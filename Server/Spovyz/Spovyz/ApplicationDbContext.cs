@@ -5,7 +5,7 @@ namespace Spovyz
 {
     public class ApplicationDbContext : DbContext
     {
-        //Add-Migration InitialMigration -c ApplicationDbContext -o Data/Migrations
+        //Add-Migration InitialMigration -c ApplicationDbContext -o Migrations
         //Update-Database
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
