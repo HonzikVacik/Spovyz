@@ -2,9 +2,9 @@
 {
     public class Task
     {
-        public uint Id { get; set; }
-        public string Name { get; set; }
+        public required uint Id { get; set; }
+        public required string Name { get; set; }
         public string? Description { get; set; }
-        public Project Project { get; set; }
+        public required Project ProjectId { get; set; }
     }
 }

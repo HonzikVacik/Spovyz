@@ -5,7 +5,7 @@ namespace Spovyz
 {
     public class ApplicationDbContext : DbContext
     {
-        //Add-Migration InitialMigration -c ApplicationDbContext -o Migrations
+        //Add-Migration InitialMigration -c ApplicationDbContext -o Data/Migrations
         //Update-Database
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
@@ -28,11 +28,6 @@ namespace Spovyz
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Enums>().HasNoKey();
-            modelBuilder.Entity<Project_employee>().HasNoKey();
-            modelBuilder.Entity<Project_tag>().HasNoKey();
-            modelBuilder.Entity<Task_employee>().HasNoKey();
-            modelBuilder.Entity<Task_tag>().HasNoKey();
         }
     }
 }

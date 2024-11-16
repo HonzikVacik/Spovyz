@@ -2,7 +2,7 @@
 {
     public class Task_employee
     {
-        public Task Task { get; set; }
-        public Employee Emlployee { get; set; }
+        public required Task TaskId { get; set; }
+        public required Employee EmlployeeId { get; set; }
     }
 }

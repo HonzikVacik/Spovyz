@@ -2,10 +2,10 @@
 {
     public class Project
     {
-        public required uint Id { get; set; }
-        public required string Name { get; set; }
+        public uint Id { get; set; }
+        public string Name { get; set; }
         public string? Description { get; set; }
-        public required Customer CustomerId { get; set; }
+        public Customer Customer { get; set; }
         public DateOnly? Dead_line { get; set; }
     }
 }
