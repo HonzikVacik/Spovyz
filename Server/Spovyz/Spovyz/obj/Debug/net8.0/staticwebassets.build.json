@@ -1,11 +1,12 @@
 {
   "Version": 1,
-  "Hash": "5e7OkVs1KkK/cGW77DVzhYugc9wgLzmHQVKkVluPj3k=",
+  "Hash": "6PwD8RDFQBZ/RAIkRwTvA83B2FPIt2RJNZq1qT1bOIM=",
   "Source": "Spovyz",
   "BasePath": "_content/Spovyz",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }
