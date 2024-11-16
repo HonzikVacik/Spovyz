@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Spovyz")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2542b741b43c9408c0c80a39dd21fea1f83b23db")]
 [assembly: System.Reflection.AssemblyProductAttribute("Spovyz")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Spovyz")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

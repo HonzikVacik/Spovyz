@@ -1,0 +1,11 @@
+﻿namespace Spovyz.Models
+{
+    public class Project
+    {
+        public uint Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public Customer CustomerId { get; set; }
+        public DateOnly Dead_line { get; set; }
+    }
+}
