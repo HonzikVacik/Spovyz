@@ -11,6 +11,17 @@
             Accountant
         }
 
+        public enum StatementType
+        {
+            Project,
+            Task,
+            Administration,
+            Training,
+            BusinessTrip,
+            FreeTime,
+            Holiday
+        }
+
         public enum Sex
         {
             Man,

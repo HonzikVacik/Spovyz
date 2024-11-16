@@ -2,7 +2,7 @@
 {
     public class Project_employee
     {
-        public Project ProjectId { get; set; }
-        public int EmployeeId { get; set; }
+        public required Project ProjectId { get; set; }
+        public required Employee EmployeeId { get; set; }
     }
 }

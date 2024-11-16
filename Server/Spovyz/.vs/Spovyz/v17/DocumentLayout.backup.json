@@ -92,7 +92,7 @@
               "RelativeDocumentMoniker": "Spovyz\\Program.cs",
               "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Program.cs",
               "RelativeToolTip": "Spovyz\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-16T14:15:53.966Z",
               "EditorCaption": ""
@@ -107,8 +107,7 @@
               "RelativeToolTip": "Spovyz\\Models\\Task_employee.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-06T15:55:25.537Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-06T15:55:25.537Z"
             },
             {
               "$type": "Document",
@@ -120,8 +119,7 @@
               "RelativeToolTip": "Spovyz\\Models\\Task_tag.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-06T15:54:27.902Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-06T15:54:27.902Z"
             },
             {
               "$type": "Document",
@@ -133,8 +131,7 @@
               "RelativeToolTip": "Spovyz\\Models\\Project_employee.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-06T15:53:56.629Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-06T15:53:56.629Z"
             },
             {
               "$type": "Document",
@@ -146,8 +143,7 @@
               "RelativeToolTip": "Spovyz\\Models\\Project_tag.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-06T15:51:46.584Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-06T15:51:46.584Z"
             },
             {
               "$type": "Document",
@@ -159,8 +155,7 @@
               "RelativeToolTip": "Spovyz\\Models\\Message.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-06T15:48:59.29Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-06T15:48:59.29Z"
             },
             {
               "$type": "Document",
@@ -172,8 +167,7 @@
               "RelativeToolTip": "Spovyz\\Models\\Task.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-06T15:47:41.806Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-06T15:47:41.806Z"
             },
             {
               "$type": "Document",
@@ -185,8 +179,7 @@
               "RelativeToolTip": "Spovyz\\Models\\Tag.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-06T15:46:31.856Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-06T15:46:31.856Z"
             },
             {
               "$type": "Document",
@@ -198,8 +191,7 @@
               "RelativeToolTip": "Spovyz\\Models\\Project.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-06T15:45:06.293Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-06T15:45:06.293Z"
             },
             {
               "$type": "Document",
@@ -211,8 +203,7 @@
               "RelativeToolTip": "Spovyz\\Models\\Customer.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-06T15:44:31.793Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-06T15:44:31.793Z"
             },
             {
               "$type": "Document",
@@ -224,8 +215,7 @@
               "RelativeToolTip": "Spovyz\\Models\\Statement.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-06T15:35:39.47Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-06T15:35:39.47Z"
             },
             {
               "$type": "Document",
@@ -237,8 +227,7 @@
               "RelativeToolTip": "Spovyz\\Models\\Accounting.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-06T15:28:35.342Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-06T15:28:35.342Z"
             },
             {
               "$type": "Document",
@@ -250,8 +239,7 @@
               "RelativeToolTip": "Spovyz\\Models\\Finance.cs",
               "ViewState": "AgIAAAIAAAAAAAAAAAAAAAYAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-06T15:25:55.47Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-06T15:25:55.47Z"
             },
             {
               "$type": "Document",
@@ -263,8 +251,7 @@
               "RelativeToolTip": "Spovyz\\Models\\Employee.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-06T15:17:24.851Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-06T15:17:24.851Z"
             },
             {
               "$type": "Document",
@@ -276,8 +263,7 @@
               "RelativeToolTip": "Spovyz\\Models\\Enums.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-06T15:13:17.851Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-06T15:13:17.851Z"
             },
             {
               "$type": "Document",
@@ -289,8 +275,7 @@
               "RelativeToolTip": "Spovyz\\Models\\Company.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-06T15:11:25.221Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-06T15:11:25.221Z"
             }
           ]
         }
