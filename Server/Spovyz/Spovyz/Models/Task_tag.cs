@@ -2,7 +2,7 @@
 {
     public class Task_tag
     {
-        public required Task TaskId { get; set; }
-        public required Tag TagId { get; set; }
+        public Task Task { get; set; }
+        public Tag Tag { get; set; }
     }
 }
