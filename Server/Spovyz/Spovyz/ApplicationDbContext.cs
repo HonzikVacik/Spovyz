@@ -28,6 +28,11 @@ namespace Spovyz
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Enums>().HasNoKey();
+            modelBuilder.Entity<Project_employee>().HasNoKey();
+            modelBuilder.Entity<Project_tag>().HasNoKey();
+            modelBuilder.Entity<Task_employee>().HasNoKey();
+            modelBuilder.Entity<Task_tag>().HasNoKey();
         }
     }
 }

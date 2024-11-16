@@ -2,11 +2,11 @@
 {
     public class Message
     {
-        public required uint Id { get; set; }
-        public required TimeOnly Timestamp { get; set; }
-        public required string Text { get; set; }
-        public required Employee EmployeeId { get; set; }
-        public Project? ProjectId { get; set; }
-        public Task? TaskId { get; set; }
+        public uint Id { get; set; }
+        public TimeOnly Timestamp { get; set; }
+        public string Text { get; set; }
+        public Employee Employee { get; set; }
+        public Project? Project { get; set; }
+        public Task? Task { get; set; }
     }
 }
