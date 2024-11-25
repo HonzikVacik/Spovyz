@@ -3,80 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Migrations\\20241116190719_InitialMigration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Spovyz\\Migrations\\20241116190719_InitialMigration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\models\\task_employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\models\\task_employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\models\\task_tag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\models\\task_tag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\models\\task.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\models\\task.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\models\\tag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\models\\tag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\models\\statement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\models\\statement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\models\\project_tag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\models\\project_tag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\models\\project_employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\models\\project_employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\models\\project.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\models\\project.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\models\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\models\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\models\\finance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\models\\finance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\models\\enums.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\models\\enums.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\controllers\\employeeinformation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\controllers\\employeeinformation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\models\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\models\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\models\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\models\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\models\\company.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\models\\company.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\models\\accounting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\models\\accounting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -86,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -98,233 +38,55 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "20241116190719_InitialMigration.cs",
-              "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Migrations\\20241116190719_InitialMigration.cs",
-              "RelativeDocumentMoniker": "Spovyz\\Migrations\\20241116190719_InitialMigration.cs",
-              "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Migrations\\20241116190719_InitialMigration.cs",
-              "RelativeToolTip": "Spovyz\\Migrations\\20241116190719_InitialMigration.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-16T19:07:19.357Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Project.cs",
-              "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Models\\Project.cs",
-              "RelativeDocumentMoniker": "Spovyz\\Models\\Project.cs",
-              "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Models\\Project.cs",
-              "RelativeToolTip": "Spovyz\\Models\\Project.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-16T18:57:20.334Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\appsettings.json",
-              "RelativeDocumentMoniker": "Spovyz\\appsettings.json",
-              "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\appsettings.json",
-              "RelativeToolTip": "Spovyz\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-11-16T15:38:09.23Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Program.cs",
-              "RelativeDocumentMoniker": "Spovyz\\Program.cs",
-              "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Program.cs",
-              "RelativeToolTip": "Spovyz\\Program.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAAABAAAACdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-16T15:35:05.962Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\ApplicationDbContext.cs",
-              "RelativeDocumentMoniker": "Spovyz\\ApplicationDbContext.cs",
-              "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\ApplicationDbContext.cs",
-              "RelativeToolTip": "Spovyz\\ApplicationDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-16T15:19:38.303Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Task_employee.cs",
-              "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Models\\Task_employee.cs",
-              "RelativeDocumentMoniker": "Spovyz\\Models\\Task_employee.cs",
-              "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Models\\Task_employee.cs",
-              "RelativeToolTip": "Spovyz\\Models\\Task_employee.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-06T15:55:25.537Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Task_tag.cs",
-              "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Models\\Task_tag.cs",
-              "RelativeDocumentMoniker": "Spovyz\\Models\\Task_tag.cs",
-              "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Models\\Task_tag.cs",
-              "RelativeToolTip": "Spovyz\\Models\\Task_tag.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-06T15:54:27.902Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Project_employee.cs",
-              "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Models\\Project_employee.cs",
-              "RelativeDocumentMoniker": "Spovyz\\Models\\Project_employee.cs",
-              "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Models\\Project_employee.cs",
-              "RelativeToolTip": "Spovyz\\Models\\Project_employee.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-06T15:53:56.629Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Project_tag.cs",
-              "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Models\\Project_tag.cs",
-              "RelativeDocumentMoniker": "Spovyz\\Models\\Project_tag.cs",
-              "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Models\\Project_tag.cs",
-              "RelativeToolTip": "Spovyz\\Models\\Project_tag.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-06T15:51:46.584Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Message.cs",
-              "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Models\\Message.cs",
-              "RelativeDocumentMoniker": "Spovyz\\Models\\Message.cs",
-              "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Models\\Message.cs",
-              "RelativeToolTip": "Spovyz\\Models\\Message.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-06T15:48:59.29Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Tag.cs",
-              "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Models\\Tag.cs",
-              "RelativeDocumentMoniker": "Spovyz\\Models\\Tag.cs",
-              "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Models\\Tag.cs",
-              "RelativeToolTip": "Spovyz\\Models\\Tag.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-06T15:46:31.856Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Task.cs",
-              "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Models\\Task.cs",
-              "RelativeDocumentMoniker": "Spovyz\\Models\\Task.cs",
-              "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Models\\Task.cs",
-              "RelativeToolTip": "Spovyz\\Models\\Task.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-06T15:47:41.806Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Customer.cs",
-              "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Models\\Customer.cs",
-              "RelativeDocumentMoniker": "Spovyz\\Models\\Customer.cs",
-              "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Models\\Customer.cs",
-              "RelativeToolTip": "Spovyz\\Models\\Customer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-06T15:44:31.793Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Statement.cs",
-              "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Models\\Statement.cs",
-              "RelativeDocumentMoniker": "Spovyz\\Models\\Statement.cs",
-              "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Models\\Statement.cs",
-              "RelativeToolTip": "Spovyz\\Models\\Statement.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-06T15:35:39.47Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "Accounting.cs",
-              "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Models\\Accounting.cs",
-              "RelativeDocumentMoniker": "Spovyz\\Models\\Accounting.cs",
-              "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Models\\Accounting.cs",
-              "RelativeToolTip": "Spovyz\\Models\\Accounting.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-06T15:28:35.342Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Finance.cs",
-              "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Models\\Finance.cs",
-              "RelativeDocumentMoniker": "Spovyz\\Models\\Finance.cs",
-              "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Models\\Finance.cs",
-              "RelativeToolTip": "Spovyz\\Models\\Finance.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAAAAoAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-06T15:25:55.47Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
               "Title": "Employee.cs",
               "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Models\\Employee.cs",
               "RelativeDocumentMoniker": "Spovyz\\Models\\Employee.cs",
               "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Models\\Employee.cs",
               "RelativeToolTip": "Spovyz\\Models\\Employee.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAABYAAAAeAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-06T15:17:24.851Z"
+              "WhenOpened": "2024-11-25T18:19:05.872Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Enums.cs",
-              "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Models\\Enums.cs",
-              "RelativeDocumentMoniker": "Spovyz\\Models\\Enums.cs",
-              "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Models\\Enums.cs",
-              "RelativeToolTip": "Spovyz\\Models\\Enums.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAATAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "EmployeeInformation.cs",
+              "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Controllers\\EmployeeInformation.cs",
+              "RelativeDocumentMoniker": "Spovyz\\Controllers\\EmployeeInformation.cs",
+              "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Controllers\\EmployeeInformation.cs",
+              "RelativeToolTip": "Spovyz\\Controllers\\EmployeeInformation.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-06T15:13:17.851Z"
+              "WhenOpened": "2024-11-25T17:31:23.297Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "Company.cs",
-              "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Models\\Company.cs",
-              "RelativeDocumentMoniker": "Spovyz\\Models\\Company.cs",
-              "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Models\\Company.cs",
-              "RelativeToolTip": "Spovyz\\Models\\Company.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAPAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "WeatherForecastController.cs",
+              "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Controllers\\WeatherForecastController.cs",
+              "RelativeDocumentMoniker": "Spovyz\\Controllers\\WeatherForecastController.cs",
+              "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Controllers\\WeatherForecastController.cs",
+              "RelativeToolTip": "Spovyz\\Controllers\\WeatherForecastController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-06T15:11:25.221Z"
+              "WhenOpened": "2024-11-25T17:25:54.036Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Program.cs",
+              "RelativeDocumentMoniker": "Spovyz\\Program.cs",
+              "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Program.cs",
+              "RelativeToolTip": "Spovyz\\Program.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAAABAAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-16T15:35:05.962Z",
+              "EditorCaption": ""
             }
           ]
         }
