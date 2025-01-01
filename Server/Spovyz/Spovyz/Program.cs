@@ -13,7 +13,6 @@ namespace Spovyz
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-
             builder.Services.AddControllers();
 
             // Configure JWT settings
@@ -43,15 +42,13 @@ namespace Spovyz
 
                 });
 
-
+            // Configuration DbContext
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            // Configuration Swagger
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(setup =>
             {
-                // Include 'SecurityScheme' to use JWT Authentication
                 var jwtSecurityScheme = new OpenApiSecurityScheme
                 {
                     BearerFormat = "JWT",
@@ -71,12 +68,12 @@ namespace Spovyz
                 setup.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
 
                 setup.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        { jwtSecurityScheme, Array.Empty<string>() }
-    });
-
+                {
+                    { jwtSecurityScheme, Array.Empty<string>() }
+                });
             });
 
+            // Configure Cors
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
@@ -102,7 +99,6 @@ namespace Spovyz
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 
