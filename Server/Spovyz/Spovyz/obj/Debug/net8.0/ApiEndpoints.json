@@ -1,5 +1,15 @@
 [
   {
+    "ContainingType": "Spovyz.Controllers.AuthController",
+    "Method": "GenerateToken",
+    "RelativePath": "api/Auth/token",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Spovyz.Controllers.EmployeeInformation",
     "Method": "Get",
     "RelativePath": "api/EmployeeInformation",
