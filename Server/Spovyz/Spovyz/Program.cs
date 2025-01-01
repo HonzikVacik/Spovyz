@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
 
 namespace Spovyz
 {
@@ -13,6 +15,33 @@ namespace Spovyz
             // Add services to the container.
 
             builder.Services.AddControllers();
+
+            // Configure JWT settings
+            var jwtSettings = new JwtSettings();
+            builder.Configuration.GetSection("JwtSettings").Bind(jwtSettings);
+            builder.Services.AddSingleton(jwtSettings);
+
+            // Configure JWT authentization
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = jwtSettings.Issuer,
+                        ValidAudience = jwtSettings.Audience,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SecretKey)),
+                        ClockSkew = TimeSpan.Zero
+                    };
+
+                });
 
 
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -53,6 +82,8 @@ namespace Spovyz
                     policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()
                 )
             );
+
+            builder.Services.AddAuthorization();
 
             var app = builder.Build();
 
