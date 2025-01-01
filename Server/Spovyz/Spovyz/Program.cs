@@ -78,10 +78,13 @@ namespace Spovyz
             });
 
             builder.Services.AddCors(options =>
-                options.AddDefaultPolicy(policy =>
-                    policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()
-                )
-            );
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder
+                        .WithOrigins("http://127.0.0.1:8000")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
+            });
 
             builder.Services.AddAuthorization();
 
@@ -94,7 +97,7 @@ namespace Spovyz
                 app.UseSwaggerUI();
             }
 
-            app.UseCors();
+            app.UseCors("CorsPolicy");
 
             app.UseHttpsRedirection();
 
