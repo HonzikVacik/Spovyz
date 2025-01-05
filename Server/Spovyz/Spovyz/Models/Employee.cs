@@ -5,6 +5,8 @@
         public uint Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        public string Salt { get; set; }
+        public string SecurityVerification { get; set; }
         public string First_name { get; set; }
         public string Surname { get; set; }
         public string Phone_number { get; set; }
