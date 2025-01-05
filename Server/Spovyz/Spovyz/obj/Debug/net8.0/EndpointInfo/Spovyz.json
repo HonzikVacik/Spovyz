@@ -10,6 +10,22 @@
         "tags": [
           "Auth"
         ],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -424,6 +440,15 @@
             "type": "string",
             "nullable": true
           },
+          "salt": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "securityVerification": {
+            "type": "string",
+            "nullable": true
+          },
           "first_name": {
             "type": "string",
             "nullable": true
@@ -493,7 +518,8 @@
           1,
           2,
           3,
-          4
+          4,
+          5
         ],
         "type": "integer",
         "format": "int32"

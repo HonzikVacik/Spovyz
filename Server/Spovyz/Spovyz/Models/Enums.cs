@@ -8,7 +8,8 @@
             Manager,
             Supervisor,
             Worker,
-            Accountant
+            Accountant,
+            Admin
         }
 
         public enum StatementType
