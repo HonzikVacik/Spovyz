@@ -40,7 +40,7 @@ namespace Spovyz.Controllers
         public IActionResult GetSelf()
         {
             Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
-            string supervisor = null;
+            string supervisor = "";
             if(activeUser.Supervisor != null)
                 supervisor = activeUser.Supervisor.Id.ToString();
             EmployeeInformationData data = new EmployeeInformationData()
