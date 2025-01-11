@@ -1,5 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Spovyz.Models;
+using Spovyz.Transport_models;
+using System.Security.Cryptography;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,30 +23,61 @@ namespace Spovyz.Controllers
 
         // GET: api/<EmployeeInformation>
         [HttpGet]
-        public IEnumerable<Employee> Get()
+        [Authorize]
+        public IEnumerable<AdminDashboardData> Get()
         {
-            Employee[] employees = [.. _context.Employees];
-            //return new string[] { "value1", "value2" };
-            return employees;
+            Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
+            Employee[] employees = [.. _context.Employees.Include(e => e.Company).Where(e => e.Company.Id == activeUser.Company.Id)];
+            List<AdminDashboardData> data = employees.Select(e => new AdminDashboardData{ Id = e.Id, Username = e.Username}).ToList();
+            return data;
+        }
+
+
+        [HttpGet("GetSelf")]
+        [Authorize]
+        public IEnumerable<AdminDashboardData> GetSelf()
+        {
+            Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
+            Employee[] employees = [.. _context.Employees.Include(e => e.Company).Where(e => e.Company.Id == activeUser.Company.Id)];
+            List<AdminDashboardData> data = employees.Select(e => new AdminDashboardData { Id = e.Id, Username = e.Username }).ToList();
+            return data;
         }
 
         // GET api/<EmployeeInformation>/5
         [HttpGet("{id}")]
-        public Employee Get(int id)
+        [Authorize]
+        public IActionResult Get(int id)
         {
-            return _context.Employees.FirstOrDefault(e => e.Id == id);
+            Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
+            Employee[] employees = [.. _context.Employees.Include(e => e.Company).Where(e => e.Company.Id == activeUser.Company.Id)];
+            if (id < 0 || id >= employees.Length)
+            {
+                return NotFound($"Uživatel s id {id} neexistuje");
+            }
+            Employee result = employees[id];
+            return Ok(result.Username);
         }
 
         // POST api/<EmployeeInformation>
         [HttpPost]
-        public string Post([FromBody] int id, string username, string password, string firstName, string surname, string phoneNumber, string email, DateOnly dateOfBirth, int sex, string pronoun, string country, string city, int zipCode, string street, uint decNumber, int accountType, int supervisorId, uint pay, int companyId)
+        [Authorize]
+        public string Post([FromBody] string username, string password, string securityVerification, string firstName, string surname, string phoneNumber, string email, DateOnly dateOfBirth, int sex, string pronoun, string country, string city, int zipCode, string street, uint decNumber, int accountType, int supervisorId, uint pay)
         {
-            Company c = _context.Companies.FirstOrDefault();
+            Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
+            byte[] salt = RandomNumberGenerator.GetBytes(128 / 8);
+            string hashedPassword = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                password: password!,
+                salt: salt,
+                prf: KeyDerivationPrf.HMACSHA256,
+                iterationCount: 100000,
+                numBytesRequested: 256 / 8));
 
             Employee employee = new Employee()
             {
                 Username = username,
-                Password = password,
+                Password = hashedPassword,
+                Salt = salt,
+                SecurityVerification = securityVerification,
                 First_name = firstName,
                 Surname = surname,
                 Phone_number = phoneNumber,
@@ -57,7 +93,7 @@ namespace Spovyz.Controllers
                 Account_type = (Enums.Role)accountType,
                 Supervisor = null,
                 Pay = pay,
-                Company = c
+                Company = activeUser.Company
             };
             return "Povedlo se";
         }
