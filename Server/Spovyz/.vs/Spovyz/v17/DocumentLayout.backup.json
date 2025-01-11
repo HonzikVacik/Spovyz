@@ -46,8 +46,7 @@
               "RelativeToolTip": "Spovyz\\Controllers\\ValuesController.cs",
               "ViewState": "AgIAAAwAAAAAAAAAAAAAAAsAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-07T11:26:36.105Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-07T11:26:36.105Z"
             },
             {
               "$type": "Document",
@@ -59,8 +58,7 @@
               "RelativeToolTip": "Spovyz\\Transport models\\AdminDashboardData.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-07T08:22:40.343Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-07T08:22:40.343Z"
             },
             {
               "$type": "Document",
@@ -70,7 +68,7 @@
               "RelativeDocumentMoniker": "Spovyz\\Controllers\\EmployeeInformation.cs",
               "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Controllers\\EmployeeInformation.cs",
               "RelativeToolTip": "Spovyz\\Controllers\\EmployeeInformation.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAACAAAABMAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABcAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-06T18:24:11.463Z",
               "EditorCaption": ""
@@ -85,8 +83,7 @@
               "RelativeToolTip": "Spovyz\\Models\\Employee.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-07T08:33:08.418Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-07T08:33:08.418Z"
             }
           ]
         }
