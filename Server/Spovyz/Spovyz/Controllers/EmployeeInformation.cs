@@ -37,12 +37,32 @@ namespace Spovyz.Controllers
 
         [HttpGet("GetSelf")]
         [Authorize]
-        public IEnumerable<AdminDashboardData> GetSelf()
+        public IActionResult GetSelf()
         {
             Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
-            Employee[] employees = [.. _context.Employees.Include(e => e.Company).Where(e => e.Company.Id == activeUser.Company.Id)];
-            List<AdminDashboardData> data = employees.Select(e => new AdminDashboardData { Id = e.Id, Username = e.Username }).ToList();
-            return data;
+            string supervisor = null;
+            if(activeUser.Supervisor != null)
+                supervisor = activeUser.Supervisor.Id.ToString();
+            EmployeeInformationData data = new EmployeeInformationData()
+            {
+                Username = activeUser.Username,
+                SecurityVerification = activeUser.SecurityVerification,
+                First_name = activeUser.First_name,
+                Surname = activeUser.Surname,
+                Phone_number = activeUser.Phone_number,
+                Email = activeUser.Email,
+                Date_of_birth = activeUser.Date_of_birth,
+                Sex = activeUser.Sex,
+                Pronoun = activeUser.Pronoun,
+                Country = activeUser.Country,
+                City = activeUser.City,
+                Zip_code = activeUser.Zip_code,
+                Street = activeUser.Street,
+                Descriptive_number = activeUser.Descriptive_number,
+                Account_type = activeUser.Account_type,
+                Supervisor = supervisor
+            };
+            return Ok(data);
         }
 
         // GET api/<EmployeeInformation>/5
