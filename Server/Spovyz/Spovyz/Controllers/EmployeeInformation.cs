@@ -65,6 +65,14 @@ namespace Spovyz.Controllers
             return Ok(data);
         }
 
+        [HttpGet("GetSelfId")]
+        [Authorize]
+        public IActionResult GetSelfId()
+        {
+            Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
+            return Ok(activeUser.Id);
+        }
+
         // GET api/<EmployeeInformation>/5
         [HttpGet("{id}")]
         [Authorize]
