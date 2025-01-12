@@ -51,7 +51,7 @@
       {
         "Name": "username",
         "Type": "System.String",
-        "IsRequired": true
+        "IsRequired": false
       },
       {
         "Name": "password",
@@ -132,24 +132,9 @@
         "Name": "supervisorId",
         "Type": "System.Int32",
         "IsRequired": false
-      },
-      {
-        "Name": "pay",
-        "Type": "System.UInt32",
-        "IsRequired": false
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "System.String",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "Spovyz.Controllers.EmployeeInformation",

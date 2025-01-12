@@ -15,6 +15,7 @@ namespace Spovyz.Controllers
     public class EmployeeInformation : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private ValidityControl validityControl = new ValidityControl();
 
         public EmployeeInformation(ApplicationDbContext context)
         {
@@ -91,9 +92,17 @@ namespace Spovyz.Controllers
         // POST api/<EmployeeInformation>
         [HttpPost]
         [Authorize]
-        public string Post([FromBody] string username, string password, string securityVerification, string firstName, string surname, string phoneNumber, string email, DateOnly dateOfBirth, int sex, string pronoun, string country, string city, int zipCode, string street, uint decNumber, int accountType, int supervisorId, uint pay)
+        public IActionResult Post(string username, string password, string securityVerification, string firstName, string surname, string phoneNumber, string email, DateOnly dateOfBirth, int sex, string pronoun, string country, string city, int zipCode, string street, uint decNumber, int accountType, int supervisorId)
         {
             Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
+
+            if (validityControl.AllFilledOut(username, password, securityVerification, firstName, surname, phoneNumber, email, dateOfBirth, sex, pronoun, country, city, zipCode, street, decNumber, accountType))
+                return Ok("e1");
+
+            string validityControlString = validityControl.NewUser(_context, activeUser.Company.Id, username, password, securityVerification, accountType, sex, email, phoneNumber, dateOfBirth);
+            if (validityControlString != "a")
+                return Ok(validityControlString);
+
             byte[] salt = RandomNumberGenerator.GetBytes(128 / 8);
             string hashedPassword = Convert.ToBase64String(KeyDerivation.Pbkdf2(
                 password: password!,
@@ -122,10 +131,14 @@ namespace Spovyz.Controllers
                 Descriptive_number = decNumber,
                 Account_type = (Enums.Role)accountType,
                 Supervisor = null,
-                Pay = pay,
+                Pay = 0,
                 Company = activeUser.Company
             };
-            return "Povedlo se";
+
+            _context.Add(employee);
+            _context.SaveChanges();
+
+            return Ok("a");
         }
 
         // PUT api/<EmployeeInformation>/5
