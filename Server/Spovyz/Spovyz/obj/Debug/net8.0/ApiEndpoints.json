@@ -166,18 +166,92 @@
         "IsRequired": true
       },
       {
-        "Name": "value",
+        "Name": "username",
         "Type": "System.String",
-        "IsRequired": true
+        "IsRequired": false
+      },
+      {
+        "Name": "password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "securityVerification",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "firstName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "surname",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "phoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "dateOfBirth",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "sex",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pronoun",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "country",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "city",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "zipCode",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "street",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "decNumber",
+        "Type": "System.UInt32",
+        "IsRequired": false
+      },
+      {
+        "Name": "accountType",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "supervisorId",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "Spovyz.Controllers.EmployeeInformation",

@@ -11,14 +11,23 @@ namespace Spovyz
 {
     public class ValidityControl
     {
-        public string NewUser(ApplicationDbContext _context, uint activeUserCompanyId, string username, string password, string securityVerification, int accountType, int sex, string email, string phoneNumber, DateOnly dateOfBirth)
+        public string Check(ApplicationDbContext _context, uint activeUserCompanyId, string username, string password, string securityVerification, int accountType, int sex, string email, string phoneNumber, DateOnly dateOfBirth, bool controlUsername, bool controlPassword, bool controlSecurityVerification)
         {
-            if (!Username(username, activeUserCompanyId, _context))
-                return "e2";
-            if (!Password(password))
-                return "e1";
-            if (!SecurityVerification(securityVerification, username, _context))
-                return "e3";
+            if (controlUsername)
+            {
+                if (!Username(username, activeUserCompanyId, _context))
+                    return "e2";
+            }
+            if(controlPassword)
+            {
+                if (!Password(password))
+                    return "e1";
+            }
+            if(controlSecurityVerification)
+            {
+                if (!SecurityVerification(securityVerification, username, _context))
+                    return "e3";
+            }
             if (!AccountType(accountType))
                 return "e1";
             if (!Sex(sex))
@@ -105,6 +114,28 @@ namespace Spovyz
         {
             if (!string.IsNullOrEmpty(username) &&
                 !string.IsNullOrEmpty(password) &&
+                !string.IsNullOrEmpty(securityVerification) &&
+                !string.IsNullOrEmpty(firstName) &&
+                !string.IsNullOrEmpty(surname) &&
+                !string.IsNullOrEmpty(phoneNumber) &&
+                !string.IsNullOrEmpty(email) &&
+                !string.IsNullOrEmpty(dateOfBirth.ToString()) &&
+                !string.IsNullOrEmpty(sex.ToString()) &&
+                !string.IsNullOrEmpty(pronoun) &&
+                !string.IsNullOrEmpty(country) &&
+                !string.IsNullOrEmpty(city) &&
+                !string.IsNullOrEmpty(zipCode.ToString()) &&
+                !string.IsNullOrEmpty(street) &&
+                !string.IsNullOrEmpty(decNumber.ToString()) &&
+                !string.IsNullOrEmpty(accountType.ToString()))
+                return true;
+            else
+                return false;
+        }
+
+        public bool PutAllFilledOut(string username, string securityVerification, string firstName, string surname, string phoneNumber, string email, DateOnly dateOfBirth, int sex, string pronoun, string country, string city, int zipCode, string street, uint decNumber, int accountType)
+        {
+            if (!string.IsNullOrEmpty(username) &&
                 !string.IsNullOrEmpty(securityVerification) &&
                 !string.IsNullOrEmpty(firstName) &&
                 !string.IsNullOrEmpty(surname) &&
