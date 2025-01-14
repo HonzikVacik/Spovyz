@@ -13,10 +13,22 @@ namespace Spovyz.Controllers
         // GET: api/<SetController>
         [HttpGet("RoleEnum")]
         [Authorize]
-        public IEnumerable<string> Get()
+        public IEnumerable<string> GetRole()
         {
             List<string> items = new List<string>();
             foreach (Enums.Role role in Enums.Role.GetValues(typeof(Enums.Role)))
+            {
+                items.Add(role.ToString());
+            }
+            return items;
+        }
+
+        [HttpGet("SexEnum")]
+        [Authorize]
+        public IEnumerable<string> GetSex()
+        {
+            List<string> items = new List<string>();
+            foreach (Enums.Sex role in Enums.Role.GetValues(typeof(Enums.Sex)))
             {
                 items.Add(role.ToString());
             }
