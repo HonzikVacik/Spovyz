@@ -242,9 +242,19 @@ namespace Spovyz.Controllers
 
         // DELETE api/<EmployeeInformation>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
-            _context.Remove(_context.Employees.FirstOrDefault(e => e.Id == id));
+            string error = "e1";
+            string accept = "a";
+            Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
+
+            Employee[] employees = [.. _context.Employees.Include(e => e.Company).Where(e => e.Company.Id == activeUser.Company.Id)];
+            if (id < 0 || id >= employees.Length)
+                return Ok(error);
+            Employee result = employees[id];
+            _context.Remove(result);
+            _context.SaveChanges();
+            return Ok(accept);
         }
     }
 }
