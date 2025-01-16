@@ -271,6 +271,22 @@
   },
   {
     "ContainingType": "Spovyz.Controllers.EmployeeInformation",
+    "Method": "GetName",
+    "RelativePath": "api/EmployeeInformation/GetName/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Spovyz.Controllers.EmployeeInformation",
     "Method": "GetSelf",
     "RelativePath": "api/EmployeeInformation/GetSelf",
     "HttpMethod": "GET",
@@ -287,6 +303,27 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Spovyz.Controllers.EmployeeInformation",
+    "Method": "Put",
+    "RelativePath": "api/EmployeeInformation/ResetPassword/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "password",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {

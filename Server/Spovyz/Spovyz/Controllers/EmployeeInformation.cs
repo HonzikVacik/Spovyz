@@ -78,6 +78,21 @@ namespace Spovyz.Controllers
             return Ok(activeUser.Id);
         }
 
+        [HttpGet("GetName/{id}")]
+        [Authorize]
+        public IActionResult GetName(int id)
+        {
+            string error = "e1";
+            string username = "";
+
+            Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
+            Employee[] employees = [.. _context.Employees.Include(e => e.Company).Where(e => e.Company.Id == activeUser.Company.Id)];
+            if (id < 0 || id >= employees.Length)
+                return Ok(new { error });
+            username = employees[id].Username;
+            return Ok(new { username });
+        }
+
         // GET api/<EmployeeInformation>/5
         [HttpGet("{id}")]
         [Authorize]
@@ -167,6 +182,7 @@ namespace Spovyz.Controllers
 
         // PUT api/<EmployeeInformation>/5
         [HttpPut("{id}")]
+        [Authorize]
         public IActionResult Put(int id, string username, string? password, string securityVerification, string firstName, string surname, string phoneNumber, string email, DateOnly dateOfBirth, int sex, string pronoun, string country, string city, int zipCode, string street, uint decNumber, int accountType, int supervisorId)
         {
             string error = "e4";
@@ -240,8 +256,43 @@ namespace Spovyz.Controllers
             return Ok("a");
         }
 
+        [HttpPut("ResetPassword/{id}")]
+        [Authorize]
+        public IActionResult Put(int id,string password)
+        {
+            string error = "e1";
+            string accept = "a";
+
+            Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
+            Employee[] employees = [.. _context.Employees.Include(e => e.Company).Where(e => e.Company.Id == activeUser.Company.Id)];
+            if (id < 0 || id >= employees.Length)
+                return Ok(new { error });
+            Employee e = employees[id];
+            if (!string.IsNullOrEmpty(password))
+            {
+                if (!validityControl.Password(password))
+                    return Ok(new { error });
+                else
+                {
+                    string hashedPassword = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                        password: password!,
+                        salt: e.Salt,
+                        prf: KeyDerivationPrf.HMACSHA256,
+                        iterationCount: 100000,
+                        numBytesRequested: 256 / 8));
+                    e.Password = hashedPassword;
+                    _context.Update(e);
+                    _context.SaveChanges();
+                    return Ok(new { accept });
+                }
+            }
+            else
+                return Ok(new { error });
+        }
+
         // DELETE api/<EmployeeInformation>/5
         [HttpDelete("{id}")]
+        [Authorize]
         public IActionResult Delete(int id)
         {
             string error = "e1";

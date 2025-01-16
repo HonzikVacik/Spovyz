@@ -50,7 +50,7 @@ namespace Spovyz
                 return false;
         }
 
-        private bool Password(string password)
+        public bool Password(string password)
         {
             string pattern = @"(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^a-zA-Z\d])";
             if (Regex.IsMatch(password, pattern) && password.Length >= 8)
