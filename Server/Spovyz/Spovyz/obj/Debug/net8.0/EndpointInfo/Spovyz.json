@@ -1014,6 +1014,9 @@
           "username": {
             "type": "string",
             "nullable": true
+          },
+          "needResetPassword": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false

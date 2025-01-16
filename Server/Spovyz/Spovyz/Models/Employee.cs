@@ -23,5 +23,6 @@
         public Employee? Supervisor { get; set; }
         public uint Pay { get; set; }
         public Company Company { get; set; }
+        public bool NeedResetPassword { get; set; }
     }
 }
