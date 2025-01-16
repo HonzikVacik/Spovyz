@@ -307,6 +307,27 @@
   },
   {
     "ContainingType": "Spovyz.Controllers.EmployeeInformation",
+    "Method": "ChangePassword",
+    "RelativePath": "api/EmployeeInformation/ChangePassword",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "username",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "securityVerification",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Spovyz.Controllers.EmployeeInformation",
     "Method": "Put",
     "RelativePath": "api/EmployeeInformation/ResetPassword/{id}",
     "HttpMethod": "PUT",

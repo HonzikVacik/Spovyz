@@ -290,6 +290,25 @@ namespace Spovyz.Controllers
                 return Ok(new { error });
         }
 
+        [HttpPut("ChangePassword")]
+        public IActionResult ChangePassword(string username, string securityVerification)
+        {
+            string error = "e1";
+            string accept = "a";
+
+            Employee[] employees = [.. _context.Employees.Where(e => e.Username == username && e.SecurityVerification == securityVerification)];
+            if (employees.Length != 0)
+            {
+                Employee employee = employees[0];
+                employee.NeedResetPassword = true;
+                _context.Update(employee);
+                _context.SaveChanges();
+                return Ok(accept);
+            }
+            else
+                return Ok(error);
+        }
+
         // DELETE api/<EmployeeInformation>/5
         [HttpDelete("{id}")]
         [Authorize]

@@ -475,6 +475,34 @@
         }
       }
     },
+    "/api/EmployeeInformation/ChangePassword": {
+      "put": {
+        "tags": [
+          "EmployeeInformation"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "securityVerification",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Project": {
       "get": {
         "tags": [
