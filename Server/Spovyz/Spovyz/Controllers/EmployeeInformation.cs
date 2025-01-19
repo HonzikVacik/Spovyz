@@ -195,9 +195,9 @@ namespace Spovyz.Controllers
             
             byte[] salt = result.Salt;
             string hashedPassword = "";
-            bool controlUsername = false;
-            bool controlPassword = false;
-            bool controlSecurityVerification = false;
+            bool controlUsername = true;
+            bool controlPassword = true;
+            bool controlSecurityVerification = true;
 
             if(string.IsNullOrEmpty(password))
             {
