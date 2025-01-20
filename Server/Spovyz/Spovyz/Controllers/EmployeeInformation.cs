@@ -271,7 +271,7 @@ namespace Spovyz.Controllers
             if (!string.IsNullOrEmpty(password))
             {
                 if (!validityControl.Password(password))
-                    return Ok(new { error });
+                    return Ok(new { error = "e2" });
                 else
                 {
                     string hashedPassword = Convert.ToBase64String(KeyDerivation.Pbkdf2(
@@ -281,13 +281,14 @@ namespace Spovyz.Controllers
                         iterationCount: 100000,
                         numBytesRequested: 256 / 8));
                     e.Password = hashedPassword;
+                    e.NeedResetPassword = false;
                     _context.Update(e);
                     _context.SaveChanges();
                     return Ok(new { accept });
                 }
             }
             else
-                return Ok(new { error });
+                return Ok(new { error = "e2" });
         }
 
         [HttpPut("ChangePassword")]
