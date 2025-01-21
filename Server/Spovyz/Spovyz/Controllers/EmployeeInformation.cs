@@ -89,8 +89,7 @@ namespace Spovyz.Controllers
             Employee[] employees = [.. _context.Employees.Include(e => e.Company).Where(e => e.Company.Id == activeUser.Company.Id)];
             if (id < 0 || id >= employees.Length)
                 return Ok(new { error });
-            username = employees[id].Username;
-            return Ok(new { username });
+            return Ok(new { username = employees[id].Username });
         }
 
         // GET api/<EmployeeInformation>/5
@@ -133,6 +132,8 @@ namespace Spovyz.Controllers
         [Authorize]
         public IActionResult Post(string username, string password, string securityVerification, string firstName, string surname, string phoneNumber, string email, DateOnly dateOfBirth, int sex, string pronoun, string country, string city, int zipCode, string street, uint decNumber, int accountType, int supervisorId)
         {
+            string accept = "a";
+
             Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
 
             if (!validityControl.AllFilledOut(username, password, securityVerification, firstName, surname, phoneNumber, email, dateOfBirth, sex, pronoun, country, city, zipCode, street, decNumber, accountType))
@@ -177,7 +178,7 @@ namespace Spovyz.Controllers
             _context.Add(employee);
             _context.SaveChanges();
 
-            return Ok("a");
+            return Ok(accept);
         }
 
         // PUT api/<EmployeeInformation>/5
@@ -185,12 +186,14 @@ namespace Spovyz.Controllers
         [Authorize]
         public IActionResult Put(int id, string username, string? password, string securityVerification, string firstName, string surname, string phoneNumber, string email, DateOnly dateOfBirth, int sex, string pronoun, string country, string city, int zipCode, string street, uint decNumber, int accountType, int supervisorId)
         {
-            string error = "e4";
+            string error1 = "e1";
+            string error4 = "e4";
+            string accept = "a";
             Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
 
             Employee[] employees = [.. _context.Employees.Include(e => e.Company).Where(e => e.Company.Id == activeUser.Company.Id)];
             if (id < 0 || id >= employees.Length)
-                return Ok(error);
+                return Ok(error4);
             Employee result = employees[id];
             
             byte[] salt = result.Salt;
@@ -202,14 +205,14 @@ namespace Spovyz.Controllers
             if(string.IsNullOrEmpty(password))
             {
                 if (!validityControl.PutAllFilledOut(username, securityVerification, firstName, surname, phoneNumber, email, dateOfBirth, sex, pronoun, country, city, zipCode, street, decNumber, accountType))
-                    return Ok("e1");
+                    return Ok(error1);
                 hashedPassword = result.Password;
                 controlPassword = false;
             }
             else
             {
                 if (!validityControl.AllFilledOut(username, password, securityVerification, firstName, surname, phoneNumber, email, dateOfBirth, sex, pronoun, country, city, zipCode, street, decNumber, accountType))
-                    return Ok("e1");
+                    return Ok(error1);
             }
             if(username == result.Username)
                 controlUsername = false;
@@ -253,7 +256,7 @@ namespace Spovyz.Controllers
             _context.Update(result);
             _context.SaveChanges();
 
-            return Ok("a");
+            return Ok(accept);
         }
 
         [HttpPut("ResetPassword/{id}")]

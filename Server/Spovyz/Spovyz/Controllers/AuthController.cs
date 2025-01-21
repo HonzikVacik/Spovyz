@@ -33,25 +33,6 @@ namespace Spovyz.Controllers
             if (string.IsNullOrEmpty(password))
                 return Unauthorized("Neplatné uživatelské heslo");
 
-            /*//Kontrola uživatelského jména
-            Employee[] employees = [.. _context.Employees.Where(e => e.Username == user)];
-            if (employees.Length == 0)
-                return Unauthorized("e1");
-
-            //Kontrola správného hesla
-            var employee = employees[0];
-            byte[] salt = employee.Salt;
-            string hashedNow = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-            password: password!,
-            salt: salt,
-            prf: KeyDerivationPrf.HMACSHA256,
-            iterationCount: 100000,
-            numBytesRequested: 256 / 8));
-
-            if (hashedNow != employee.Password)
-                return Unauthorized("e1");*/
-
-
 
             //Kontrola databáze
 
