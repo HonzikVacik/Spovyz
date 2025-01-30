@@ -3,7 +3,7 @@
     public class Message
     {
         public uint Id { get; set; }
-        public TimeOnly Timestamp { get; set; }
+        public DateTime DateTime { get; set; }
         public string Text { get; set; }
         public Employee Employee { get; set; }
         public Project? Project { get; set; }

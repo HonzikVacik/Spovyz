@@ -40,14 +40,22 @@ namespace Spovyz.Controllers
 
         // GET api/<ProjectController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
-            return "value";
+            //e1 - bad id
+            string error = null;
+            Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
+            Project[] projects = [.. _context.Project_employees.Include(te => te.Project).Include(te => te.Employee).Where(te => te.Employee.Id == activeUser.Id).Select(te => te.Project)];
+            if (id < 0 || id >= projects.Length)
+                return Ok(error = "e1");
+            Project project = projects[id];
+
+            return Ok("");
         }
 
         // POST api/<ProjectController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post(string name, string description, int customer, DateOnly deathline, string[] tags, int[] employees)
         {
         }
 
@@ -59,8 +67,14 @@ namespace Spovyz.Controllers
 
         // DELETE api/<ProjectController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            //e1 - bad id
+            Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
+            Project[] projects = [.. _context.Project_employees.Include(te => te.Project).Include(te => te.Employee).Where(te => te.Employee.Id == activeUser.Id).Select(te => te.Project)];
+            if (id < 0 || id >= projects.Length)
+                return Ok("e1");
+            return Ok("a");
         }
     }
 }
