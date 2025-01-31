@@ -55,7 +55,7 @@ namespace Spovyz.Controllers
 
         // POST api/<ProjectController>
         [HttpPost]
-        public void Post(string name, string description, int customer, DateOnly deathline, string[] tags, int[] employees)
+        public void Post(string name, string description, int customer, DateOnly? deathline, string[] tags, string employees)
         {
         }
 

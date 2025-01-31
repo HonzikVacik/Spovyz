@@ -4,31 +4,39 @@
     {
         public enum Role
         {
-            Owner,
-            Manager,
-            Supervisor,
-            Worker,
-            Accountant,
-            Admin
+            [RoleCesky("Majitel")] Owner,
+            [RoleCesky("Ředitel")] Manager,
+            [RoleCesky("Vedoucí")] Supervisor,
+            [RoleCesky("Zaměstnanec")] Worker,
+            [RoleCesky("Účetní")] Accountant,
+            [RoleCesky("Administrátor")] Admin
         }
 
         public enum StatementType
         {
-            Project,
-            Task,
-            Administration,
-            Training,
-            BusinessTrip,
-            FreeTime,
-            Holiday
+            [RoleCesky("Projekt")] Project,
+            [RoleCesky("Task")] Task,
+            [RoleCesky("Administrace")] Administration,
+            [RoleCesky("Školení")] Training,
+            [RoleCesky("Služební cesta")] BusinessTrip,
+            [RoleCesky("Volno")] FreeTime,
+            [RoleCesky("Dovolená")] Holiday
+        }
+
+        public enum ProjectStatus
+        {
+            [RoleCesky("Nový")] New,
+            [RoleCesky("Aktivní")] Active,
+            [RoleCesky("Vyřešený")] Resolved,
+            [RoleCesky("Uzavřený")] Deleted
         }
 
         public enum Sex
         {
-            Man,
-            Woman,
-            Nonbinary,
-            Other
+            [RoleCesky("Muž")] Man,
+            [RoleCesky("Žena")] Woman,
+            [RoleCesky("Nebinární")] Nonbinary,
+            [RoleCesky("Jiné")] Other
         }
 
         public enum Month

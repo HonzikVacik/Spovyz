@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Spovyz.Models;
+using System.Reflection;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,7 +19,14 @@ namespace Spovyz.Controllers
             List<string> items = new List<string>();
             foreach (Enums.Role role in Enums.Role.GetValues(typeof(Enums.Role)))
             {
-                items.Add(role.ToString());
+                RoleCeskyAttribute attribute = (RoleCeskyAttribute)role.GetType()
+                    .GetField(role.ToString())
+                    .GetCustomAttribute(typeof(RoleCeskyAttribute));
+
+                if (attribute != null)
+                {
+                    items.Add(attribute.Nazev);
+                }
             }
             return items;
         }
@@ -28,9 +36,16 @@ namespace Spovyz.Controllers
         public IEnumerable<string> GetSex()
         {
             List<string> items = new List<string>();
-            foreach (Enums.Sex role in Enums.Role.GetValues(typeof(Enums.Sex)))
+            foreach (Enums.Sex sex in Enums.Role.GetValues(typeof(Enums.Sex)))
             {
-                items.Add(role.ToString());
+                RoleCeskyAttribute attribute = (RoleCeskyAttribute)sex.GetType()
+                    .GetField(sex.ToString())
+                    .GetCustomAttribute(typeof(RoleCeskyAttribute));
+
+                if (attribute != null)
+                {
+                    items.Add(attribute.Nazev);
+                }
             }
             return items;
         }

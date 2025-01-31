@@ -8,6 +8,13 @@ namespace Spovyz.Controllers
     [ApiController]
     public class ChatController : ControllerBase
     {
+        private readonly ApplicationDbContext _context;
+        
+        public ChatController(ApplicationDbContext context)
+        {
+            this._context = context;
+        }
+
         [HttpGet("{id}")]
         public string Get(int id)
         {
