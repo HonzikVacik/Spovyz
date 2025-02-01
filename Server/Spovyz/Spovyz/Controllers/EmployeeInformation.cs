@@ -34,7 +34,10 @@ namespace Spovyz.Controllers
         {
             uint i = 0;
             Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
-            Employee[] employees = [.. _context.Employees.Include(e => e.Company).Where(e => e.Company.Id == activeUser.Company.Id)];
+            Employee[] employees = [.. _context.Employees
+                .Include(e => e.Company)
+                .Where(e => e.Company.Id == activeUser.Company.Id)
+                .ToArray()];
             List<AdminDashboardData> data = employees.Select(e => new AdminDashboardData{ Id = i++, Username = e.Username, NeedResetPassword = e.NeedResetPassword}).ToList();
             return data;
         }
@@ -86,7 +89,10 @@ namespace Spovyz.Controllers
             string username = "";
 
             Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
-            Employee[] employees = [.. _context.Employees.Include(e => e.Company).Where(e => e.Company.Id == activeUser.Company.Id)];
+            Employee[] employees = [.. _context.Employees
+                .Include(e => e.Company)
+                .Where(e => e.Company.Id == activeUser.Company.Id)
+                .ToArray()];
             if (id < 0 || id >= employees.Length)
                 return Ok(new { error });
             return Ok(new { username = employees[id].Username });
@@ -101,7 +107,10 @@ namespace Spovyz.Controllers
             string error = "e1";
 
             Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
-            Employee[] employees = [.. _context.Employees.Include(e => e.Company).Where(e => e.Company.Id == activeUser.Company.Id)];
+            Employee[] employees = [.. _context.Employees
+                .Include(e => e.Company)
+                .Where(e => e.Company.Id == activeUser.Company.Id)
+                .ToArray()];
             if (id < 0 || id >= employees.Length)
                 return Ok(new { error });
             Employee result = employees[id];
@@ -191,7 +200,10 @@ namespace Spovyz.Controllers
             string accept = "a";
             Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
 
-            Employee[] employees = [.. _context.Employees.Include(e => e.Company).Where(e => e.Company.Id == activeUser.Company.Id)];
+            Employee[] employees = [.. _context.Employees
+                .Include(e => e.Company)
+                .Where(e => e.Company.Id == activeUser.Company.Id)
+                .ToArray()];
             if (id < 0 || id >= employees.Length)
                 return Ok(error4);
             Employee result = employees[id];
@@ -267,7 +279,10 @@ namespace Spovyz.Controllers
             string accept = "a";
 
             Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
-            Employee[] employees = [.. _context.Employees.Include(e => e.Company).Where(e => e.Company.Id == activeUser.Company.Id)];
+            Employee[] employees = [.. _context.Employees
+                .Include(e => e.Company)
+                .Where(e => e.Company.Id == activeUser.Company.Id)
+                .ToArray()];
             if (id < 0 || id >= employees.Length)
                 return Ok(new { error });
             Employee e = employees[id];
@@ -300,7 +315,9 @@ namespace Spovyz.Controllers
             string error = "e1";
             string accept = "a";
 
-            Employee[] employees = [.. _context.Employees.Where(e => e.Username == username && e.SecurityVerification == securityVerification)];
+            Employee[] employees = [.. _context.Employees
+                .Where(e => e.Username == username && e.SecurityVerification == securityVerification)
+                .ToArray()];
             if (employees.Length != 0)
             {
                 Employee employee = employees[0];
@@ -322,7 +339,10 @@ namespace Spovyz.Controllers
             string accept = "a";
             Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
 
-            Employee[] employees = [.. _context.Employees.Include(e => e.Company).Where(e => e.Company.Id == activeUser.Company.Id)];
+            Employee[] employees = [.. _context.Employees
+                .Include(e => e.Company)
+                .Where(e => e.Company.Id == activeUser.Company.Id)
+                .ToArray()];
             if (id < 0 || id >= employees.Length)
                 return Ok(error);
             Employee result = employees[id];

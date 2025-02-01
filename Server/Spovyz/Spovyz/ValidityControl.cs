@@ -43,7 +43,9 @@ namespace Spovyz
 
         private bool Username(string username, uint activeUserCompanyId, ApplicationDbContext _context)
         {
-            Employee[] e = [.. _context.Employees.Include(e => e.Company).Where(e => e.Username == username && e.Company.Id == activeUserCompanyId)];
+            Employee[] e = [.. _context.Employees
+                .Include(e => e.Company)
+                .Where(e => e.Username == username && e.Company.Id == activeUserCompanyId)];
             if (e == null || e.Length == 0)
                 return true;
             else
@@ -61,7 +63,9 @@ namespace Spovyz
 
         private bool SecurityVerification(string securityVerification, string username, ApplicationDbContext _context)
         {
-            Employee[] e = [.. _context.Employees.Include(e => e.Company).Where(e => e.Username == username && e.SecurityVerification == securityVerification)];
+            Employee[] e = [.. _context.Employees
+                .Include(e => e.Company)
+                .Where(e => e.Username == username && e.SecurityVerification == securityVerification)];
             if (e == null || e.Length == 0)
                 return true;
             else

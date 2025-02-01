@@ -23,7 +23,7 @@
             [RoleCesky("Dovolená")] Holiday
         }
 
-        public enum ProjectStatus
+        public enum Status
         {
             [RoleCesky("Nový")] New,
             [RoleCesky("Aktivní")] Active,

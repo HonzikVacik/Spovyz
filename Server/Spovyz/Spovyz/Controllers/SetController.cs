@@ -50,6 +50,25 @@ namespace Spovyz.Controllers
             return items;
         }
 
+        [HttpGet("StatusEnum")]
+        [Authorize]
+        public IEnumerable<string> GetStatus()
+        {
+            List<string> items = new List<string>();
+            foreach (Enums.Status status in Enums.Role.GetValues(typeof(Enums.Status)))
+            {
+                RoleCeskyAttribute attribute = (RoleCeskyAttribute)status.GetType()
+                    .GetField(status.ToString())
+                    .GetCustomAttribute(typeof(RoleCeskyAttribute));
+
+                if (attribute != null)
+                {
+                    items.Add(attribute.Nazev);
+                }
+            }
+            return items;
+        }
+
         // GET api/<SetController>/5
         [HttpGet("{id}")]
         public string Get(int id)

@@ -54,11 +54,18 @@ namespace Spovyz.Controllers
 
             uint i = 0;
             Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
-            Project_employee[] pe = [.. _context.Project_employees.Include(pe => pe.Employee).Include(pe => pe.Project).Where(pe => pe.Employee.Id == activeUser.Id).ToArray()];
+            Project_employee[] pe = [.. _context.Project_employees
+                .Include(pe => pe.Employee)
+                .Include(pe => pe.Project)
+                .Where(pe => pe.Employee.Id == activeUser.Id)
+                .ToArray()];
             if (ProjectId < 0 || ProjectId >= pe.Length)
                 return Ok("e1");
             uint activeProjectId = pe[ProjectId].Project.Id;
-            Models.Task[] tasks = [.. _context.Tasks.Include(t => t.Project).Where(t => t.Project.Id == activeProjectId).ToArray()];
+            Models.Task[] tasks = [.. _context.Tasks
+                .Include(t => t.Project)
+                .Where(t => t.Project.Id == activeProjectId)
+                .ToArray()];
             List<EmployeeDashboardTask> data = tasks.Select(t => new EmployeeDashboardTask() { Id = i++, Name = t.Name }).ToList();
             return Ok(data);
         }

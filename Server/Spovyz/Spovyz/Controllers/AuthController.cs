@@ -37,7 +37,7 @@ namespace Spovyz.Controllers
             //Kontrola databáze
 
             //Kontrola existence user
-            Employee[] employees = [.. _context.Employees.Where(e => e.Username == user)];
+            Employee[] employees = _context.Employees.Where(e => e.Username == user).ToArray();
             if(employees.Length == 0)
                 return Unauthorized("e1");
 

@@ -7,6 +7,6 @@
         public string? Description { get; set; }
         public Customer Customer { get; set; }
         public DateOnly? Dead_line { get; set; }
-        public Enums.ProjectStatus Status { get; set; }
+        public Enums.Status Status { get; set; }
     }
 }
