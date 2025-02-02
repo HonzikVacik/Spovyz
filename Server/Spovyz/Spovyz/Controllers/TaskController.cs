@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Spovyz.Models;
 using Spovyz.Transport_models;
+using System.ComponentModel.DataAnnotations;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -52,6 +53,9 @@ namespace Spovyz.Controllers
             }
             return Ok(datas);
 
+            //e1 - projekt neexistuje
+
+            string error = "e1";
             uint i = 0;
             Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
             Project_employee[] pe = [.. _context.Project_employees
@@ -60,7 +64,7 @@ namespace Spovyz.Controllers
                 .Where(pe => pe.Employee.Id == activeUser.Id)
                 .ToArray()];
             if (ProjectId < 0 || ProjectId >= pe.Length)
-                return Ok("e1");
+                return Ok(error);
             uint activeProjectId = pe[ProjectId].Project.Id;
             Models.Task[] tasks = [.. _context.Tasks
                 .Include(t => t.Project)
@@ -72,7 +76,7 @@ namespace Spovyz.Controllers
 
         // GET api/<TaskController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public string Get(int id, int projectId)
         {
             return "value";
         }
@@ -91,8 +95,40 @@ namespace Spovyz.Controllers
 
         // DELETE api/<TaskController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        [Authorize]
+        public IActionResult Delete(int id, [Required]int projectId)
         {
+            //e1 - projekt neexistuje
+            string error = "e1";
+            string accept = "a";
+
+            Employee activeUser = _context.Employees.FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
+
+            Models.Task[] tasks = _context.Tasks
+                .Include(t => t.Project)
+                .ToArray();
+
+            if(id >= 0 && projectId < tasks.Length)
+            {
+                Models.Task task = tasks[id];
+                Models.Task_employee[] t_employees = [.. _context.Task_employees
+                    .Include(t => t.Task)
+                    .Include(t => t.Emlployee)
+                    .Where(t => t.Task == task)
+                    .ToArray()];
+                Models.Task_tag[] t_tags = [.. _context.Task_tags
+                    .Include(t => t.Task == task)
+                    .ToArray()];
+
+                _context.RemoveRange(t_employees);
+                _context.RemoveRange(t_tags);
+                _context.Remove(task);
+                _context.SaveChanges();
+
+                return Ok(accept);
+            }
+            else
+                return Ok(error);
         }
     }
 }
