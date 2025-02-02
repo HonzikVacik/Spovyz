@@ -113,7 +113,6 @@ namespace Spovyz.Controllers
                 Models.Task task = tasks[id];
                 Models.Task_employee[] t_employees = [.. _context.Task_employees
                     .Include(t => t.Task)
-                    .Include(t => t.Emlployee)
                     .Where(t => t.Task == task)
                     .ToArray()];
                 Models.Task_tag[] t_tags = [.. _context.Task_tags
