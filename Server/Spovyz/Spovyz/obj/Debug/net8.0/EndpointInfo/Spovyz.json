@@ -948,6 +948,54 @@
         }
       }
     },
+    "/api/Set/Junior": {
+      "get": {
+        "tags": [
+          "Set"
+        ],
+        "parameters": [
+          {
+            "name": "project_task",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NameBasic"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NameBasic"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NameBasic"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Set/{id}": {
       "get": {
         "tags": [
@@ -1321,6 +1369,20 @@
         "additionalProperties": false
       },
       "EmployeeDashboardProject": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NameBasic": {
         "type": "object",
         "properties": {
           "id": {

@@ -669,6 +669,32 @@
   },
   {
     "ContainingType": "Spovyz.Controllers.SetController",
+    "Method": "GetJunior",
+    "RelativePath": "api/Set/Junior",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "project_task",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Spovyz.Transport_models.NameBasic, Spovyz, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Spovyz.Controllers.SetController",
     "Method": "GetRole",
     "RelativePath": "api/Set/RoleEnum",
     "HttpMethod": "GET",

@@ -82,6 +82,20 @@ namespace Spovyz.Controllers
                 .Where(e => e.Project.Id == project.Id)
                 .Select(e => e.Employee.Id)
                 .ToArray()];
+            uint[] allEmployees = [.. _context.Employees
+                .Where(e => e.Company == activeUser.Company &&
+                    (e.Account_type == Enums.Role.Manager || 
+                    e.Account_type == Enums.Role.Supervisor || 
+                    e.Account_type == Enums.Role.Worker))
+                .OrderBy(e => e.Username)
+                .Select(e => e.Id)
+                .ToArray()];
+            List<uint> u1 = new List<uint>();
+            foreach (var employee in employees)
+            {
+                u1.Add((uint)Array.IndexOf(allEmployees, employee));
+            }
+            uint[] u2 = u1.ToArray();
 
 
             string[] taskNames = [.. _context.Tasks

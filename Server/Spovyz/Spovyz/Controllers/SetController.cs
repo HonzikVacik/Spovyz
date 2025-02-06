@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Spovyz.Models;
+using Spovyz.Transport_models;
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.Eventing.Reader;
 using System.Reflection;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -11,6 +15,13 @@ namespace Spovyz.Controllers
     [ApiController]
     public class SetController : ControllerBase
     {
+        private readonly ApplicationDbContext _context;
+
+        public SetController(ApplicationDbContext context)
+        {
+            this._context = context;
+        }
+
         // GET: api/<SetController>
         [HttpGet("RoleEnum")]
         [Authorize]
@@ -68,6 +79,51 @@ namespace Spovyz.Controllers
             }
             return items;
         }
+
+
+        [HttpGet("Junior")]
+        [Authorize]
+        public IEnumerable<NameBasic> GetJunior([Required] bool project_task)
+        {
+            Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
+
+            //get direct workers
+            Employee[] employees = [.. _context.Employees
+                .Include(e => e.Company)
+                .Include(e => e.Supervisor)
+                .Where(e => e.Company == activeUser.Company && e.Supervisor == activeUser && (e.Account_type == Enums.Role.Manager || e.Account_type == Enums.Role.Supervisor || e.Account_type == Enums.Role.Worker))
+                .ToArray()];
+
+            //get other workers
+            Employee[] employees1 = GetJuniorChild(employees, activeUser);
+            employees1 = employees1.OrderBy(e => e.Account_type).ToArray();
+
+            Employee[] ee2 = employees.Concat(employees1).ToArray();
+            List<NameBasic> ee3 = new List<NameBasic>();
+            foreach (var employee in ee2.Select((value, index) => new { index, value }))
+            {
+                ee3.Add(new NameBasic() { Id = employee.index, Name = employee.value.Username });
+            }
+            return ee3;
+        }
+
+
+        private Employee[] GetJuniorChild(Employee[] employees, Employee activeUser)
+        {
+            if(employees.Length == 0)
+                return new Employee[0];
+            else
+            {
+
+                Employee[] employees1 = [.. _context.Employees
+                    .Include(e => e.Company)
+                    .Include(e => e.Supervisor)
+                    .Where(e => e.Company == activeUser.Company && employees.Contains(e.Supervisor) && (e.Account_type == Enums.Role.Manager || e.Account_type == Enums.Role.Supervisor || e.Account_type == Enums.Role.Worker))
+                    .ToArray()];
+                return employees1.Concat(GetJuniorChild(employees1 , activeUser)).ToArray();
+            }
+        }
+
 
         // GET api/<SetController>/5
         [HttpGet("{id}")]
