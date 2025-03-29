@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Spovyz.Models;
 using Spovyz.Transport_models;
 using System.ComponentModel.DataAnnotations;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -25,7 +26,7 @@ namespace Spovyz.Controllers
         [Authorize]
         public IActionResult GetList(int ProjectId)
         {
-            // Testovací hodnoty
+            /*// Testovací hodnoty
             List<EmployeeDashboardTask> datas = new List<EmployeeDashboardTask>();
             switch(ProjectId)
             {
@@ -51,26 +52,27 @@ namespace Spovyz.Controllers
                     }
                     break;
             }
-            return Ok(datas);
+            return Ok(datas);*/
 
             //e1 - projekt neexistuje
+            Employee? activeUser = _context.Employees.FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
+            if (activeUser == null)
+                return NotFound("A");
 
-            string error = "e1";
-            uint i = 0;
-            Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
-            Project_employee[] pe = [.. _context.Project_employees
-                .Include(pe => pe.Employee)
-                .Include(pe => pe.Project)
-                .Where(pe => pe.Employee.Id == activeUser.Id)
-                .ToArray()];
-            if (ProjectId < 0 || ProjectId >= pe.Length)
-                return Ok(error);
-            uint activeProjectId = pe[ProjectId].Project.Id;
+            Project? project = _context.Project_employees
+                .Include(p => p.Project)
+                .Include(p => p.Employee)
+                .Where(p => p.Project.Id == ProjectId && p.Employee.Company.Id == activeUser.Company.Id)
+                .Select(p => p.Project)
+                .FirstOrDefault();
+            if (project == null)
+                return NotFound("B");
+
             Models.Task[] tasks = [.. _context.Tasks
                 .Include(t => t.Project)
-                .Where(t => t.Project.Id == activeProjectId)
+                .Where(t => t.Project.Id == project.Id)
                 .ToArray()];
-            List<EmployeeDashboardTask> data = tasks.Select(t => new EmployeeDashboardTask() { Id = i++, Name = t.Name }).ToList();
+            List<EmployeeDashboardTask> data = tasks.Select(t => new EmployeeDashboardTask() { Id = t.Id, Name = t.Name }).ToList();
             return Ok(data);
         }
 
@@ -96,21 +98,24 @@ namespace Spovyz.Controllers
         // DELETE api/<TaskController>/5
         [HttpDelete("{id}")]
         [Authorize]
-        public IActionResult Delete(int id, [Required]int projectId)
+        public IActionResult Delete(int id)
         {
             //e1 - projekt neexistuje
             string error = "e1";
             string accept = "a";
 
-            Employee activeUser = _context.Employees.FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
+            Employee? activeUser = _context.Employees.FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
 
-            Models.Task[] tasks = _context.Tasks
+            if(activeUser == null)
+                return NotFound(error);
+
+            Models.Task? task = _context.Tasks
                 .Include(t => t.Project)
-                .ToArray();
+                .Where(t => t.Id == id)
+                .FirstOrDefault();
 
-            if(id >= 0 && projectId < tasks.Length)
+            if(task != null)
             {
-                Models.Task task = tasks[id];
                 Models.Task_employee[] t_employees = [.. _context.Task_employees
                     .Include(t => t.Task)
                     .Where(t => t.Task == task)
@@ -127,7 +132,7 @@ namespace Spovyz.Controllers
                 return Ok(accept);
             }
             else
-                return Ok(error);
+                return NotFound(error);
         }
     }
 }

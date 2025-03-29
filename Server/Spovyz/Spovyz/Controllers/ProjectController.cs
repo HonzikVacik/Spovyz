@@ -42,7 +42,7 @@ namespace Spovyz.Controllers
                 .Select(te => te.Project)
                 .ToArray()];
 
-            List<EmployeeDashboardProject> data = projects.Select(t => new EmployeeDashboardProject() { Id = i++, Name = t.Name }).ToList();
+            List<EmployeeDashboardProject> data = projects.Select(t => new EmployeeDashboardProject() { Id = t.Id, Name = t.Name }).ToList();
             return data;
         }
 
@@ -54,16 +54,13 @@ namespace Spovyz.Controllers
             //e1 - bad id
             string error = null;
             Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
-            Project[] projects = [.. _context.Project_employees
+            Project project = _context.Project_employees
                 .Include(te => te.Project)
                 .Include(te => te.Employee)
                 .Where(te => te.Employee.Id == activeUser.Id)
                 .Select(te => te.Project)
-                .ToArray()];
-
-            if (id < 0 || id >= projects.Length)
-                return Ok(error = "e1");
-            Project project = projects[id];
+                .Where(p => p.Id == id)
+                .FirstOrDefault();
 
 
             string[] tagNames = [.. _context.Project_tags
@@ -76,26 +73,12 @@ namespace Spovyz.Controllers
                 .ToList();
 
 
-            uint[] employees = [.. _context.Project_employees
+            uint[] employeesIds = [.. _context.Project_employees
                 .Include(e => e.Project)
                 .Include(e => e.Employee)
                 .Where(e => e.Project.Id == project.Id)
                 .Select(e => e.Employee.Id)
                 .ToArray()];
-            uint[] allEmployees = [.. _context.Employees
-                .Where(e => e.Company == activeUser.Company &&
-                    (e.Account_type == Enums.Role.Manager || 
-                    e.Account_type == Enums.Role.Supervisor || 
-                    e.Account_type == Enums.Role.Worker))
-                .OrderBy(e => e.Username)
-                .Select(e => e.Id)
-                .ToArray()];
-            List<uint> u1 = new List<uint>();
-            foreach (var employee in employees)
-            {
-                u1.Add((uint)Array.IndexOf(allEmployees, employee));
-            }
-            uint[] u2 = u1.ToArray();
 
 
             string[] taskNames = [.. _context.Tasks
@@ -118,7 +101,7 @@ namespace Spovyz.Controllers
                 WorkedOut = "3 dny",
                 WorkedByMe = "9 hodin",
                 Tags = p_tag.ToArray(),
-                Employees = employees,
+                Employees = employeesIds,
                 Tasks = p_task.ToArray()
             };
             return Ok("");
@@ -147,54 +130,51 @@ namespace Spovyz.Controllers
 
             Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
 
-            Project[] projects = [.. _context.Project_employees
+            Project? project = _context.Project_employees
                 .Include(te => te.Project)
                 .Include(te => te.Employee)
-                .Where(te => te.Employee.Id == activeUser.Id)
+                .Where(te => te.Employee.Id == activeUser.Id && te.Project.Id == id)
                 .Select(te => te.Project)
-                .ToArray()];
+                .FirstOrDefault();
 
-            if (id >= 0 && id < projects.Length)
-            {
-                Project project = projects[id];
-                Project_employee[] p_employees = [.. _context.Project_employees
+            if (project == null)
+                return NotFound(error);
+
+            Project_employee[] p_employees = [.. _context.Project_employees
                 .Include(p => p.Project)
                 .Where(p => p.Project == project)
                 .ToArray()];
-                Project_tag[] p_tag = [.. _context.Project_tags
+            Project_tag[] p_tag = [.. _context.Project_tags
                 .Include(p => p.Project)
                 .Where(p => p.Project == project)
                 .ToArray()];
-                Models.Task[] p_tasks = [.. _context.Tasks
+            Models.Task[] p_tasks = [.. _context.Tasks
                 .Include(t => t.Project)
                 .Where(t => t.Project == project)
                 .ToArray()];
 
-                var result = p_tasks.Select(task => new
-                {
-                    t_employees = _context.Task_employees
-                        .Include(t => t.Task)
-                        .Where(t => t.Task == task)
-                        .ToArray(),
-                    t_tags = _context.Task_tags
-                        .Include(t => t.Task == task)
-                        .ToArray()
-                });
-                Task_employee[] t_employees = result.SelectMany(r => r.t_employees).ToArray();
-                Task_tag[] t_tag = result.SelectMany(r => r.t_tags).ToArray();
+            var result = p_tasks.Select(task => new
+            {
+                t_employees = _context.Task_employees
+                    .Include(t => t.Task)
+                    .Where(t => t.Task == task)
+                    .ToArray(),
+                t_tags = _context.Task_tags
+                    .Include(t => t.Task == task)
+                    .ToArray()
+            });
+            Task_employee[] t_employees = result.SelectMany(r => r.t_employees).ToArray();
+            Task_tag[] t_tag = result.SelectMany(r => r.t_tags).ToArray();
 
-                _context.RemoveRange(t_employees, t_tag);
-                _context.RemoveRange(t_tag);
-                _context.RemoveRange(p_tasks);
-                _context.RemoveRange(p_tag);
-                _context.RemoveRange(p_employees);
-                _context.Remove(project);
-                _context.SaveChanges();
+            _context.RemoveRange(t_employees);
+            _context.RemoveRange(t_tag);
+            _context.RemoveRange(p_tasks);
+            _context.RemoveRange(p_tag);
+            _context.RemoveRange(p_employees);
+            _context.Remove(project);
+            _context.SaveChanges();
 
-                return Ok(accept);
-            }
-            else
-                return Ok(error);
+            return Ok(accept);
         }
     }
 }
