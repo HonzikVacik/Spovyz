@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Spovyz.Models;
 using Spovyz.Transport_models;
+using Spovyz.Services;
 using System.Reflection;
+using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,26 +16,39 @@ namespace Spovyz.Controllers
     public class ProjectController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly ProjectService _projectService;
 
-        public ProjectController(ApplicationDbContext context)
+        public ProjectController(ApplicationDbContext context, ProjectService projectService)
         {
             _context = context;
+            _projectService = projectService;
         }
 
-        // GET: api/<ProjectController>
         [HttpGet]
         [Authorize]
-        public IEnumerable<EmployeeDashboardProject> Get()
+        public async Task<IActionResult> Get()
         {
-            // Testovací hodnoty
+            /*// Testovací hodnoty
             List<EmployeeDashboardProject> datas = new List<EmployeeDashboardProject>();
             datas.Add(new EmployeeDashboardProject() { Id = 0, Name = "Project1" });
             datas.Add(new EmployeeDashboardProject() { Id = 1, Name = "Project2" });
             datas.Add(new EmployeeDashboardProject() { Id = 2, Name = "Project3" });
-            return datas;
+            return datas;*/
 
-            uint i = 0;
-            Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
+            string? UserName = User.Identity?.Name?.ToString();
+            if (UserName == null)
+                return NotFound();
+
+            (List<EmployeeDashboardProject>? data, string? error) = await _projectService.GetProjectList(UserName);
+            
+            if (error != null)
+                return NotFound(error);
+            return Ok(data);
+
+            /*Employee? activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
+
+            if(activeUser == null)
+                return NotFound();
 
             Project[] projects = [.. _context.Project_employees
                 .Include(te => te.Project)
@@ -43,138 +58,47 @@ namespace Spovyz.Controllers
                 .ToArray()];
 
             List<EmployeeDashboardProject> data = projects.Select(t => new EmployeeDashboardProject() { Id = t.Id, Name = t.Name }).ToList();
-            return data;
+            return Ok(data);*/
         }
 
-        // GET api/<ProjectController>/5
         [HttpGet("{id}")]
         [Authorize]
-        public IActionResult Get(int id)
+        public async Task<IActionResult> Get(uint ProjectId)
         {
-            //e1 - bad id
-            string error = null;
-            Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
-            Project project = _context.Project_employees
-                .Include(te => te.Project)
-                .Include(te => te.Employee)
-                .Where(te => te.Employee.Id == activeUser.Id)
-                .Select(te => te.Project)
-                .Where(p => p.Id == id)
-                .FirstOrDefault();
+            string? UserName = User.Identity?.Name?.ToString();
+            if (UserName == null)
+                return NotFound();
 
+            (ProjectCardData? data, string? error) = await _projectService.GetProjectById(UserName, ProjectId);
+            if (error != null)
+                return NotFound(error);
 
-            string[] tagNames = [.. _context.Project_tags
-                .Include(pt => pt.Tag)
-                .Where(pt => pt.Project.Id == project.Id)
-                .Select(pt => pt.Tag.Name)
-                .ToArray()];
-            List<NameBasic> p_tag = tagNames
-                .Select((name, index) => new NameBasic { Id = index, Name = name })
-                .ToList();
-
-
-            uint[] employeesIds = [.. _context.Project_employees
-                .Include(e => e.Project)
-                .Include(e => e.Employee)
-                .Where(e => e.Project.Id == project.Id)
-                .Select(e => e.Employee.Id)
-                .ToArray()];
-
-
-            string[] taskNames = [.. _context.Tasks
-                .Include(t => t.Project)
-                .Where(t => t.Project.Id == project.Id)
-                .Select(t => t.Name)
-                .ToArray()];
-            List<NameBasic> p_task = taskNames
-                .Select((name, index) => new NameBasic { Id = index, Name = name })
-                .ToList();
-
-
-            ProjectCardData data = new ProjectCardData()
-            {
-                Name = project.Name,
-                Description = project.Description,
-                Customer = project.Customer.Id,
-                Status = (uint)project.Status,
-                Deathline = project.Dead_line,
-                WorkedOut = "3 dny",
-                WorkedByMe = "9 hodin",
-                Tags = p_tag.ToArray(),
-                Employees = employeesIds,
-                Tasks = p_task.ToArray()
-            };
-            return Ok("");
+            return Ok(data);
         }
 
-        // POST api/<ProjectController>
         [HttpPost]
         public void Post(string name, string description, int customer, DateOnly? deathline, string[] tags, string employees)
         {
         }
 
-        // PUT api/<ProjectController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<ProjectController>/5
         [HttpDelete("{id}")]
         [Authorize]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(uint id)
         {
-            //e1 - projekt neexistuje
-            string error = "e1";
-            string accept = "a";
+            string? UserName = User.Identity?.Name?.ToString();
+            if (UserName == null)
+                return NotFound();
 
-            Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
+            string result = await _projectService.DeleteProject(UserName, id);
+            if (result != "Accept")
+                return NotFound(result);
 
-            Project? project = _context.Project_employees
-                .Include(te => te.Project)
-                .Include(te => te.Employee)
-                .Where(te => te.Employee.Id == activeUser.Id && te.Project.Id == id)
-                .Select(te => te.Project)
-                .FirstOrDefault();
-
-            if (project == null)
-                return NotFound(error);
-
-            Project_employee[] p_employees = [.. _context.Project_employees
-                .Include(p => p.Project)
-                .Where(p => p.Project == project)
-                .ToArray()];
-            Project_tag[] p_tag = [.. _context.Project_tags
-                .Include(p => p.Project)
-                .Where(p => p.Project == project)
-                .ToArray()];
-            Models.Task[] p_tasks = [.. _context.Tasks
-                .Include(t => t.Project)
-                .Where(t => t.Project == project)
-                .ToArray()];
-
-            var result = p_tasks.Select(task => new
-            {
-                t_employees = _context.Task_employees
-                    .Include(t => t.Task)
-                    .Where(t => t.Task == task)
-                    .ToArray(),
-                t_tags = _context.Task_tags
-                    .Include(t => t.Task == task)
-                    .ToArray()
-            });
-            Task_employee[] t_employees = result.SelectMany(r => r.t_employees).ToArray();
-            Task_tag[] t_tag = result.SelectMany(r => r.t_tags).ToArray();
-
-            _context.RemoveRange(t_employees);
-            _context.RemoveRange(t_tag);
-            _context.RemoveRange(p_tasks);
-            _context.RemoveRange(p_tag);
-            _context.RemoveRange(p_employees);
-            _context.Remove(project);
-            _context.SaveChanges();
-
-            return Ok(accept);
+            return Ok(result);
         }
     }
 }
