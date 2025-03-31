@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Spovyz.IServices;
 using Spovyz.Models;
 using Spovyz.Transport_models;
 using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -15,16 +17,18 @@ namespace Spovyz.Controllers
     public class TaskController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly ITaskService _taskService;
 
-        public TaskController(ApplicationDbContext context)
+        public TaskController(ApplicationDbContext context, ITaskService taskService)
         {
             this._context = context;
+            this._taskService = taskService;
         }
 
         // GET: api/<TaskController>
         [HttpGet]
         [Authorize]
-        public IActionResult GetList(int ProjectId)
+        public async Task<IActionResult> GetList(uint ProjectId)
         {
             /*// Testovací hodnoty
             List<EmployeeDashboardTask> datas = new List<EmployeeDashboardTask>();
@@ -55,24 +59,13 @@ namespace Spovyz.Controllers
             return Ok(datas);*/
 
             //e1 - projekt neexistuje
-            Employee? activeUser = _context.Employees.FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
-            if (activeUser == null)
+            string? UserName = User.Identity.Name;
+            if (UserName == null)
                 return NotFound("A");
-
-            Project? project = _context.Project_employees
-                .Include(p => p.Project)
-                .Include(p => p.Employee)
-                .Where(p => p.Project.Id == ProjectId && p.Employee.Company.Id == activeUser.Company.Id)
-                .Select(p => p.Project)
-                .FirstOrDefault();
-            if (project == null)
-                return NotFound("B");
-
-            Models.Task[] tasks = [.. _context.Tasks
-                .Include(t => t.Project)
-                .Where(t => t.Project.Id == project.Id)
-                .ToArray()];
-            List<EmployeeDashboardTask> data = tasks.Select(t => new EmployeeDashboardTask() { Id = t.Id, Name = t.Name }).ToList();
+            
+            (List<EmployeeDashboardTask>? data, string? error) = await _taskService.GetTaskList(UserName, ProjectId);
+            if (error != null)
+                return NotFound(error);
             return Ok(data);
         }
 
@@ -98,39 +91,19 @@ namespace Spovyz.Controllers
         // DELETE api/<TaskController>/5
         [HttpDelete("{id}")]
         [Authorize]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(uint id)
         {
             //e1 - projekt neexistuje
             string error = "e1";
             string accept = "a";
 
-            Employee? activeUser = _context.Employees.FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
-
-            if(activeUser == null)
+            string? UserName = User.Identity.Name;
+            if (UserName == null)
                 return NotFound(error);
 
-            Models.Task? task = _context.Tasks
-                .Include(t => t.Project)
-                .Where(t => t.Id == id)
-                .FirstOrDefault();
-
-            if(task != null)
-            {
-                Models.Task_employee[] t_employees = [.. _context.Task_employees
-                    .Include(t => t.Task)
-                    .Where(t => t.Task == task)
-                    .ToArray()];
-                Models.Task_tag[] t_tags = [.. _context.Task_tags
-                    .Include(t => t.Task == task)
-                    .ToArray()];
-
-                _context.RemoveRange(t_employees);
-                _context.RemoveRange(t_tags);
-                _context.Remove(task);
-                _context.SaveChanges();
-
+            string result = await _taskService.DeleteTask(UserName, id);
+            if (result == accept)
                 return Ok(accept);
-            }
             else
                 return NotFound(error);
         }

@@ -5,6 +5,7 @@ using Spovyz.Models;
 using Spovyz.Transport_models;
 using Microsoft.AspNetCore.Http.HttpResults;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using Spovyz.IRepositories;
 
 namespace Spovyz.Services
 {
@@ -12,11 +13,13 @@ namespace Spovyz.Services
     {
         private readonly ApplicationDbContext _context;
         private readonly ProjectRepository _projectRepository;
+        private readonly ITaskRepository _taskRepository;
 
-        public ProjectService(ApplicationDbContext context, ProjectRepository projectRepository)
+        public ProjectService(ApplicationDbContext context, ProjectRepository projectRepository, ITaskRepository taskRepository)
         {
             _context = context;
             _projectRepository = projectRepository;
+            _taskRepository = taskRepository;
         }
 
         public async Task<string> DeleteProject(string UserName, uint ProjectId)
@@ -37,10 +40,7 @@ namespace Spovyz.Services
                 .Include(p => p.Project)
                 .Where(p => p.Project == project)
                 .ToArray()];
-            Models.Task[] p_tasks = [.. _context.Tasks
-                .Include(t => t.Project)
-                .Where(t => t.Project == project)
-                .ToArray()];
+            List<Models.Task> p_tasks = await _taskRepository.GetTaskList(project.Id);
 
             var result = p_tasks.Select(task => new
             {
@@ -56,7 +56,7 @@ namespace Spovyz.Services
             Task_tag[] t_tag = result.SelectMany(r => r.t_tags).ToArray();
 
 
-            await _projectRepository.DeleteProject(project, t_employees, t_tag, p_tasks, p_tag, p_employees);
+            await _projectRepository.DeleteProject(project, t_employees, t_tag, p_tasks.ToArray(), p_tag, p_employees);
             return "Accept";
         }
 
