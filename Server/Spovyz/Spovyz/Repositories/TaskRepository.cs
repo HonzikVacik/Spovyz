@@ -40,5 +40,15 @@ namespace Spovyz.Repositories
                 .Select(t => t.Task)
                 .ToListAsync();
         }
+
+        public async Task<string[]?> GetTaskNames(uint ProjectId, uint ActiveUserId)
+        {
+            return await _context.Task_employees
+                .Include(t => t.Task)
+                .Include(t => t.Emlployee)
+                .Where(t => t.Task.Project.Id == ProjectId && t.Emlployee.Id == ActiveUserId)
+                .Select(t => t.Task.Name)
+                .ToArrayAsync();
+        }
     }
 }

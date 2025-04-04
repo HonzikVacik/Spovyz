@@ -3,8 +3,6 @@ using Spovyz.Repositories;
 using Spovyz.IServices;
 using Spovyz.Models;
 using Spovyz.Transport_models;
-using Microsoft.AspNetCore.Http.HttpResults;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 using Spovyz.IRepositories;
 
 namespace Spovyz.Services
@@ -12,14 +10,26 @@ namespace Spovyz.Services
     public class ProjectService : IProjectService
     {
         private readonly ApplicationDbContext _context;
+        private readonly IEmployeeRepository _employeeRepository;
         private readonly ProjectRepository _projectRepository;
         private readonly ITaskRepository _taskRepository;
+        private readonly IProjectEmployeeRepository _projectEmployeeRepository;
+        private readonly IProjectTagRepository _projectTagRepository;
+        private readonly ITaskEmployeeRepository _taskEmployeeRepository;
+        private readonly ITaskTagRepository _taskTagRepository;
+        private readonly ITagRepository _tagRepository;
 
-        public ProjectService(ApplicationDbContext context, ProjectRepository projectRepository, ITaskRepository taskRepository)
+        public ProjectService(ApplicationDbContext context, IEmployeeRepository employeeRepository, ProjectRepository projectRepository, ITaskRepository taskRepository, IProjectEmployeeRepository projectEmployeeRepository, IProjectTagRepository projectTagRepository, ITaskEmployeeRepository taskEmployeeRepository, ITaskTagRepository taskTagRepository, ITagRepository tagRepository)
         {
             _context = context;
+            _employeeRepository = employeeRepository;
             _projectRepository = projectRepository;
             _taskRepository = taskRepository;
+            _projectEmployeeRepository = projectEmployeeRepository;
+            _projectTagRepository = projectTagRepository;
+            _taskEmployeeRepository = taskEmployeeRepository;
+            _taskTagRepository = taskTagRepository;
+            _tagRepository = tagRepository;
         }
 
         public async Task<string> DeleteProject(string UserName, uint ProjectId)
@@ -32,29 +42,18 @@ namespace Spovyz.Services
             if (project == null)
                 return "Project not found";
 
-            Project_employee[] p_employees = [.. _context.Project_employees
-                .Include(p => p.Project)
-                .Where(p => p.Project == project)
-                .ToArray()];
-            Project_tag[] p_tag = [.. _context.Project_tags
-                .Include(p => p.Project)
-                .Where(p => p.Project == project)
-                .ToArray()];
+            Project_employee[] p_employees = await _projectEmployeeRepository.GetProjectEmployeeByProject(project);
+            Project_tag[] p_tag = await _projectTagRepository.GetProjectTagByProject(project);
             List<Models.Task> p_tasks = await _taskRepository.GetTaskList(project.Id, activeUser.Id);
 
-            var result = p_tasks.Select(task => new
+            var result = await System.Threading.Tasks.Task.WhenAll(p_tasks.Select(async task => new
             {
-                t_employees = _context.Task_employees
-                    .Include(t => t.Task)
-                    .Where(t => t.Task == task)
-                    .ToArray(),
-                t_tags = _context.Task_tags
-                    .Include(t => t.Task == task)
-                    .ToArray()
-            });
+                t_employees = await _taskEmployeeRepository.GetTaskEmployeeByTask(task),
+                t_tags = await _taskTagRepository.GetTaskTagByTask(task)
+            }));
+
             Task_employee[] t_employees = result.SelectMany(r => r.t_employees).ToArray();
             Task_tag[] t_tag = result.SelectMany(r => r.t_tags).ToArray();
-
 
             await _projectRepository.DeleteProject(project, t_employees, t_tag, p_tasks.ToArray(), p_tag, p_employees);
             return "Accept";
@@ -72,29 +71,16 @@ namespace Spovyz.Services
 
 
 
-            string[] tagNames = [.. _context.Project_tags
-                .Include(pt => pt.Tag)
-                .Where(pt => pt.Project.Id == project.Id)
-                .Select(pt => pt.Tag.Name)
-                .ToArray()];
+            string[] tagNames = await _tagRepository.GetTagNamesByProject(ProjectId);
             List<NameBasic> p_tag = tagNames
                 .Select((name, index) => new NameBasic { Id = index, Name = name })
                 .ToList();
 
 
-            uint[] employeesIds = [.. _context.Project_employees
-                .Include(e => e.Project)
-                .Include(e => e.Employee)
-                .Where(e => e.Project.Id == project.Id)
-                .Select(e => e.Employee.Id)
-                .ToArray()];
+            uint[]? employeesIds = await _employeeRepository.GetEmployeesIdsByProjectId(project.Id);
 
 
-            string[] taskNames = [.. _context.Tasks
-                .Include(t => t.Project)
-                .Where(t => t.Project.Id == project.Id)
-                .Select(t => t.Name)
-                .ToArray()];
+            string[]? taskNames = await _taskRepository.GetTaskNames(project.Id, activeUser.Id);
             List<NameBasic> p_task = taskNames
                 .Select((name, index) => new NameBasic { Id = index, Name = name })
                 .ToList();

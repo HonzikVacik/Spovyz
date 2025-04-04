@@ -13,11 +13,17 @@ namespace Spovyz.Services
         private readonly ApplicationDbContext _context;
         private readonly IProjectRepository _projectRepository;
         private readonly ITaskRepository _taskRepository;
+        private readonly ITaskEmployeeRepository _taskEmployeeRepository;
+        private readonly ITaskTagRepository _taskTagRepository;
 
-        public TaskService(ApplicationDbContext context, IProjectRepository _projectRepository, ITaskRepository taskRepository)
+        public TaskService(ApplicationDbContext context, IProjectRepository projectRepository, ITaskRepository taskRepository, ITaskEmployeeRepository taskEmployeeRepository, ITaskTagRepository taskTagRepository)
         {
             _context = context;
+            _projectRepository = projectRepository;
             _taskRepository = taskRepository;
+            _taskEmployeeRepository = taskEmployeeRepository;
+            _taskTagRepository = taskTagRepository;
+            _taskTagRepository = taskTagRepository;
         }
 
         public async Task<string> DeleteTask(string UserName, uint TaskId)
@@ -30,13 +36,8 @@ namespace Spovyz.Services
             if(task == null)
                 return "Task not found";
 
-            Models.Task_employee[] t_employees = [.. _context.Task_employees
-                    .Include(t => t.Task)
-                    .Where(t => t.Task == task)
-                    .ToArray()];
-            Models.Task_tag[] t_tags = [.. _context.Task_tags
-                    .Include(t => t.Task == task)
-                    .ToArray()];
+            Models.Task_employee[] t_employees = await _taskEmployeeRepository.GetTaskEmployeeByTask(task);
+            Models.Task_tag[] t_tags = await _taskTagRepository.GetTaskTagByTask(task);
 
             await _taskRepository.DeleteTask(task, t_employees, t_tags);
             return "accept";
