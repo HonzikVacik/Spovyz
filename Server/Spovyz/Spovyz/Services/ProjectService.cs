@@ -40,7 +40,7 @@ namespace Spovyz.Services
                 .Include(p => p.Project)
                 .Where(p => p.Project == project)
                 .ToArray()];
-            List<Models.Task> p_tasks = await _taskRepository.GetTaskList(project.Id);
+            List<Models.Task> p_tasks = await _taskRepository.GetTaskList(project.Id, activeUser.Id);
 
             var result = p_tasks.Select(task => new
             {

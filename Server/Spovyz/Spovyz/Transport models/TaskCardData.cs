@@ -1,4 +1,6 @@
-﻿namespace Spovyz.Transport_models
+﻿using System;
+
+namespace Spovyz.Transport_models
 {
     public class TaskCardData
     {

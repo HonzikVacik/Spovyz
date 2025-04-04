@@ -26,7 +26,7 @@ namespace Spovyz.Services
             if (activeUser == null)
                 return "User not found";
 
-            Models.Task? task = await _taskRepository.GetTaskById(TaskId);
+            Models.Task? task = await _taskRepository.GetTaskById(TaskId, activeUser.Id);
             if(task == null)
                 return "Task not found";
 
@@ -42,6 +42,11 @@ namespace Spovyz.Services
             return "accept";
         }
 
+        public Task<TaskCardData> GetTaskById(string UserName, uint TaskId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<(List<EmployeeDashboardTask>?, string?)> GetTaskList(string UserName, uint ProjectId)
         {
             Employee? activeUser = await _context.Employees.FirstOrDefaultAsync(e => e.Username == UserName);
@@ -52,7 +57,7 @@ namespace Spovyz.Services
             if (project == null)
                 return (null, "Project not found");
 
-            List<Models.Task> tasks = await _taskRepository.GetTaskList(ProjectId);
+            List<Models.Task> tasks = await _taskRepository.GetTaskList(ProjectId, activeUser.Id);
             List<EmployeeDashboardTask> data = tasks.Select(t => new EmployeeDashboardTask() { Id = t.Id, Name = t.Name }).ToList();
             return (data, null);
         }

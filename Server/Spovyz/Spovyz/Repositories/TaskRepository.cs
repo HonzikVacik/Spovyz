@@ -21,18 +21,23 @@ namespace Spovyz.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Models.Task?> GetTaskById(uint TaskId)
+        public async Task<Models.Task?> GetTaskById(uint TaskId, uint ActiveUserId)
         {
-            return await _context.Tasks
-                .Where(t => t.Id == TaskId)
+            return await _context.Task_employees
+                .Include(t => t.Task)
+                .Include(t => t.Emlployee)
+                .Where(t => t.Task.Id == TaskId && t.Emlployee.Id == ActiveUserId)
+                .Select(t => t.Task)
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<List<Models.Task>> GetTaskList(uint ProjectId)
+        public async Task<List<Models.Task>> GetTaskList(uint ProjectId, uint ActiveUserId)
         {
-            return await _context.Tasks
-                .Include(t => t.Project)
-                .Where(t => t.Project.Id == ProjectId)
+            return await _context.Task_employees
+                .Include(t => t.Task)
+                .Include(t => t.Emlployee)
+                .Where(t => t.Task.Project.Id == ProjectId && t.Emlployee.Id == ActiveUserId)
+                .Select(t => t.Task)
                 .ToListAsync();
         }
     }

@@ -71,9 +71,12 @@ namespace Spovyz.Controllers
 
         // GET api/<TaskController>/5
         [HttpGet("{id}")]
-        public string Get(int id, int projectId)
+        public async Task<IActionResult> Get(int id)
         {
-            return "value";
+            string? UserName = User.Identity.Name;
+            if (UserName == null)
+                return NotFound("User not found");
+            return Ok("Accept");
         }
 
         // POST api/<TaskController>

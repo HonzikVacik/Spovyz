@@ -27,11 +27,10 @@ namespace Spovyz.Repositories
         public async Task<Project?> GetProjectById(uint ProjectId, uint activeUserId)
         {
             return await _context.Project_employees
-                .Include(te => te.Project)
-                .Include(te => te.Employee)
-                .Where(te => te.Employee.Id == activeUserId)
-                .Select(te => te.Project)
-                .Where(p => p.Id == ProjectId)
+                .Include(pe => pe.Project)
+                .Include(pe => pe.Employee)
+                .Where(pe => pe.Project.Id == ProjectId && pe.Employee.Id == activeUserId)
+                .Select(pe => pe.Project)
                 .FirstOrDefaultAsync();
         }
 
