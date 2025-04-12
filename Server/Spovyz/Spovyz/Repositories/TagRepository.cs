@@ -21,5 +21,15 @@ namespace Spovyz.Repositories
                 .Select(pt => pt.Tag.Name)
                 .ToArrayAsync();
         }
+
+        public async Task<string[]?> GetTagNamesByTask(uint TaskId)
+        {
+            return await _context.Task_tags
+                .Include(tt => tt.Task)
+                .Include(tt => tt.Tag)
+                .Where(tt => tt.Task.Id == TaskId)
+                .Select(tt => tt.Tag.Name)
+                .ToArrayAsync();
+        }
     }
 }

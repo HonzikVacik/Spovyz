@@ -15,8 +15,9 @@ namespace Spovyz.Services
         private readonly ITaskRepository _taskRepository;
         private readonly ITaskEmployeeRepository _taskEmployeeRepository;
         private readonly ITaskTagRepository _taskTagRepository;
+        private readonly ITagRepository _tagRepository;
 
-        public TaskService(ApplicationDbContext context, IProjectRepository projectRepository, ITaskRepository taskRepository, ITaskEmployeeRepository taskEmployeeRepository, ITaskTagRepository taskTagRepository)
+        public TaskService(ApplicationDbContext context, IProjectRepository projectRepository, ITaskRepository taskRepository, ITaskEmployeeRepository taskEmployeeRepository, ITaskTagRepository taskTagRepository, ITagRepository tagRepository)
         {
             _context = context;
             _projectRepository = projectRepository;
@@ -24,6 +25,7 @@ namespace Spovyz.Services
             _taskEmployeeRepository = taskEmployeeRepository;
             _taskTagRepository = taskTagRepository;
             _taskTagRepository = taskTagRepository;
+            _tagRepository = tagRepository;
         }
 
         public async Task<string> DeleteTask(string UserName, uint TaskId)
@@ -43,9 +45,34 @@ namespace Spovyz.Services
             return "accept";
         }
 
-        public Task<TaskCardData> GetTaskById(string UserName, uint TaskId)
+        public async Task<(TaskCardData?, string?)> GetTaskById(string UserName, uint TaskId)
         {
-            throw new NotImplementedException();
+            Employee? activeUser = await _context.Employees.FirstOrDefaultAsync(e => e.Username == UserName);
+            if (activeUser == null)
+                return (null, "User not found");
+
+            Models.Task? task = await _taskRepository.GetTaskById(TaskId, activeUser.Id);
+            if (task == null)
+                return (null, "Task not found");
+
+            TaskCardData result = new TaskCardData()
+            {
+                Name = task.Name,
+                Description = task.Description,
+                Status = (uint)task.Status,
+                Deathline = task.Dead_line,
+                WorkedOut = 0.ToString(),
+                WorkedByMe = 0.ToString(),
+                Tags = await _tagRepository.GetTagNamesByTask(task.Id),
+                Employees = await _context.Task_employees
+                    .Include(t => t.Task)
+                    .Include(t => t.Emlployee)
+                    .Where(t => t.Task.Id == task.Id)
+                    .Select(t => t.Emlployee.Id)
+                    .ToArrayAsync(),
+            };
+
+            return (result, null);
         }
 
         public async Task<(List<EmployeeDashboardTask>?, string?)> GetTaskList(string UserName, uint ProjectId)

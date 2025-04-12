@@ -76,7 +76,11 @@ namespace Spovyz.Controllers
             string? UserName = User.Identity.Name;
             if (UserName == null)
                 return NotFound("User not found");
-            return Ok("Accept");
+            
+            (TaskCardData? data, string? error) = await _taskService.GetTaskById(UserName, (uint)id);
+            if (error != null)
+                return NotFound(error);
+            return Ok(data);
         }
 
         // POST api/<TaskController>

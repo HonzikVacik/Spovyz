@@ -41,12 +41,12 @@ namespace Spovyz.Repositories
                 .ToListAsync();
         }
 
-        public async Task<string[]?> GetTaskNames(uint ProjectId, uint ActiveUserId)
+        public async Task<string[]?> GetTaskNames(uint TaskId, uint ActiveUserId)
         {
             return await _context.Task_employees
                 .Include(t => t.Task)
                 .Include(t => t.Emlployee)
-                .Where(t => t.Task.Project.Id == ProjectId && t.Emlployee.Id == ActiveUserId)
+                .Where(t => t.Task.Id == TaskId && t.Emlployee.Id == ActiveUserId)
                 .Select(t => t.Task.Name)
                 .ToArrayAsync();
         }
