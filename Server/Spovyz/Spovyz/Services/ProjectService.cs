@@ -71,19 +71,13 @@ namespace Spovyz.Services
 
 
 
-            string[] tagNames = await _tagRepository.GetTagNamesByProject(ProjectId);
-            List<NameBasic> p_tag = tagNames
-                .Select((name, index) => new NameBasic { Id = index, Name = name })
-                .ToList();
+            string[]? tagNames = await _tagRepository.GetTagNamesByProject(ProjectId);
 
 
             uint[]? employeesIds = await _employeeRepository.GetEmployeesIdsByProjectId(project.Id);
 
 
-            string[]? taskNames = await _taskRepository.GetTaskNames(project.Id, activeUser.Id);
-            List<NameBasic> p_task = taskNames
-                .Select((name, index) => new NameBasic { Id = index, Name = name })
-                .ToList();
+            NameBasic[]? taskNames = await _taskRepository.GetTaskNames(project, activeUser.Id);
 
 
             ProjectCardData data = new ProjectCardData()
@@ -95,9 +89,9 @@ namespace Spovyz.Services
                 Deathline = project.Dead_line,
                 WorkedOut = "3 dny",
                 WorkedByMe = "9 hodin",
-                Tags = p_tag.ToArray(),
+                Tags = tagNames,
                 Employees = employeesIds,
-                Tasks = p_task.ToArray()
+                Tasks = taskNames
             };
             return (data, null);
         }

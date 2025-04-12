@@ -9,7 +9,7 @@
         public DateOnly? Deathline { get; set; }
         public string WorkedOut { get; set; }
         public string WorkedByMe { get; set; }
-        public NameBasic[] Tags { get; set; }
+        public string[]? Tags { get; set; }
         public uint[] Employees { get; set; }
         public NameBasic[] Tasks { get; set; }
     }

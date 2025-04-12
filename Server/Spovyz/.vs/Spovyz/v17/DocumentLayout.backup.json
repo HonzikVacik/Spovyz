@@ -3,12 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\controllers\\taskcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\controllers\\taskcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\iservices\\itaskservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\iservices\\itaskservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\irepositories\\itaskrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\irepositories\\itaskrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\services\\taskservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\services\\taskservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\services\\projectservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\services\\projectservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\transport models\\taskcarddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\transport models\\taskcarddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\repositories\\taskrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\repositories\\taskrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 180,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,28 +46,80 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TaskCardData.cs",
+              "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Transport models\\TaskCardData.cs",
+              "RelativeDocumentMoniker": "Spovyz\\Transport models\\TaskCardData.cs",
+              "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Transport models\\TaskCardData.cs",
+              "RelativeToolTip": "Spovyz\\Transport models\\TaskCardData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-12T09:34:38.055Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "TaskController.cs",
+              "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Controllers\\TaskController.cs",
+              "RelativeDocumentMoniker": "Spovyz\\Controllers\\TaskController.cs",
+              "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Controllers\\TaskController.cs",
+              "RelativeToolTip": "Spovyz\\Controllers\\TaskController.cs",
+              "ViewState": "AgIAADwAAAAAAAAAAAAAAGYAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-12T09:14:17.707Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ITaskService.cs",
+              "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\IServices\\ITaskService.cs",
+              "RelativeDocumentMoniker": "Spovyz\\IServices\\ITaskService.cs",
+              "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\IServices\\ITaskService.cs",
+              "RelativeToolTip": "Spovyz\\IServices\\ITaskService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-12T09:14:08.043Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ITaskRepository.cs",
+              "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\IRepositories\\ITaskRepository.cs",
+              "RelativeDocumentMoniker": "Spovyz\\IRepositories\\ITaskRepository.cs",
+              "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\IRepositories\\ITaskRepository.cs",
+              "RelativeToolTip": "Spovyz\\IRepositories\\ITaskRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-12T09:32:17.244Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "TaskService.cs",
               "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Services\\TaskService.cs",
               "RelativeDocumentMoniker": "Spovyz\\Services\\TaskService.cs",
               "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Services\\TaskService.cs",
               "RelativeToolTip": "Spovyz\\Services\\TaskService.cs",
-              "ViewState": "AgIAACcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAAEEAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-04T16:46:56.825Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ProjectService.cs",
-              "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Services\\ProjectService.cs",
-              "RelativeDocumentMoniker": "Spovyz\\Services\\ProjectService.cs",
-              "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Services\\ProjectService.cs",
-              "RelativeToolTip": "Spovyz\\Services\\ProjectService.cs",
-              "ViewState": "AgIAAFEAAAAAAAAAAAAAAEkAAAAlAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "TaskRepository.cs",
+              "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Repositories\\TaskRepository.cs",
+              "RelativeDocumentMoniker": "Spovyz\\Repositories\\TaskRepository.cs",
+              "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Repositories\\TaskRepository.cs",
+              "RelativeToolTip": "Spovyz\\Repositories\\TaskRepository.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAADAAAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-04T14:45:55.874Z",
+              "WhenOpened": "2025-04-12T09:14:14.034Z",
               "EditorCaption": ""
             }
           ]

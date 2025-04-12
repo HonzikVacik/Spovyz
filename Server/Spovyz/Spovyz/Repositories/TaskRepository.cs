@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Spovyz.IRepositories;
 using Spovyz.Models;
+using Spovyz.Transport_models;
 
 namespace Spovyz.Repositories
 {
@@ -41,13 +42,13 @@ namespace Spovyz.Repositories
                 .ToListAsync();
         }
 
-        public async Task<string[]?> GetTaskNames(uint TaskId, uint ActiveUserId)
+        public async Task<NameBasic[]?> GetTaskNames(Project Project, uint ActiveUserId)
         {
             return await _context.Task_employees
                 .Include(t => t.Task)
                 .Include(t => t.Emlployee)
-                .Where(t => t.Task.Id == TaskId && t.Emlployee.Id == ActiveUserId)
-                .Select(t => t.Task.Name)
+                .Where(t => t.Task.Project == Project && t.Emlployee.Id == ActiveUserId)
+                .Select(t => new NameBasic { Id = t.Task.Id, Name = t.Task.Name })
                 .ToArrayAsync();
         }
     }
