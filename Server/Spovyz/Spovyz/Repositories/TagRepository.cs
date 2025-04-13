@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Spovyz.IRepositories;
+using Spovyz.Models;
 
 namespace Spovyz.Repositories
 {
@@ -30,6 +31,19 @@ namespace Spovyz.Repositories
                 .Where(tt => tt.Task.Id == TaskId)
                 .Select(tt => tt.Tag.Name)
                 .ToArrayAsync();
+        }
+
+        public async Task<Tag> PostGetTag(string TagName)
+        {
+            Tag? tag = await _context.Tags.FirstOrDefaultAsync(t => t.Name == TagName);
+            if(tag == null)
+            {
+                tag = new Tag { Name = TagName };
+                _context.Tags.Add(tag);
+                _context.SaveChanges();
+                return await _context.Tags.FirstOrDefaultAsync(t => t.Name == TagName);
+            }
+            return tag;
         }
     }
 }
