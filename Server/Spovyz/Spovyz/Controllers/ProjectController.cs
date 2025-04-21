@@ -77,13 +77,25 @@ namespace Spovyz.Controllers
         }
 
         [HttpPost]
-        public void Post(string name, string description, int customer, DateOnly? deathline, string[] tags, string employees)
+        public async Task<IActionResult> Post(string Name, string Description, int CustomerId, DateOnly? DeadLine, string[] Tags, uint[] Employees)
         {
+            string? UserName = User.Identity?.Name?.ToString();
+            if (UserName == null)
+                return NotFound();
+
+            await _projectService.AddProject(UserName, Name, Description, CustomerId, DeadLine, Tags, Employees);
+            return Ok();
         }
 
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put(uint ProjectId, string Name, string Description, int CustomerId, DateOnly? DeadLine, int Status, string[] Tags, uint[] Employees)
         {
+            string? UserName = User.Identity?.Name?.ToString();
+            if (UserName == null)
+                return NotFound();
+
+            await _projectService.UpdateProject(UserName, ProjectId, Name, Description, CustomerId, DeadLine, Status, Tags, Employees);
+            return Ok();
         }
 
         [HttpDelete("{id}")]

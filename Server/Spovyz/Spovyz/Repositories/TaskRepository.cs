@@ -58,7 +58,7 @@ namespace Spovyz.Repositories
                 .ToArrayAsync();
         }
 
-        public async System.Threading.Tasks.Task PostTask(string Name, string? Description, Project Project, DateOnly? DeadLine, Enums.Status Status, Employee[] Employees, uint[] TagIds)
+        public async System.Threading.Tasks.Task PostTask(string Name, string? Description, Project Project, DateOnly? DeadLine, Employee[] Employees, uint[] TagIds)
         {
             Models.Task task = new Models.Task
             {
@@ -66,7 +66,7 @@ namespace Spovyz.Repositories
                 Description = Description,
                 Project = Project,
                 Dead_line = DeadLine,
-                Status = Status
+                Status = Enums.Status.New
             };
 
             var taskTags = new List<Task_tag>();

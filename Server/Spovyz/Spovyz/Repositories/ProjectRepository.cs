@@ -46,7 +46,7 @@ namespace Spovyz.Repositories
                 .ToListAsync();
         }
 
-        public async System.Threading.Tasks.Task PostProject(string Name, string? Description, Customer Customer, DateOnly? DeadLine, Enums.Status Status, Employee[] Employees, Tag[] Tags)
+        public async System.Threading.Tasks.Task PostProject(string Name, string? Description, Customer Customer, DateOnly? DeadLine, Employee[] Employees, Tag[] Tags)
         {
             Project project = new Project
             {
@@ -54,7 +54,7 @@ namespace Spovyz.Repositories
                 Description = Description,
                 Customer = Customer,
                 Dead_line = DeadLine,
-                Status = Status
+                Status = Enums.Status.New
             };
             _context.Project_tags.AddRange(Tags.Select(t => new Project_tag { Project = project, Tag = t}));
             _context.Project_employees.AddRange(Employees.Select(e => new Project_employee { Project = project, Employee = e }));
