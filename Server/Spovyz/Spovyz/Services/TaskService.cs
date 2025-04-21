@@ -38,7 +38,7 @@ namespace Spovyz.Services
             if(task == null)
                 return "Task not found";
 
-            Models.Task_employee[] t_employees = await _taskEmployeeRepository.GetTaskEmployeeByTask(task);
+            Models.Project_Tag[] t_employees = await _taskEmployeeRepository.GetTaskEmployeeByTask(task);
             Models.Task_tag[] t_tags = await _taskTagRepository.GetTaskTagByTask(task);
 
             await _taskRepository.DeleteTask(task, t_employees, t_tags);

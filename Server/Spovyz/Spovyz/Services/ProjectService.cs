@@ -52,7 +52,7 @@ namespace Spovyz.Services
                 t_tags = await _taskTagRepository.GetTaskTagByTask(task)
             }));
 
-            Task_employee[] t_employees = result.SelectMany(r => r.t_employees).ToArray();
+            Project_Tag[] t_employees = result.SelectMany(r => r.t_employees).ToArray();
             Task_tag[] t_tag = result.SelectMany(r => r.t_tags).ToArray();
 
             await _projectRepository.DeleteProject(project, t_employees, t_tag, p_tasks.ToArray(), p_tag, p_employees);

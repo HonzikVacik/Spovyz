@@ -16,7 +16,7 @@ namespace Spovyz.Repositories
             _context = context;
         }
 
-        public async System.Threading.Tasks.Task DeleteTask(Models.Task Task, Task_employee[] t_employees, Task_tag[] t_tags)
+        public async System.Threading.Tasks.Task DeleteTask(Models.Task Task, Project_Tag[] t_employees, Task_tag[] t_tags)
         {
             _context.RemoveRange(t_employees);
             _context.RemoveRange(t_tags);
@@ -58,7 +58,7 @@ namespace Spovyz.Repositories
                 .ToArrayAsync();
         }
 
-        public async System.Threading.Tasks.Task PostTask(string Name, string? Description, Project Project, DateOnly? DeadLine, Enums.Status Status, Employee[] Employees, uint[] TaskIds)
+        public async System.Threading.Tasks.Task PostTask(string Name, string? Description, Project Project, DateOnly? DeadLine, Enums.Status Status, Employee[] Employees, uint[] TagIds)
         {
             Models.Task task = new Models.Task
             {
@@ -71,9 +71,9 @@ namespace Spovyz.Repositories
 
             var taskTags = new List<Task_tag>();
 
-            foreach (var taskId in TaskIds)
+            foreach (var tagId in TagIds)
             {
-                var tag = await _context.Tags.FirstOrDefaultAsync(tt => tt.Id == taskId);
+                var tag = await _context.Tags.FirstOrDefaultAsync(tt => tt.Id == tagId);
                 if (tag != null)
                 {
                     taskTags.Add(new Task_tag
@@ -85,7 +85,7 @@ namespace Spovyz.Repositories
             }
 
             _context.Tasks.Add(task);
-            _context.Task_employees.AddRange(Employees.Select(e => new Task_employee { Emlployee = e, Task = task }));
+            _context.Task_employees.AddRange(Employees.Select(e => new Project_Tag { Emlployee = e, Task = task }));
             _context.Task_tags.AddRange(taskTags);
             await _context.SaveChangesAsync();
         }
