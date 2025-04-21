@@ -89,5 +89,15 @@ namespace Spovyz.Services
             List<EmployeeDashboardTask> data = tasks.Select(t => new EmployeeDashboardTask() { Id = t.Id, Name = t.Name }).ToList();
             return (data, null);
         }
+
+        public async System.Threading.Tasks.Task AddTask(string UserName, string Name, string? Description, uint ProjectId, DateOnly? DeadLine, int Status, string[] Tags, uint[] Employees)
+        {
+
+        }
+
+        public async System.Threading.Tasks.Task UpdateTask(string UserName, uint TaskId, string Name, string? Description, uint ProjectId, DateOnly? DeadLine, int Status, string[] Tags, uint[] Employees)
+        {
+
+        }
     }
 }

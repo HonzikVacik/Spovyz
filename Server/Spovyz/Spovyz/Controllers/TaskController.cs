@@ -85,14 +85,26 @@ namespace Spovyz.Controllers
 
         // POST api/<TaskController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post(string Name, string? Description, uint ProjectId, DateOnly? DeadLine, int Status, string[] Tags, uint[] Employees)
         {
+            string? UserName = User.Identity.Name;
+            if (UserName == null)
+                return NotFound("User not found");
+
+            await _taskService.AddTask(UserName, Name, Description, ProjectId, DeadLine, Status, Tags, Employees);
+            return Ok();
         }
 
         // PUT api/<TaskController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put(uint TaskId, string Name, string? Description, uint ProjectId, DateOnly? DeadLine, int Status, string[] Tags, uint[] Employees)
         {
+            string? UserName = User.Identity.Name;
+            if (UserName == null)
+                return NotFound("User not found");
+
+            await _taskService.UpdateTask(UserName, TaskId, Name, Description, ProjectId, DeadLine, Status, Tags, Employees)
+            return Ok();
         }
 
         // DELETE api/<TaskController>/5
