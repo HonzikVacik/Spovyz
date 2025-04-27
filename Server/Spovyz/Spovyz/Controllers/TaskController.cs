@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Spovyz.InputModels;
 using Spovyz.IServices;
 using Spovyz.Models;
 using Spovyz.Transport_models;
@@ -85,25 +86,25 @@ namespace Spovyz.Controllers
 
         // POST api/<TaskController>
         [HttpPost]
-        public async Task<IActionResult> Post(string Name, string? Description, uint ProjectId, DateOnly? DeadLine, int Status, string[] Tags, uint[] Employees)
+        public async Task<IActionResult> Post(TaskPostInput TaskPostInput)
         {
             string? UserName = User.Identity.Name;
             if (UserName == null)
                 return NotFound("User not found");
 
-            await _taskService.AddTask(UserName, Name, Description, ProjectId, DeadLine, Status, Tags, Employees);
+            await _taskService.AddTask(UserName, TaskPostInput.Name, TaskPostInput.Description, TaskPostInput.ProjectId, TaskPostInput.DeadLine, TaskPostInput.Status, TaskPostInput.Tags, TaskPostInput.Employees);
             return Ok();
         }
 
         // PUT api/<TaskController>/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(uint TaskId, string Name, string? Description, uint ProjectId, DateOnly? DeadLine, int Status, string[] Tags, uint[] Employees)
+        public async Task<IActionResult> Put(TaskPutInput TaskPutInput)
         {
             string? UserName = User.Identity.Name;
             if (UserName == null)
                 return NotFound("User not found");
 
-            await _taskService.UpdateTask(UserName, TaskId, Name, Description, ProjectId, DeadLine, Status, Tags, Employees);
+            await _taskService.UpdateTask(UserName, TaskPutInput.TaskId, TaskPutInput.Name, TaskPutInput.Description, TaskPutInput.ProjectId, TaskPutInput.DeadLine, TaskPutInput.Status, TaskPutInput.Tags, TaskPutInput.Employees);
             return Ok();
         }
 

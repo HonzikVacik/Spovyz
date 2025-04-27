@@ -6,6 +6,7 @@ using Spovyz.Transport_models;
 using Spovyz.Services;
 using System.Reflection;
 using System.Threading.Tasks;
+using Spovyz.InputModels;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -77,24 +78,24 @@ namespace Spovyz.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(string Name, string Description, int CustomerId, DateOnly? DeadLine, string[] Tags, uint[] Employees)
+        public async Task<IActionResult> Post(ProjectPostInput ProjectPostInput)
         {
             string? UserName = User.Identity?.Name?.ToString();
             if (UserName == null)
                 return NotFound();
 
-            await _projectService.AddProject(UserName, Name, Description, CustomerId, DeadLine, Tags, null);
+            await _projectService.AddProject(UserName, ProjectPostInput.Name, ProjectPostInput.Description, ProjectPostInput.CustomerId, ProjectPostInput.DeadLine, ProjectPostInput.Tags, ProjectPostInput.Employees);
             return Ok();
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(uint ProjectId, string Name, string Description, int CustomerId, DateOnly? DeadLine, int Status, string[] Tags, uint[] Employees)
+        public async Task<IActionResult> Put(ProjectPutInput projectPutInput)
         {
             string? UserName = User.Identity?.Name?.ToString();
             if (UserName == null)
                 return NotFound();
 
-            await _projectService.UpdateProject(UserName, ProjectId, Name, Description, CustomerId, DeadLine, Status, Tags, Employees);
+            await _projectService.UpdateProject(UserName, projectPutInput.ProjectId, projectPutInput.Name, projectPutInput.Description, projectPutInput.CustomerId, projectPutInput.DeadLine, projectPutInput.Status, projectPutInput.Tags, projectPutInput.Employees);
             return Ok();
         }
 
