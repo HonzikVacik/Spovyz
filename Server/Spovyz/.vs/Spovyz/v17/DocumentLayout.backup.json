@@ -57,7 +57,7 @@
               "RelativeDocumentMoniker": "Spovyz\\Controllers\\ProjectController.cs",
               "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Controllers\\ProjectController.cs*",
               "RelativeToolTip": "Spovyz\\Controllers\\ProjectController.cs*",
-              "ViewState": "AgIAAEMAAAAAAAAAAAAAAF0AAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAqwE8AAACBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-27T12:28:59.361Z",
               "EditorCaption": ""
@@ -72,8 +72,7 @@
               "RelativeToolTip": "Spovyz\\ValidityControl.cs",
               "ViewState": "AgIAAGkAAAAAAAAAAAAAAA0AAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-23T10:13:20.298Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-23T10:13:20.298Z"
             },
             {
               "$type": "Document",
@@ -85,8 +84,7 @@
               "RelativeToolTip": "Spovyz\\Services\\TaskService.cs",
               "ViewState": "AgIAAEkAAAAAAAAAAAAwwFEAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T09:12:55.437Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-22T09:12:55.437Z"
             }
           ]
         }

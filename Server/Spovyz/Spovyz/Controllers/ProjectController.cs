@@ -77,19 +77,13 @@ namespace Spovyz.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(
-    [FromBody] string Name,
-    [FromBody] string Description,
-    [FromBody] int CustomerId,
-    [FromBody] DateOnly? DeadLine,
-    [FromBody] string[] Tags,
-    [FromBody] uint[] Employees)
+        public async Task<IActionResult> Post(string Name, string Description, int CustomerId, DateOnly? DeadLine, string[] Tags, uint[] Employees)
         {
             string? UserName = User.Identity?.Name?.ToString();
             if (UserName == null)
                 return NotFound();
 
-            await _projectService.AddProject(UserName, Name, Description, CustomerId, DeadLine, Tags, Employees);
+            await _projectService.AddProject(UserName, Name, Description, CustomerId, DeadLine, Tags, null);
             return Ok();
         }
 
