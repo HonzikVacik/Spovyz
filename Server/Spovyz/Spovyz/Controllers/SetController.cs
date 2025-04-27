@@ -102,7 +102,7 @@ namespace Spovyz.Controllers
             List<NameBasic> ee3 = new List<NameBasic>();
             foreach (var employee in ee2.Select((value, index) => new { index, value }))
             {
-                ee3.Add(new NameBasic() { Id = employee.index, Name = employee.value.Username });
+                ee3.Add(new NameBasic() { Id = (uint)employee.index, Name = employee.value.Username });
             }
             return ee3;
         }

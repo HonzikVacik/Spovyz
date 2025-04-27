@@ -103,7 +103,7 @@ namespace Spovyz.Controllers
             if (UserName == null)
                 return NotFound("User not found");
 
-            await _taskService.UpdateTask(UserName, TaskId, Name, Description, ProjectId, DeadLine, Status, Tags, Employees)
+            await _taskService.UpdateTask(UserName, TaskId, Name, Description, ProjectId, DeadLine, Status, Tags, Employees);
             return Ok();
         }
 

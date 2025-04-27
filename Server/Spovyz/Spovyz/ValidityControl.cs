@@ -9,9 +9,9 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace Spovyz
 {
-    public class ValidityControl
+    public static class ValidityControl
     {
-        public string Check(ApplicationDbContext _context, uint activeUserCompanyId, string username, string password, string securityVerification, int accountType, int sex, string email, string phoneNumber, DateOnly dateOfBirth, bool controlUsername, bool controlPassword, bool controlSecurityVerification)
+        public static string Check_EI(ApplicationDbContext _context, uint activeUserCompanyId, string username, string password, string securityVerification, int accountType, int sex, string email, string phoneNumber, DateOnly dateOfBirth, bool controlUsername, bool controlPassword, bool controlSecurityVerification)
         {
             if (controlUsername)
             {
@@ -41,7 +41,7 @@ namespace Spovyz
             return "a";
         }
 
-        private bool Username(string username, uint activeUserCompanyId, ApplicationDbContext _context)
+        private static bool Username(string username, uint activeUserCompanyId, ApplicationDbContext _context)
         {
             Employee[] e = [.. _context.Employees
                 .Include(e => e.Company)
@@ -52,7 +52,7 @@ namespace Spovyz
                 return false;
         }
 
-        public bool Password(string password)
+        public static bool Password(string password)
         {
             string pattern = @"(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^a-zA-Z\d])";
             if (Regex.IsMatch(password, pattern) && password.Length >= 8)
@@ -61,7 +61,7 @@ namespace Spovyz
                 return false;
         }
 
-        private bool SecurityVerification(string securityVerification, string username, ApplicationDbContext _context)
+        private static bool SecurityVerification(string securityVerification, string username, ApplicationDbContext _context)
         {
             Employee[] e = [.. _context.Employees
                 .Include(e => e.Company)
@@ -72,7 +72,7 @@ namespace Spovyz
                 return false;
         }
 
-        private bool AccountType(int accountType)
+        private static bool AccountType(int accountType)
         {
             if (accountType >= 0 && accountType < Enum.GetNames(typeof(Enums.Role)).Length)
                 return true;
@@ -80,7 +80,7 @@ namespace Spovyz
                 return false;
         }
 
-        private bool Sex(int sex)
+        private static bool Sex(int sex)
         {
             if (sex >= 0 && sex < Enum.GetNames(typeof(Enums.Sex)).Length)
                 return true;
@@ -88,7 +88,7 @@ namespace Spovyz
                 return false;
         }
 
-        private bool DateOfBirth(DateOnly dateOfBirth)
+        private static bool DateOfBirth(DateOnly dateOfBirth)
         {
             if(dateOfBirth < DateOnly.FromDateTime(DateTime.Now.Date))
                 return true;
@@ -96,7 +96,7 @@ namespace Spovyz
                 return false;
         }
 
-        private bool Email(string email)
+        private static bool Email(string email)
         {
             string pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
             if (Regex.IsMatch(email, pattern))
@@ -105,7 +105,7 @@ namespace Spovyz
                 return false;
         }
 
-        private bool PhoneNumber(string phoneNumber)
+        private static bool PhoneNumber(string phoneNumber)
         {
             string pattern = @"^\d+$";
             if (Regex.IsMatch(phoneNumber, pattern) && phoneNumber.Length == 9)
@@ -114,7 +114,7 @@ namespace Spovyz
                 return false;
         }
 
-        public bool AllFilledOut(string username, string password, string securityVerification, string firstName, string surname, string phoneNumber, string email, DateOnly dateOfBirth, int sex, string pronoun, string country, string city, int zipCode, string street, uint decNumber, int accountType)
+        public static bool AllFilledOut_EI(string username, string password, string securityVerification, string firstName, string surname, string phoneNumber, string email, DateOnly dateOfBirth, int sex, string pronoun, string country, string city, int zipCode, string street, uint decNumber, int accountType)
         {
             if (!string.IsNullOrEmpty(username) &&
                 !string.IsNullOrEmpty(password) &&
@@ -137,7 +137,7 @@ namespace Spovyz
                 return false;
         }
 
-        public bool PutAllFilledOut(string username, string securityVerification, string firstName, string surname, string phoneNumber, string email, DateOnly dateOfBirth, int sex, string pronoun, string country, string city, int zipCode, string street, uint decNumber, int accountType)
+        public static bool PutAllFilledOut_EI(string username, string securityVerification, string firstName, string surname, string phoneNumber, string email, DateOnly dateOfBirth, int sex, string pronoun, string country, string city, int zipCode, string street, uint decNumber, int accountType)
         {
             if (!string.IsNullOrEmpty(username) &&
                 !string.IsNullOrEmpty(securityVerification) &&

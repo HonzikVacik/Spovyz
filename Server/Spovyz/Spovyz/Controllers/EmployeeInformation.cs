@@ -20,7 +20,6 @@ namespace Spovyz.Controllers
     public class EmployeeInformation : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        private ValidityControl validityControl = new ValidityControl();
 
         public EmployeeInformation(ApplicationDbContext context)
         {
@@ -145,10 +144,10 @@ namespace Spovyz.Controllers
 
             Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
 
-            if (!validityControl.AllFilledOut(username, password, securityVerification, firstName, surname, phoneNumber, email, dateOfBirth, sex, pronoun, country, city, zipCode, street, decNumber, accountType))
+            if (!ValidityControl.AllFilledOut_EI(username, password, securityVerification, firstName, surname, phoneNumber, email, dateOfBirth, sex, pronoun, country, city, zipCode, street, decNumber, accountType))
                 return Ok("e1");
 
-            string validityControlString = validityControl.Check(_context, activeUser.Company.Id, username, password, securityVerification, accountType, sex, email, phoneNumber, dateOfBirth, true, true, true);
+            string validityControlString = ValidityControl.Check_EI(_context, activeUser.Company.Id, username, password, securityVerification, accountType, sex, email, phoneNumber, dateOfBirth, true, true, true);
             if (validityControlString != "a")
                 return Ok(validityControlString);
 
@@ -216,14 +215,14 @@ namespace Spovyz.Controllers
 
             if(string.IsNullOrEmpty(password))
             {
-                if (!validityControl.PutAllFilledOut(username, securityVerification, firstName, surname, phoneNumber, email, dateOfBirth, sex, pronoun, country, city, zipCode, street, decNumber, accountType))
+                if (!ValidityControl.PutAllFilledOut_EI(username, securityVerification, firstName, surname, phoneNumber, email, dateOfBirth, sex, pronoun, country, city, zipCode, street, decNumber, accountType))
                     return Ok(error1);
                 hashedPassword = result.Password;
                 controlPassword = false;
             }
             else
             {
-                if (!validityControl.AllFilledOut(username, password, securityVerification, firstName, surname, phoneNumber, email, dateOfBirth, sex, pronoun, country, city, zipCode, street, decNumber, accountType))
+                if (!ValidityControl.AllFilledOut_EI(username, password, securityVerification, firstName, surname, phoneNumber, email, dateOfBirth, sex, pronoun, country, city, zipCode, street, decNumber, accountType))
                     return Ok(error1);
             }
             if(username == result.Username)
@@ -231,7 +230,7 @@ namespace Spovyz.Controllers
             if (securityVerification == result.SecurityVerification)
                 controlSecurityVerification = false;
 
-            string validityControlString = validityControl.Check(_context, activeUser.Company.Id, username, password, securityVerification, accountType, sex, email, phoneNumber, dateOfBirth, controlUsername, controlPassword, controlSecurityVerification);
+            string validityControlString = ValidityControl.Check_EI(_context, activeUser.Company.Id, username, password, securityVerification, accountType, sex, email, phoneNumber, dateOfBirth, controlUsername, controlPassword, controlSecurityVerification);
             if (validityControlString != "a")
                 return Ok(validityControlString);
 
@@ -288,7 +287,7 @@ namespace Spovyz.Controllers
             Employee e = employees[id];
             if (!string.IsNullOrEmpty(password))
             {
-                if (!validityControl.Password(password))
+                if (!ValidityControl.Password(password))
                     return Ok(new { error = "e2" });
                 else
                 {
