@@ -24,6 +24,7 @@ namespace Spovyz
         public DbSet<Task_tag> Task_tags { get; set; }
         public DbSet<Project_employee> Project_employees { get; set; }
         public DbSet<Project_Tag> Task_employees { get; set; }
+        public DbSet<Customer> Customers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

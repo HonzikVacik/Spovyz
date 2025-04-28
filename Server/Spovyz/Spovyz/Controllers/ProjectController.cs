@@ -95,7 +95,12 @@ namespace Spovyz.Controllers
             if (UserName == null)
                 return NotFound();
 
-            await _projectService.UpdateProject(UserName, projectPutInput.ProjectId, projectPutInput.Name, projectPutInput.Description, projectPutInput.CustomerId, projectPutInput.DeadLine, projectPutInput.Status, projectPutInput.Tags, projectPutInput.Employees);
+            (ValidityControl.ResultStatus ResultStatus, string? Description) result = await _projectService.UpdateProject(UserName, projectPutInput.ProjectId, projectPutInput.Name, projectPutInput.Description, projectPutInput.CustomerId, projectPutInput.DeadLine, projectPutInput.Status, projectPutInput.Tags, projectPutInput.Employees);
+
+            if (result.ResultStatus == ValidityControl.ResultStatus.Error)
+                return BadRequest(result.Description);
+            if (result.ResultStatus == ValidityControl.ResultStatus.NotFound)
+                return NotFound(result.Description);
             return Ok();
         }
 

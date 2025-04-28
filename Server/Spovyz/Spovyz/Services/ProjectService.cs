@@ -107,14 +107,27 @@ namespace Spovyz.Services
             return (data, null);
         }
 
-        public async System.Threading.Tasks.Task AddProject(string UserName, string Name, string Description, int CustomerId, DateOnly? Deadline, string[] Tags, uint[] Employees)
+        public async System.Threading.Tasks.Task<(ValidityControl.ResultStatus, string?)> AddProject(string UserName, string Name, string Description, uint CustomerId, DateOnly? Deadline, string[] Tags, uint[] Employees)
         {
-            
+            Employee? activeUser = await _context.Employees.Include(e => e.Company).FirstOrDefaultAsync(e => e.Username == UserName);
+            if (activeUser == null)
+                return (ValidityControl.ResultStatus.NotFound, "User not found");
+
+            (ValidityControl.ResultStatus resultStatus, string? error) = await ValidityControl.Check_PI(_context, activeUser.Company.Id, Name, Description, CustomerId, Deadline, Employees);
+
+            if (resultStatus != ValidityControl.ResultStatus.Ok)
+                return (resultStatus, error);
+
+            return (ValidityControl.ResultStatus.Ok, null);
         }
 
-        public async System.Threading.Tasks.Task UpdateProject(string UserName, uint ProjectId, string Name, string Description, int CustomerId, DateOnly? DeadLine, int Status, string[] Tags, uint[] Employees)
+        public async System.Threading.Tasks.Task<(ValidityControl.ResultStatus, string?)> UpdateProject(string UserName, uint ProjectId, string Name, string Description, int CustomerId, DateOnly? DeadLine, int Status, string[] Tags, uint[] Employees)
         {
+            Employee? activeUser = await _context.Employees.Include(e => e.Company).FirstOrDefaultAsync(e => e.Username == UserName);
+            if (activeUser == null)
+                return (ValidityControl.ResultStatus.NotFound, "User not found");
 
+            return (ValidityControl.ResultStatus.Ok, null);
         }
     }
 }

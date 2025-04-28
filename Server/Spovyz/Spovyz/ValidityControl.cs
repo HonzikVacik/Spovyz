@@ -4,6 +4,7 @@ using Spovyz.Models;
 using System.Diagnostics;
 using System.Reflection.Metadata.Ecma335;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using static Spovyz.Models.Enums;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -11,6 +12,13 @@ namespace Spovyz
 {
     public static class ValidityControl
     {
+        public enum ResultStatus
+        {
+            Ok,
+            Error,
+            NotFound
+        }
+
         public static string Check_EI(ApplicationDbContext _context, uint activeUserCompanyId, string username, string password, string securityVerification, int accountType, int sex, string email, string phoneNumber, DateOnly dateOfBirth, bool controlUsername, bool controlPassword, bool controlSecurityVerification)
         {
             if (controlUsername)
@@ -39,6 +47,30 @@ namespace Spovyz
             if (!DateOfBirth(dateOfBirth))
                 return "e1";
             return "a";
+        }
+
+        public static async Task<(ValidityControl.ResultStatus, string?)> Check_PI(ApplicationDbContext _context, uint CompanyId, string ProjectName, string ProjectDescription, uint CustomerId, DateOnly? Deadline, uint[] Employees)
+        {
+            if (ExistCompany(_context, CompanyId) is null)
+                return (ResultStatus.Error, "Company does not exist");
+
+            if (await ExistProjectName(_context, CompanyId, ProjectName))
+                return (ResultStatus.Error, "Project name already exists");
+
+            if (NotValidDeadLine(Deadline))
+                return (ResultStatus.Error, "DeadLine must be newer than yestedrday");
+
+            if (ExistCompany(_context, CustomerId) is null)
+                return (ResultStatus.Error, "Customer does not exist");
+
+            if (await ExistEmployees(_context, CompanyId, Employees))
+                return (ResultStatus.Error, "Some employee does not exist");
+
+            (bool isEmpty, string? error) = ProjectInformationEmpty(ProjectName, ProjectDescription);
+            if (isEmpty)
+                return (ResultStatus.Error, error);
+
+            return (ResultStatus.Ok, null);
         }
 
         private static bool Username(string username, uint activeUserCompanyId, ApplicationDbContext _context)
@@ -157,6 +189,73 @@ namespace Spovyz
                 return true;
             else
                 return false;
+        }
+
+        public static async Task<Company?> ExistCompany(ApplicationDbContext _context, uint CompanyId)
+        {
+            return await _context.Companies.Where(c => c.Id == CompanyId).FirstOrDefaultAsync();
+        }
+
+        public static async Task<bool> ExistProjectName(ApplicationDbContext _context, uint CompanyId, string ProjectName)
+        {
+            Project_employee? project_employee = await _context.Project_employees
+                .Include(pe => pe.Project)
+                .Include(pe => pe.Employee)
+                .Where(pe => pe.Project.Name == ProjectName && pe.Employee.Company.Id == CompanyId)
+                .FirstOrDefaultAsync();
+            return !(project_employee is null);
+        }
+
+        public static bool NotValidDeadLine(DateOnly? DeadLine)
+        {
+            if(DeadLine != null)
+            {
+                if (DeadLine < DateOnly.FromDateTime(DateTime.Now.Date))
+                    return true;
+                else
+                    return false;
+            }
+            return false;
+        }
+
+        public static async Task<Customer?> ExistCustomer(ApplicationDbContext _context, uint CustomerId)
+        {
+            return await _context.Customers
+                .Where(c => c.Id == CustomerId)
+                .FirstOrDefaultAsync();
+        }
+
+        public static async Task<bool> ExistEmployees(ApplicationDbContext _context, uint CompanyId, uint[] Employees)
+        {
+            foreach(var employee in Employees)
+            {
+                if (await _context.Employees
+                    .Include(e => e.Company)
+                    .Where(e => e.Company.Id == CompanyId)
+                    .FirstOrDefaultAsync() is null)
+                    return true;
+            }
+            return false;
+        }
+
+        public static (bool, string?) ProjectInformationEmpty(string Name, string Description)
+        {
+            if(string.IsNullOrEmpty(Name) || string.IsNullOrWhiteSpace(Name))
+            {
+                return (true, "Project name is empty");
+            }
+            else if(string.IsNullOrEmpty(Description) || string.IsNullOrWhiteSpace(Description))
+            {
+                return (true, "Project description is empty");
+            }
+            else if (string.IsNullOrEmpty(Description) && string.IsNullOrWhiteSpace(Description))
+            {
+                return (true, "Project description is empty");
+            }
+            else
+            {
+                return (false, null);
+            }
         }
     }
 }
