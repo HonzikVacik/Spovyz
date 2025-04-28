@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Spovyz.IRepositories;
+using Spovyz.Models;
 
 namespace Spovyz.Repositories
 {
@@ -10,6 +11,13 @@ namespace Spovyz.Repositories
         public EmployeeRepository(ApplicationDbContext context)
         {
             _context = context;
+        }
+
+        public async Task<Employee[]> GetEmployeesByIds(uint[] employees)
+        {
+            return await _context.Employees
+                .Where(e => employees.Contains(e.Id))
+                .ToArrayAsync();
         }
 
         public async Task<uint[]?> GetEmployeesIdsByProjectId(uint ProjectId)

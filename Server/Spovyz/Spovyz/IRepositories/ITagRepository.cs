@@ -7,5 +7,6 @@ namespace Spovyz.IRepositories
         Task<string[]?> GetTagNamesByProject(uint ProjectId);
         Task<string[]?> GetTagNamesByTask(uint TaskId);
         Task<Tag> PostGetTag(string TagName);
+        Task<Tag[]> PostGetTags(string[] TagNames);
     }
 }

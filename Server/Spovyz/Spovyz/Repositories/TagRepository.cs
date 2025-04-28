@@ -45,5 +45,23 @@ namespace Spovyz.Repositories
             }
             return tag;
         }
+
+        public async Task<Tag[]> PostGetTags(string[] TagNames)
+        {
+            List<Tag> tags = new List<Tag>();
+            foreach (string tagName in TagNames)
+            {
+                Tag? tag = await _context.Tags.FirstOrDefaultAsync(t => t.Name == tagName);
+                if (tag == null)
+                {
+                    tag = new Tag { Name = tagName };
+                    _context.Tags.Add(tag);
+                    _context.SaveChanges();
+                    tags.Add(await _context.Tags.FirstOrDefaultAsync(t => t.Name == tagName));
+                }
+                tags.Add(tag);
+            }
+            return tags.ToArray();
+        }
     }
 }

@@ -118,6 +118,8 @@ namespace Spovyz.Services
             if (resultStatus != ValidityControl.ResultStatus.Ok)
                 return (resultStatus, error);
 
+            await _projectRepository.PostProject(Name, Description, await _context.Customers.FindAsync(CustomerId), Deadline, await _employeeRepository.GetEmployeesByIds(Employees), await _tagRepository.PostGetTags(Tags));
+
             return (ValidityControl.ResultStatus.Ok, null);
         }
 
