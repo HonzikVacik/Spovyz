@@ -91,8 +91,12 @@ namespace Spovyz.Controllers
             string? UserName = User.Identity.Name;
             if (UserName == null)
                 return NotFound("User not found");
+            (ValidityControl.ResultStatus ResultStatus, string? Description) result = await _taskService.AddTask(UserName, TaskPostInput.Name, TaskPostInput.Description, TaskPostInput.ProjectId, TaskPostInput.DeadLine, TaskPostInput.Status, TaskPostInput.Tags, TaskPostInput.Employees);
 
-            await _taskService.AddTask(UserName, TaskPostInput.Name, TaskPostInput.Description, TaskPostInput.ProjectId, TaskPostInput.DeadLine, TaskPostInput.Status, TaskPostInput.Tags, TaskPostInput.Employees);
+            if (result.ResultStatus == ValidityControl.ResultStatus.Error)
+                return BadRequest(result.Description);
+            if (result.ResultStatus == ValidityControl.ResultStatus.NotFound)
+                return NotFound(result.Description);
             return Ok();
         }
 
@@ -104,7 +108,12 @@ namespace Spovyz.Controllers
             if (UserName == null)
                 return NotFound("User not found");
 
-            await _taskService.UpdateTask(UserName, TaskPutInput.TaskId, TaskPutInput.Name, TaskPutInput.Description, TaskPutInput.ProjectId, TaskPutInput.DeadLine, TaskPutInput.Status, TaskPutInput.Tags, TaskPutInput.Employees);
+            (ValidityControl.ResultStatus ResultStatus, string? Description) result = await _taskService.UpdateTask(UserName, TaskPutInput.TaskId, TaskPutInput.Name, TaskPutInput.Description, TaskPutInput.ProjectId, TaskPutInput.DeadLine, TaskPutInput.Status, TaskPutInput.Tags, TaskPutInput.Employees);
+
+            if (result.ResultStatus == ValidityControl.ResultStatus.Error)
+                return BadRequest(result.Description);
+            if (result.ResultStatus == ValidityControl.ResultStatus.NotFound)
+                return NotFound(result.Description);
             return Ok();
         }
 

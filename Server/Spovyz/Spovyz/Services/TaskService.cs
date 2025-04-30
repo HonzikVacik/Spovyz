@@ -90,14 +90,14 @@ namespace Spovyz.Services
             return (data, null);
         }
 
-        public async System.Threading.Tasks.Task AddTask(string UserName, string Name, string? Description, uint ProjectId, DateOnly? DeadLine, int Status, string[] Tags, uint[] Employees)
+        public Task<(ValidityControl.ResultStatus, string?)> AddTask(string UserName, string Name, string? Description, uint ProjectId, DateOnly? DeadLine, int Status, string[] Tags, uint[] Employees)
         {
-
+            throw new NotImplementedException();
         }
 
-        public async System.Threading.Tasks.Task UpdateTask(string UserName, uint TaskId, string Name, string? Description, uint ProjectId, DateOnly? DeadLine, int Status, string[] Tags, uint[] Employees)
+        public Task<(ValidityControl.ResultStatus, string?)> UpdateTask(string UserName, uint TaskId, string Name, string? Description, uint ProjectId, DateOnly? DeadLine, int Status, string[] Tags, uint[] Employees)
         {
-
+            throw new NotImplementedException();
         }
     }
 }
