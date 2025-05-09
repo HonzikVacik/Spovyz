@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Spovyz.Models;
+using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Reflection.Metadata.Ecma335;
 using System.Text.RegularExpressions;
@@ -69,6 +70,28 @@ namespace Spovyz
             (bool isEmpty, string? error) = ProjectInformationEmpty(ProjectName, ProjectDescription);
             if (isEmpty)
                 return (ResultStatus.Error, error);
+
+            return (ResultStatus.Ok, null);
+        }
+
+        public static async Task<(ValidityControl.ResultStatus, string?)> Check_TI(ApplicationDbContext _context, string Name, uint ProjectId, DateOnly? DeadLine, int Status, uint[] Employees)
+        {
+            (bool isEmpty, string? emptyError) = TaskInformationEmpty(Name);
+            if (isEmpty)
+                return (ResultStatus.Error, emptyError);
+
+            if (await ExistTaskName(_context, ProjectId, Name))
+                return (ResultStatus.Error, "Task name already exists");
+
+            (bool neplatny, string? error) = NotValidTaskDeadLine(_context, DeadLine, ProjectId);
+            if (neplatny)
+                return (ResultStatus.Error, error);
+
+            if (InvalidStatus(Status))
+                return (ResultStatus.Error, "Invalid status");
+
+            if (await ExistEmployees(_context, ProjectId, Employees))
+                return (ResultStatus.Error, "Some employees are not assigned to the project");
 
             return (ResultStatus.Ok, null);
         }
@@ -251,6 +274,81 @@ namespace Spovyz
             else if (string.IsNullOrEmpty(Description) && string.IsNullOrWhiteSpace(Description))
             {
                 return (true, "Project description is empty");
+            }
+            else
+            {
+                return (false, null);
+            }
+        }
+
+        public static async Task<bool> ExistTaskName(ApplicationDbContext _context, uint ProjectId, string TaskName)
+        {
+            Models.Task? task = await _context.Tasks
+                .Include(t => t.Project)
+                .Where(t => t.Name == TaskName && t.Project.Id == ProjectId)
+                .FirstOrDefaultAsync();
+            return !(task is null);
+        }
+
+        public static (bool, string?) NotValidTaskDeadLine(ApplicationDbContext _context, DateOnly? DeadLine, uint ProjectId)
+        {
+            DateOnly? projectDeadLine = _context.Projects
+                .Where(p => p.Id == ProjectId)
+                .Select(p => p.Dead_line)
+                .FirstOrDefault();
+
+            if (DeadLine != null)
+            {
+                if(projectDeadLine != null)
+                {
+                    if (DeadLine > projectDeadLine)
+                        return (true, "DeadLine must be older than the DeadLine of Project");
+                    else
+                        return (false, null);
+                }
+                else
+                {
+                    if (DeadLine < DateOnly.FromDateTime(DateTime.Now.Date))
+                        return (true, "DeadLine must be newer than yestedrday");
+                    else
+                        return (false, null);
+                }
+            }
+            return (false, null);
+        }
+
+        public static bool InvalidStatus(int Status)
+        {
+            try
+            {
+                Enums.Status validStatus = (Enums.Status)Status;
+                return false;
+            }
+            catch
+            {
+                return true;
+            }
+        }
+
+        public static async Task<bool> InvalidEmployees(ApplicationDbContext _context, uint ProjectId, uint[] Employees)
+        {
+            foreach (var employee in Employees)
+            {
+                if (await _context.Project_employees
+                    .Include(e => e.Project)
+                    .Include(e => e.Employee)
+                    .Where(e => e.Project.Id == ProjectId && e.Employee.Id == employee)
+                    .FirstOrDefaultAsync() is null)
+                    return true;
+            }
+            return false;
+        }
+
+        public static (bool, string?) TaskInformationEmpty(string Name)
+        {
+            if (string.IsNullOrEmpty(Name) || string.IsNullOrWhiteSpace(Name))
+            {
+                return (true, "Task name is empty");
             }
             else
             {

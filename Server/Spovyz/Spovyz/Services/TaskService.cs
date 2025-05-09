@@ -16,8 +16,9 @@ namespace Spovyz.Services
         private readonly ITaskEmployeeRepository _taskEmployeeRepository;
         private readonly ITaskTagRepository _taskTagRepository;
         private readonly ITagRepository _tagRepository;
+        private readonly IEmployeeRepository _employeeRepository;
 
-        public TaskService(ApplicationDbContext context, IProjectRepository projectRepository, ITaskRepository taskRepository, ITaskEmployeeRepository taskEmployeeRepository, ITaskTagRepository taskTagRepository, ITagRepository tagRepository)
+        public TaskService(ApplicationDbContext context, IProjectRepository projectRepository, ITaskRepository taskRepository, ITaskEmployeeRepository taskEmployeeRepository, ITaskTagRepository taskTagRepository, ITagRepository tagRepository, IEmployeeRepository employeeRepository)
         {
             _context = context;
             _projectRepository = projectRepository;
@@ -26,6 +27,7 @@ namespace Spovyz.Services
             _taskTagRepository = taskTagRepository;
             _taskTagRepository = taskTagRepository;
             _tagRepository = tagRepository;
+            _employeeRepository = employeeRepository;
         }
 
         public async Task<string> DeleteTask(string UserName, uint TaskId)
@@ -90,14 +92,33 @@ namespace Spovyz.Services
             return (data, null);
         }
 
-        public Task<(ValidityControl.ResultStatus, string?)> AddTask(string UserName, string Name, string? Description, uint ProjectId, DateOnly? DeadLine, int Status, string[] Tags, uint[] Employees)
+        public async Task<(ValidityControl.ResultStatus, string?)> AddTask(string UserName, string Name, string? Description, uint ProjectId, DateOnly? DeadLine, int Status, string[] Tags, uint[] Employees)
         {
-            throw new NotImplementedException();
+            Employee? activeUser = await _context.Employees.FirstOrDefaultAsync(e => e.Username == UserName);
+            if (activeUser == null)
+                return (ValidityControl.ResultStatus.NotFound, "User not found");
+
+            Project? project = await _projectRepository.GetProjectById(ProjectId, activeUser.Id);
+            if (project == null)
+                return (ValidityControl.ResultStatus.NotFound, "Project not found");
+
+            (ValidityControl.ResultStatus resultStatus, string? error) = await ValidityControl.Check_TI(_context, Name, ProjectId, DeadLine, Status, Employees);
+
+            if (resultStatus != ValidityControl.ResultStatus.Ok)
+                return (resultStatus, error);
+
+            await _taskRepository.PostTask(Name, Description, project, DeadLine, await _employeeRepository.GetEmployeesByIds(Employees), await _tagRepository.PostGetTags(Tags));
+
+            return (ValidityControl.ResultStatus.Ok, null);
         }
 
-        public Task<(ValidityControl.ResultStatus, string?)> UpdateTask(string UserName, uint TaskId, string Name, string? Description, uint ProjectId, DateOnly? DeadLine, int Status, string[] Tags, uint[] Employees)
+        public async Task<(ValidityControl.ResultStatus, string?)> UpdateTask(string UserName, uint TaskId, string Name, string? Description, uint ProjectId, DateOnly? DeadLine, int Status, string[] Tags, uint[] Employees)
         {
-            throw new NotImplementedException();
+            Employee? activeUser = await _context.Employees.Include(e => e.Company).FirstOrDefaultAsync(e => e.Username == UserName);
+            if (activeUser == null)
+                return (ValidityControl.ResultStatus.NotFound, "User not found");
+
+            return (ValidityControl.ResultStatus.Ok, null);
         }
     }
 }

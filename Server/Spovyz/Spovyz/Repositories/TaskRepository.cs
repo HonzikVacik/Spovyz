@@ -58,7 +58,7 @@ namespace Spovyz.Repositories
                 .ToArrayAsync();
         }
 
-        public async System.Threading.Tasks.Task PostTask(string Name, string? Description, Project Project, DateOnly? DeadLine, Employee[] Employees, uint[] TagIds)
+        public async System.Threading.Tasks.Task PostTask(string Name, string? Description, Project Project, DateOnly? DeadLine, Employee[] Employees, Tag[] Tags)
         {
             Models.Task task = new Models.Task
             {
@@ -69,24 +69,9 @@ namespace Spovyz.Repositories
                 Status = Enums.Status.New
             };
 
-            var taskTags = new List<Task_tag>();
-
-            foreach (var tagId in TagIds)
-            {
-                var tag = await _context.Tags.FirstOrDefaultAsync(tt => tt.Id == tagId);
-                if (tag != null)
-                {
-                    taskTags.Add(new Task_tag
-                    {
-                        Task = task,
-                        Tag = tag
-                    });
-                }
-            }
-
             _context.Tasks.Add(task);
             _context.Task_employees.AddRange(Employees.Select(e => new Project_Tag { Emlployee = e, Task = task }));
-            _context.Task_tags.AddRange(taskTags);
+            _context.Task_tags.AddRange(Tags.Select(t => new Task_tag { Task = task, Tag = t }));
             await _context.SaveChangesAsync();
         }
 
