@@ -70,7 +70,7 @@ namespace Spovyz
             if (await ExistEmployees(_context, CompanyId, Employees))
                 return (ResultStatus.Error, "Some employee does not exist");
 
-            (bool isEmpty, string? error) = ProjectInformationEmpty(ProjectName, ProjectDescription);
+            (bool isEmpty, string? error) = ProjectInformationEmpty(ProjectName, ProjectDescription, Employees);
             if (isEmpty)
                 return (ResultStatus.Error, error);
 
@@ -79,7 +79,7 @@ namespace Spovyz
 
         public static async Task<(ValidityControl.ResultStatus, string?)> Check_TI(ApplicationDbContext _context, string Name, uint ProjectId, DateOnly? DeadLine, int Status, uint[] Employees, bool checkTaskName)
         {
-            (bool isEmpty, string? emptyError) = TaskInformationEmpty(Name);
+            (bool isEmpty, string? emptyError) = TaskInformationEmpty(Name, Employees);
             if (isEmpty)
                 return (ResultStatus.Error, emptyError);
 
@@ -96,7 +96,7 @@ namespace Spovyz
             if (InvalidStatus(Status))
                 return (ResultStatus.Error, "Invalid status");
 
-            if (await ExistEmployees(_context, ProjectId, Employees))
+            if (await InvalidEmployees(_context, ProjectId, Employees))
                 return (ResultStatus.Error, "Some employees are not assigned to the project");
 
             return (ResultStatus.Ok, null);
@@ -267,7 +267,7 @@ namespace Spovyz
             return false;
         }
 
-        private static (bool, string?) ProjectInformationEmpty(string Name, string Description)
+        private static (bool, string?) ProjectInformationEmpty(string Name, string Description, uint[] Employees)
         {
             if(string.IsNullOrEmpty(Name) || string.IsNullOrWhiteSpace(Name))
             {
@@ -277,9 +277,9 @@ namespace Spovyz
             {
                 return (true, "Project description is empty");
             }
-            else if (string.IsNullOrEmpty(Description) && string.IsNullOrWhiteSpace(Description))
+            else if (Employees.Length == 0)
             {
-                return (true, "Project description is empty");
+                return (true, "Project must have at least one employee");
             }
             else
             {
@@ -350,11 +350,15 @@ namespace Spovyz
             return false;
         }
 
-        private static (bool, string?) TaskInformationEmpty(string Name)
+        private static (bool, string?) TaskInformationEmpty(string Name, uint[] Employees)
         {
             if (string.IsNullOrEmpty(Name) || string.IsNullOrWhiteSpace(Name))
             {
                 return (true, "Task name is empty");
+            }
+            else if(Employees.Length == 0)
+            {
+                return (true, "Task must have at least one employee");
             }
             else
             {
