@@ -75,23 +75,13 @@ namespace Spovyz.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async System.Threading.Tasks.Task<string?> PutTask(uint ActiveUserId, uint TaskId, string Name, string? Description, Project Project, DateOnly? DeadLine, Enums.Status Status, Employee[] Employees, uint[] TaskIds)
+        public async System.Threading.Tasks.Task<string?> PutTask(uint ActiveUserId, Models.Task Task, string Name, string? Description, Project Project, DateOnly? DeadLine, Enums.Status Status, Employee[] Employees, Tag[] Tags)
         {
-            Models.Task? task = await _context.Task_employees
-                .Include(t => t.Task)
-                .Include(t => t.Emlployee)
-                .Where(t => t.Task.Id == TaskId && t.Emlployee.Id == ActiveUserId)
-                .Select(t => t.Task)
-                .FirstOrDefaultAsync();
-
-            if (task == null)
-                return "Task not found";
-
-            task.Name = Name;
-            task.Description = Description;
-            task.Project = Project;
-            task.Dead_line = DeadLine;
-            task.Status = Status;
+            Task.Name = Name;
+            Task.Description = Description;
+            Task.Project = Project;
+            Task.Dead_line = DeadLine;
+            Task.Status = Status;
 
             return null;
         }

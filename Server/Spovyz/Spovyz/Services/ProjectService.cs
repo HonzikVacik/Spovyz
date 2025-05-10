@@ -113,7 +113,7 @@ namespace Spovyz.Services
             if (activeUser == null)
                 return (ValidityControl.ResultStatus.NotFound, "User not found");
 
-            (ValidityControl.ResultStatus resultStatus, string? error) = await ValidityControl.Check_PI(_context, activeUser.Company.Id, Name, Description, CustomerId, Deadline, Employees);
+            (ValidityControl.ResultStatus resultStatus, string? error) = await ValidityControl.Check_PI(_context, activeUser.Company.Id, Name, Description, CustomerId, Deadline, Employees, true);
 
             if (resultStatus != ValidityControl.ResultStatus.Ok)
                 return (resultStatus, error);

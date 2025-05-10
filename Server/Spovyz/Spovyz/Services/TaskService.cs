@@ -102,7 +102,7 @@ namespace Spovyz.Services
             if (project == null)
                 return (ValidityControl.ResultStatus.NotFound, "Project not found");
 
-            (ValidityControl.ResultStatus resultStatus, string? error) = await ValidityControl.Check_TI(_context, Name, ProjectId, DeadLine, Status, Employees);
+            (ValidityControl.ResultStatus resultStatus, string? error) = await ValidityControl.Check_TI(_context, Name, ProjectId, DeadLine, Status, Employees, true);
 
             if (resultStatus != ValidityControl.ResultStatus.Ok)
                 return (resultStatus, error);
@@ -117,6 +117,21 @@ namespace Spovyz.Services
             Employee? activeUser = await _context.Employees.Include(e => e.Company).FirstOrDefaultAsync(e => e.Username == UserName);
             if (activeUser == null)
                 return (ValidityControl.ResultStatus.NotFound, "User not found");
+
+            Project? project = await _projectRepository.GetProjectById(ProjectId, activeUser.Id);
+            if (project == null)
+                return (ValidityControl.ResultStatus.NotFound, "Project not found");
+
+            Models.Task? originalTask = await _taskRepository.GetTaskById(TaskId, activeUser.Id);
+            if (originalTask == null)
+                return (ValidityControl.ResultStatus.NotFound, "Task does not exist");
+
+            (ValidityControl.ResultStatus resultStatus, string? error) = await ValidityControl.Check_TI(_context, Name, ProjectId, DeadLine, Status, Employees, originalTask.Name != Name);
+
+            if (resultStatus != ValidityControl.ResultStatus.Ok)
+                return (resultStatus, error);
+
+            await _taskRepository.PutTask(activeUser.Id, originalTask, Name, Description, project, DeadLine, (Enums.Status) Status, await _employeeRepository.GetEmployeesByIds(Employees), await _tagRepository.PostGetTags(Tags));
 
             return (ValidityControl.ResultStatus.Ok, null);
         }

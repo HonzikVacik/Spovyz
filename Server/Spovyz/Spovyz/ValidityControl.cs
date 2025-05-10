@@ -50,18 +50,21 @@ namespace Spovyz
             return "a";
         }
 
-        public static async Task<(ValidityControl.ResultStatus, string?)> Check_PI(ApplicationDbContext _context, uint CompanyId, string ProjectName, string ProjectDescription, uint CustomerId, DateOnly? Deadline, uint[] Employees)
+        public static async Task<(ValidityControl.ResultStatus, string?)> Check_PI(ApplicationDbContext _context, uint CompanyId, string ProjectName, string ProjectDescription, uint CustomerId, DateOnly? Deadline, uint[] Employees, bool checkProjectName)
         {
             if (ExistCompany(_context, CompanyId) is null)
                 return (ResultStatus.Error, "Company does not exist");
 
-            if (await ExistProjectName(_context, CompanyId, ProjectName))
-                return (ResultStatus.Error, "Project name already exists");
+            if(checkProjectName)
+            {
+                if (await ExistProjectName(_context, CompanyId, ProjectName))
+                    return (ResultStatus.Error, "Project name already exists");
+            }
 
             if (NotValidDeadLine(Deadline))
                 return (ResultStatus.Error, "DeadLine must be newer than yestedrday");
 
-            if (ExistCompany(_context, CustomerId) is null)
+            if (ExistCustomer(_context, CustomerId) is null)
                 return (ResultStatus.Error, "Customer does not exist");
 
             if (await ExistEmployees(_context, CompanyId, Employees))
@@ -74,14 +77,17 @@ namespace Spovyz
             return (ResultStatus.Ok, null);
         }
 
-        public static async Task<(ValidityControl.ResultStatus, string?)> Check_TI(ApplicationDbContext _context, string Name, uint ProjectId, DateOnly? DeadLine, int Status, uint[] Employees)
+        public static async Task<(ValidityControl.ResultStatus, string?)> Check_TI(ApplicationDbContext _context, string Name, uint ProjectId, DateOnly? DeadLine, int Status, uint[] Employees, bool checkTaskName)
         {
             (bool isEmpty, string? emptyError) = TaskInformationEmpty(Name);
             if (isEmpty)
                 return (ResultStatus.Error, emptyError);
 
-            if (await ExistTaskName(_context, ProjectId, Name))
-                return (ResultStatus.Error, "Task name already exists");
+            if(checkTaskName)
+            {
+                if (await ExistTaskName(_context, ProjectId, Name))
+                    return (ResultStatus.Error, "Task name already exists");
+            }
 
             (bool neplatny, string? error) = NotValidTaskDeadLine(_context, DeadLine, ProjectId);
             if (neplatny)
@@ -219,7 +225,7 @@ namespace Spovyz
             return await _context.Companies.Where(c => c.Id == CompanyId).FirstOrDefaultAsync();
         }
 
-        public static async Task<bool> ExistProjectName(ApplicationDbContext _context, uint CompanyId, string ProjectName)
+        private static async Task<bool> ExistProjectName(ApplicationDbContext _context, uint CompanyId, string ProjectName)
         {
             Project_employee? project_employee = await _context.Project_employees
                 .Include(pe => pe.Project)
@@ -229,7 +235,7 @@ namespace Spovyz
             return !(project_employee is null);
         }
 
-        public static bool NotValidDeadLine(DateOnly? DeadLine)
+        private static bool NotValidDeadLine(DateOnly? DeadLine)
         {
             if(DeadLine != null)
             {
@@ -241,14 +247,14 @@ namespace Spovyz
             return false;
         }
 
-        public static async Task<Customer?> ExistCustomer(ApplicationDbContext _context, uint CustomerId)
+        private static async Task<Customer?> ExistCustomer(ApplicationDbContext _context, uint CustomerId)
         {
             return await _context.Customers
                 .Where(c => c.Id == CustomerId)
                 .FirstOrDefaultAsync();
         }
 
-        public static async Task<bool> ExistEmployees(ApplicationDbContext _context, uint CompanyId, uint[] Employees)
+        private static async Task<bool> ExistEmployees(ApplicationDbContext _context, uint CompanyId, uint[] Employees)
         {
             foreach(var employee in Employees)
             {
@@ -261,7 +267,7 @@ namespace Spovyz
             return false;
         }
 
-        public static (bool, string?) ProjectInformationEmpty(string Name, string Description)
+        private static (bool, string?) ProjectInformationEmpty(string Name, string Description)
         {
             if(string.IsNullOrEmpty(Name) || string.IsNullOrWhiteSpace(Name))
             {
@@ -281,7 +287,7 @@ namespace Spovyz
             }
         }
 
-        public static async Task<bool> ExistTaskName(ApplicationDbContext _context, uint ProjectId, string TaskName)
+        private static async Task<bool> ExistTaskName(ApplicationDbContext _context, uint ProjectId, string TaskName)
         {
             Models.Task? task = await _context.Tasks
                 .Include(t => t.Project)
@@ -290,7 +296,7 @@ namespace Spovyz
             return !(task is null);
         }
 
-        public static (bool, string?) NotValidTaskDeadLine(ApplicationDbContext _context, DateOnly? DeadLine, uint ProjectId)
+        private static (bool, string?) NotValidTaskDeadLine(ApplicationDbContext _context, DateOnly? DeadLine, uint ProjectId)
         {
             DateOnly? projectDeadLine = _context.Projects
                 .Where(p => p.Id == ProjectId)
@@ -317,7 +323,7 @@ namespace Spovyz
             return (false, null);
         }
 
-        public static bool InvalidStatus(int Status)
+        private static bool InvalidStatus(int Status)
         {
             try
             {
@@ -344,7 +350,7 @@ namespace Spovyz
             return false;
         }
 
-        public static (bool, string?) TaskInformationEmpty(string Name)
+        private static (bool, string?) TaskInformationEmpty(string Name)
         {
             if (string.IsNullOrEmpty(Name) || string.IsNullOrWhiteSpace(Name))
             {
