@@ -23,7 +23,7 @@ namespace Spovyz
         public DbSet<Project_tag> Project_tags { get; set; }
         public DbSet<Task_tag> Task_tags { get; set; }
         public DbSet<Project_employee> Project_employees { get; set; }
-        public DbSet<Project_Tag> Task_employees { get; set; }
+        public DbSet<Task_employee> Task_employees { get; set; }
         public DbSet<Customer> Customers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -32,7 +32,7 @@ namespace Spovyz
             modelBuilder.Entity<Enums>().HasNoKey();
             modelBuilder.Entity<Project_employee>().HasNoKey();
             modelBuilder.Entity<Project_tag>().HasNoKey();
-            modelBuilder.Entity<Project_Tag>().HasNoKey();
+            modelBuilder.Entity<Task_employee>().HasNoKey();
             modelBuilder.Entity<Task_tag>().HasNoKey();
         }
     }

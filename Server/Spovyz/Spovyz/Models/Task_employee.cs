@@ -1,8 +1,8 @@
 ﻿namespace Spovyz.Models
 {
-    public class Project_Tag
+    public class Task_employee
     {
         public Task Task { get; set; }
-        public Employee Emlployee { get; set; }
+        public Employee Employee { get; set; }
     }
 }

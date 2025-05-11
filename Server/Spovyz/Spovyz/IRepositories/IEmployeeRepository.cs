@@ -6,5 +6,6 @@ namespace Spovyz.IRepositories
     {
         Task<Employee[]> GetEmployeesByIds(uint[] employees);
         Task<uint[]?> GetEmployeesIdsByProjectId(uint ProjectId);
+        Task<uint[]> GetEmployeesIdsByTaskId(uint TaskId);
     }
 }

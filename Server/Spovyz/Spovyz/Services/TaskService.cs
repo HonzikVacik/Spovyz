@@ -40,7 +40,7 @@ namespace Spovyz.Services
             if(task == null)
                 return "Task not found";
 
-            Models.Project_Tag[] t_employees = await _taskEmployeeRepository.GetTaskEmployeeByTask(task);
+            Models.Task_employee[] t_employees = await _taskEmployeeRepository.GetTaskEmployeeByTask(task);
             Models.Task_tag[] t_tags = await _taskTagRepository.GetTaskTagByTask(task);
 
             await _taskRepository.DeleteTask(task, t_employees, t_tags);
@@ -68,9 +68,9 @@ namespace Spovyz.Services
                 Tags = await _tagRepository.GetTagNamesByTask(task.Id),
                 Employees = await _context.Task_employees
                     .Include(t => t.Task)
-                    .Include(t => t.Emlployee)
+                    .Include(t => t.Employee)
                     .Where(t => t.Task.Id == task.Id)
-                    .Select(t => t.Emlployee.Id)
+                    .Select(t => t.Employee.Id)
                     .ToArrayAsync(),
             };
 
@@ -131,7 +131,24 @@ namespace Spovyz.Services
             if (resultStatus != ValidityControl.ResultStatus.Ok)
                 return (resultStatus, error);
 
-            await _taskRepository.PutTask(activeUser.Id, originalTask, Name, Description, project, DeadLine, (Enums.Status) Status, await _employeeRepository.GetEmployeesByIds(Employees), await _tagRepository.PostGetTags(Tags));
+            uint[] originalEmployees = await _employeeRepository.GetEmployeesIdsByTaskId(originalTask.Id);
+            uint[] DelEmployees = originalEmployees.Except(Employees).ToArray();
+            uint[] AddEmployees = Employees.Except(originalEmployees).ToArray();
+
+            string[]? originalTags = await _tagRepository.GetTagNamesByTask(originalTask.Id);
+            string[] DelTags = Array.Empty<string>();
+            string[] AddTags = Array.Empty<string>();
+            if(originalTags != null)
+            {
+                DelTags = originalTags.Except(Tags).ToArray();
+                AddTags = Tags.Except(originalTags).ToArray();
+            }
+            else
+            {
+                AddTags = Tags;
+            }
+
+            await _taskRepository.PutTask(activeUser.Id, originalTask, Name, Description, project, DeadLine, (Enums.Status) Status, await _employeeRepository.GetEmployeesByIds(DelEmployees), await _employeeRepository.GetEmployeesByIds(AddEmployees), await _tagRepository.PostGetTags(DelTags), await _tagRepository.PostGetTags(AddTags));
 
             return (ValidityControl.ResultStatus.Ok, null);
         }

@@ -27,5 +27,13 @@ namespace Spovyz.Repositories
                 .Select(pe => pe.Employee.Id)
                 .ToArrayAsync();
         }
+
+        public async Task<uint[]> GetEmployeesIdsByTaskId(uint TaskId)
+        {
+            return await _context.Task_employees
+                .Where(te => te.Task.Id == TaskId)
+                .Select(te => te.Employee.Id)
+                .ToArrayAsync();
+        }
     }
 }

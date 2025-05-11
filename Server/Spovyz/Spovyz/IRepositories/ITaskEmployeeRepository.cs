@@ -4,6 +4,6 @@ namespace Spovyz.IRepositories
 {
     public interface ITaskEmployeeRepository
     {
-        Task<Project_Tag[]> GetTaskEmployeeByTask(Models.Task task);
+        Task<Task_employee[]> GetTaskEmployeeByTask(Models.Task task);
     }
 }

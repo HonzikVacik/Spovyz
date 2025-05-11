@@ -15,7 +15,7 @@ namespace Spovyz.Repositories
             _context = context;
         }
 
-        public async System.Threading.Tasks.Task DeleteProject(Project project, Project_Tag[] t_employees, Task_tag[] t_tag, Models.Task[] p_tasks, Project_tag[] p_tag, Project_employee[] p_employees)
+        public async System.Threading.Tasks.Task DeleteProject(Project project, Task_employee[] t_employees, Task_tag[] t_tag, Models.Task[] p_tasks, Project_tag[] p_tag, Project_employee[] p_employees)
         {
             _context.RemoveRange(t_employees);
             _context.RemoveRange(t_tag);

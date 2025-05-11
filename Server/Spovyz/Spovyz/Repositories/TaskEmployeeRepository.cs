@@ -13,7 +13,7 @@ namespace Spovyz.Repositories
             _context = context;
         }
 
-        public async Task<Project_Tag[]> GetTaskEmployeeByTask(Models.Task task)
+        public async Task<Task_employee[]> GetTaskEmployeeByTask(Models.Task task)
         {
             return await _context.Task_employees
                     .Include(t => t.Task)

@@ -16,7 +16,7 @@ namespace Spovyz.Repositories
             _context = context;
         }
 
-        public async System.Threading.Tasks.Task DeleteTask(Models.Task Task, Project_Tag[] t_employees, Task_tag[] t_tags)
+        public async System.Threading.Tasks.Task DeleteTask(Models.Task Task, Task_employee[] t_employees, Task_tag[] t_tags)
         {
             _context.RemoveRange(t_employees);
             _context.RemoveRange(t_tags);
@@ -32,8 +32,8 @@ namespace Spovyz.Repositories
         {
             return await _context.Task_employees
                 .Include(t => t.Task)
-                .Include(t => t.Emlployee)
-                .Where(t => t.Task.Id == TaskId && t.Emlployee.Id == ActiveUserId)
+                .Include(t => t.Employee)
+                .Where(t => t.Task.Id == TaskId && t.Employee.Id == ActiveUserId)
                 .Select(t => t.Task)
                 .FirstOrDefaultAsync();
         }
@@ -42,8 +42,8 @@ namespace Spovyz.Repositories
         {
             return await _context.Task_employees
                 .Include(t => t.Task)
-                .Include(t => t.Emlployee)
-                .Where(t => t.Task.Project.Id == ProjectId && t.Emlployee.Id == ActiveUserId)
+                .Include(t => t.Employee)
+                .Where(t => t.Task.Project.Id == ProjectId && t.Employee.Id == ActiveUserId)
                 .Select(t => t.Task)
                 .ToListAsync();
         }
@@ -52,8 +52,8 @@ namespace Spovyz.Repositories
         {
             return await _context.Task_employees
                 .Include(t => t.Task)
-                .Include(t => t.Emlployee)
-                .Where(t => t.Task.Project == Project && t.Emlployee.Id == ActiveUserId)
+                .Include(t => t.Employee)
+                .Where(t => t.Task.Project == Project && t.Employee.Id == ActiveUserId)
                 .Select(t => new NameBasic { Id = t.Task.Id, Name = t.Task.Name })
                 .ToArrayAsync();
         }
@@ -70,12 +70,12 @@ namespace Spovyz.Repositories
             };
 
             _context.Tasks.Add(task);
-            _context.Task_employees.AddRange(Employees.Select(e => new Project_Tag { Emlployee = e, Task = task }));
+            _context.Task_employees.AddRange(Employees.Select(e => new Task_employee { Employee = e, Task = task }));
             _context.Task_tags.AddRange(Tags.Select(t => new Task_tag { Task = task, Tag = t }));
             await _context.SaveChangesAsync();
         }
 
-        public async System.Threading.Tasks.Task<string?> PutTask(uint ActiveUserId, Models.Task Task, string Name, string? Description, Project Project, DateOnly? DeadLine, Enums.Status Status, Employee[] Employees, Tag[] Tags)
+        public async System.Threading.Tasks.Task PutTask(uint ActiveUserId, Models.Task Task, string Name, string? Description, Project Project, DateOnly? DeadLine, Enums.Status Status, Employee[] DelEmployees, Employee[] AddEmployees, Tag[] DelTags, Tag[] AddTags)
         {
             Task.Name = Name;
             Task.Description = Description;
@@ -83,7 +83,34 @@ namespace Spovyz.Repositories
             Task.Dead_line = DeadLine;
             Task.Status = Status;
 
-            return null;
+            List<Task_employee> DelEmployeeList = new List<Task_employee>();
+            List<Task_employee> AddEmployeeList = new List<Task_employee>();
+            List<Task_tag> DelTagList = new List<Task_tag>();
+            List<Task_tag> AddTagList = new List<Task_tag>();
+
+            foreach (var employee in DelEmployees)
+            {
+                DelEmployeeList.Add(new Task_employee { Task = Task, Employee = employee });
+            }
+            foreach (var employee in AddEmployees)
+            {
+                AddEmployeeList.Add(new Task_employee { Task = Task, Employee = employee });
+            }
+            foreach (var tag in DelTags)
+            {
+                DelTagList.Add(new Task_tag { Task = Task, Tag = tag });
+            }
+            foreach(var tag in AddTags)
+            {
+                AddTagList.Add(new Task_tag { Task= Task, Tag = tag });
+            }
+
+            _context.Tasks.Update(Task);
+            _context.Task_employees.RemoveRange(DelEmployeeList);
+            _context.Task_employees.AddRange(AddEmployeeList);
+            _context.Task_tags.RemoveRange(DelTagList);
+            _context.Task_tags.AddRange(AddTagList);
+            await _context.SaveChangesAsync();
         }
     }
 }
