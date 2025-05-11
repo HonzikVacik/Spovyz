@@ -75,7 +75,7 @@ namespace Spovyz.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async System.Threading.Tasks.Task PutTask(uint ActiveUserId, Models.Task Task, string Name, string? Description, Project Project, DateOnly? DeadLine, Enums.Status Status, Employee[] DelEmployees, Employee[] AddEmployees, Tag[] DelTags, Tag[] AddTags)
+        public async System.Threading.Tasks.Task PutTask(Models.Task Task, string Name, string? Description, Project Project, DateOnly? DeadLine, Enums.Status Status, Employee[] DelEmployees, Employee[] AddEmployees, Tag[] DelTags, Tag[] AddTags)
         {
             Task.Name = Name;
             Task.Description = Description;

@@ -123,11 +123,36 @@ namespace Spovyz.Services
             return (ValidityControl.ResultStatus.Ok, null);
         }
 
-        public async System.Threading.Tasks.Task<(ValidityControl.ResultStatus, string?)> UpdateProject(string UserName, uint ProjectId, string Name, string Description, int CustomerId, DateOnly? DeadLine, int Status, string[] Tags, uint[] Employees)
+        public async System.Threading.Tasks.Task<(ValidityControl.ResultStatus, string?)> UpdateProject(string UserName, uint ProjectId, string Name, string Description, uint CustomerId, DateOnly? DeadLine, int Status, string[] Tags, uint[] Employees)
         {
             Employee? activeUser = await _context.Employees.Include(e => e.Company).FirstOrDefaultAsync(e => e.Username == UserName);
             if (activeUser == null)
                 return (ValidityControl.ResultStatus.NotFound, "User not found");
+
+            Project? originalProject = await _projectRepository.GetProjectById(ProjectId, activeUser.Id);
+            if (originalProject == null)
+                return (ValidityControl.ResultStatus.NotFound, "Project does not exist");
+
+            (ValidityControl.ResultStatus resultStatus, string? error) = await ValidityControl.Check_PI(_context, activeUser.Company.Id, Name, Description, CustomerId, DeadLine, Employees, false);
+
+            Customer customer = await _context.Customers.FindAsync(CustomerId);
+
+            uint[] originalEmployees = await _employeeRepository.GetEmployeesIdsByProjectId(originalProject.Id);
+            uint[] DelEmployees = originalEmployees.Except(Employees).ToArray();
+            uint[] AddEmployees = Employees.Except(originalEmployees).ToArray();
+
+            string[]? originalTags = await _tagRepository.GetTagNamesByProject(originalProject.Id);
+            string[] DelTags = Array.Empty<string>();
+            string[] AddTags = Array.Empty<string>();
+            if (originalTags != null)
+            {
+                DelTags = originalTags.Except(Tags).ToArray();
+                AddTags = Tags.Except(originalTags).ToArray();
+            }
+            else
+            {
+                AddTags = Tags;
+            }
 
             return (ValidityControl.ResultStatus.Ok, null);
         }

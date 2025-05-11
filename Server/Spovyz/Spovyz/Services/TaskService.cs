@@ -148,7 +148,7 @@ namespace Spovyz.Services
                 AddTags = Tags;
             }
 
-            await _taskRepository.PutTask(activeUser.Id, originalTask, Name, Description, project, DeadLine, (Enums.Status) Status, await _employeeRepository.GetEmployeesByIds(DelEmployees), await _employeeRepository.GetEmployeesByIds(AddEmployees), await _tagRepository.PostGetTags(DelTags), await _tagRepository.PostGetTags(AddTags));
+            await _taskRepository.PutTask(originalTask, Name, Description, project, DeadLine, (Enums.Status) Status, await _employeeRepository.GetEmployeesByIds(DelEmployees), await _employeeRepository.GetEmployeesByIds(AddEmployees), await _tagRepository.PostGetTags(DelTags), await _tagRepository.PostGetTags(AddTags));
 
             return (ValidityControl.ResultStatus.Ok, null);
         }

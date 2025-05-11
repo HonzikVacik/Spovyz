@@ -62,25 +62,42 @@ namespace Spovyz.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async System.Threading.Tasks.Task<string?> PutProject(uint ActiveUserId, uint ProjectId, string Name, string? Description, Customer Customer, DateOnly? DeadLine, Enums.Status Status, Employee[] Employees, Tag[] Tags)
+        public async System.Threading.Tasks.Task PutProject(Project Project, string Name, string? Description, Customer Customer, DateOnly? DeadLine, Enums.Status Status, Employee[] DelEmployees, Employee[] AddEmployees, Tag[] DelTags, Tag[] AddTags)
         {
-            Project? project = await _context.Project_employees
-                .Include(pe => pe.Project)
-                .Include(pe => pe.Employee)
-                .Where(pe => pe.Project.Id == ProjectId && pe.Employee.Id == ActiveUserId)
-                .Select(pe => pe.Project)
-                .FirstOrDefaultAsync();
+            Project.Name = Name;
+            Project.Description = Description;
+            Project.Customer = Customer;
+            Project.Dead_line = DeadLine;
+            Project.Status = Status;
 
-            if (project == null)
-                return "Project not found.";
+            List<Project_employee> DelEmployeeList = new List<Project_employee>();
+            List<Project_employee> AddEmployeeList = new List<Project_employee>();
+            List<Project_tag> DelTagList = new List<Project_tag>();
+            List<Project_tag> AddTagList = new List<Project_tag>();
 
-            project.Name = Name;
-            project.Description = Description;
-            project.Customer = Customer;
-            project.Dead_line = DeadLine;
-            project.Status = Status;
+            foreach (var employee in DelEmployees)
+            {
+                DelEmployeeList.Add(new Project_employee { Project = Project, Employee = employee });
+            }
+            foreach (var employee in AddEmployees)
+            {
+                AddEmployeeList.Add(new Project_employee { Project = Project, Employee = employee });
+            }
+            foreach (var tag in DelTags)
+            {
+                DelTagList.Add(new Project_tag { Project = Project, Tag = tag });
+            }
+            foreach (var tag in AddTags)
+            {
+                AddTagList.Add(new Project_tag { Project = Project, Tag = tag });
+            }
 
-            return null;
+            _context.Projects.Update(Project);
+            _context.Project_employees.RemoveRange(DelEmployeeList);
+            _context.Project_employees.AddRange(AddEmployeeList);
+            _context.Project_tags.RemoveRange(DelTagList);
+            _context.Project_tags.AddRange(AddTagList);
+            await _context.SaveChangesAsync();
         }
     }
 }

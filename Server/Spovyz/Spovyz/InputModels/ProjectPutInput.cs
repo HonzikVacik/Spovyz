@@ -11,7 +11,7 @@ namespace Spovyz.InputModels
         [Required]
         public string Description { get; set; }
         [Required]
-        public int CustomerId { get; set; }
+        public uint CustomerId { get; set; }
         [Required]
         public DateOnly? DeadLine { get; set; }
         [Required]
