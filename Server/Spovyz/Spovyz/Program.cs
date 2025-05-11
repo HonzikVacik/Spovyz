@@ -2,6 +2,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Spovyz.IRepositories;
+using Spovyz.IServices;
+using Spovyz.Repositories;
+using Spovyz.Services;
 using System.Text;
 
 namespace Spovyz
@@ -44,6 +48,19 @@ namespace Spovyz
 
             // Configuration DbContext
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            builder.Services.AddScoped<IChatRepository, ChatRepository>();
+            builder.Services.AddScoped<IProjectEmployeeRepository, ProjectEmployeeRepository>();
+            builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
+            builder.Services.AddScoped<IProjectTagRepository, ProjectTagRepository>();
+            builder.Services.AddScoped<ITagRepository, TagRepository>();
+            builder.Services.AddScoped<ITaskEmployeeRepository, TaskEmployeeRepository>();
+            builder.Services.AddScoped<ITaskRepository, TaskRepository>();
+            builder.Services.AddScoped<ITaskTagRepository, TaskTagRepository>();
+
+            builder.Services.AddScoped<IProjectService, ProjectService>();
+            builder.Services.AddScoped<ITaskService, TaskService>();
 
             // Configuration Swagger
             builder.Services.AddEndpointsApiExplorer();

@@ -11,7 +11,7 @@ namespace Spovyz.Services
     {
         private readonly ApplicationDbContext _context;
         private readonly IEmployeeRepository _employeeRepository;
-        private readonly ProjectRepository _projectRepository;
+        private readonly IProjectRepository _projectRepository;
         private readonly ITaskRepository _taskRepository;
         private readonly IProjectEmployeeRepository _projectEmployeeRepository;
         private readonly IProjectTagRepository _projectTagRepository;
@@ -19,7 +19,7 @@ namespace Spovyz.Services
         private readonly ITaskTagRepository _taskTagRepository;
         private readonly ITagRepository _tagRepository;
 
-        public ProjectService(ApplicationDbContext context, IEmployeeRepository employeeRepository, ProjectRepository projectRepository, ITaskRepository taskRepository, IProjectEmployeeRepository projectEmployeeRepository, IProjectTagRepository projectTagRepository, ITaskEmployeeRepository taskEmployeeRepository, ITaskTagRepository taskTagRepository, ITagRepository tagRepository)
+        public ProjectService(ApplicationDbContext context, IEmployeeRepository employeeRepository, IProjectRepository projectRepository, ITaskRepository taskRepository, IProjectEmployeeRepository projectEmployeeRepository, IProjectTagRepository projectTagRepository, ITaskEmployeeRepository taskEmployeeRepository, ITaskTagRepository taskTagRepository, ITagRepository tagRepository)
         {
             _context = context;
             _employeeRepository = employeeRepository;

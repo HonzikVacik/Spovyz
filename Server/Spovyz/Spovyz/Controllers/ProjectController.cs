@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Spovyz.Models;
 using Spovyz.Transport_models;
-using Spovyz.Services;
+using Spovyz.IServices;
 using System.Reflection;
 using System.Threading.Tasks;
 using Spovyz.InputModels;
@@ -17,9 +17,9 @@ namespace Spovyz.Controllers
     public class ProjectController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        private readonly ProjectService _projectService;
+        private readonly IProjectService _projectService;
 
-        public ProjectController(ApplicationDbContext context, ProjectService projectService)
+        public ProjectController(ApplicationDbContext context, IProjectService projectService)
         {
             _context = context;
             _projectService = projectService;
