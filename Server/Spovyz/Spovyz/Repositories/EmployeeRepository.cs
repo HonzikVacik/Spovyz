@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Spovyz.IRepositories;
 using Spovyz.Models;
+using Spovyz.Transport_models;
 
 namespace Spovyz.Repositories
 {
@@ -11,6 +12,19 @@ namespace Spovyz.Repositories
         public EmployeeRepository(ApplicationDbContext context)
         {
             _context = context;
+        }
+
+        public async Task<EmployeeSalary[]> EmployeeSalary(uint CompanyId)
+        {
+            Transport_models.EmployeeSalary[] employeeSalaries = await _context.Employees
+                .Where(e => e.Company.Id == CompanyId)
+                .Select(e => new Transport_models.EmployeeSalary
+                {
+                    EmployeeId = e.Id,
+                    EmployeeName = e.Username,
+                    Salary = e.Pay
+                }).ToArrayAsync();
+            return employeeSalaries;
         }
 
         public async Task<Employee[]> GetAllEmployees(uint CompanyId)

@@ -45,6 +45,18 @@
         }
       }
     },
+    "/api/EmployeeInformation/GetEmployeesSalary": {
+      "get": {
+        "tags": [
+          "EmployeeInformation"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/EmployeeInformation": {
       "get": {
         "tags": [

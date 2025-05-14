@@ -48,6 +48,15 @@ namespace Spovyz.Controllers
             return Ok(employeeList);
         }
 
+        [HttpGet("GetEmployeesSalary")]
+        [Authorize]
+        public async Task<IActionResult> GetEmployeesSalary()
+        {
+            Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
+            EmployeeSalary[] employeeSalaries = await _employeeRepository.EmployeeSalary(activeUser.Company.Id);
+            return Ok(employeeSalaries);
+        }
+
         // GET: api/<EmployeeInformation>
         [HttpGet]
         [Authorize]

@@ -8,5 +8,6 @@ namespace Spovyz.IRepositories
         Task<Employee[]> GetAllEmployees(uint CompanyId);
         Task<uint[]?> GetEmployeesIdsByProjectId(uint ProjectId);
         Task<uint[]> GetEmployeesIdsByTaskId(uint TaskId);
+        Task<Transport_models.EmployeeSalary[]> EmployeeSalary(uint CompanyId);
     }
 }
