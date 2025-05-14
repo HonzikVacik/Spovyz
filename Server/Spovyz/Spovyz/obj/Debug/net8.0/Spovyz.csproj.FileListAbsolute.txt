@@ -54,12 +54,6 @@ C:\Users\honzi\Documents\GitHub\Spovyz\Server\Spovyz\Spovyz\obj\Debug\net8.0\sco
 C:\Users\honzi\Documents\GitHub\Spovyz\Server\Spovyz\Spovyz\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\honzi\Documents\GitHub\Spovyz\Server\Spovyz\Spovyz\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\honzi\Documents\GitHub\Spovyz\Server\Spovyz\Spovyz\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-C:\Users\honzi\Documents\GitHub\Spovyz\Server\Spovyz\Spovyz\obj\Debug\net8.0\staticwebassets\msbuild.Spovyz.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Users\honzi\Documents\GitHub\Spovyz\Server\Spovyz\Spovyz\obj\Debug\net8.0\staticwebassets\msbuild.Spovyz.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
-C:\Users\honzi\Documents\GitHub\Spovyz\Server\Spovyz\Spovyz\obj\Debug\net8.0\staticwebassets\msbuild.build.Spovyz.props
-C:\Users\honzi\Documents\GitHub\Spovyz\Server\Spovyz\Spovyz\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.Spovyz.props
-C:\Users\honzi\Documents\GitHub\Spovyz\Server\Spovyz\Spovyz\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Spovyz.props
-C:\Users\honzi\Documents\GitHub\Spovyz\Server\Spovyz\Spovyz\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\honzi\Documents\GitHub\Spovyz\Server\Spovyz\Spovyz\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\honzi\Documents\GitHub\Spovyz\Server\Spovyz\Spovyz\obj\Debug\net8.0\Spovyz.csproj.Up2Date
 C:\Users\honzi\Documents\GitHub\Spovyz\Server\Spovyz\Spovyz\obj\Debug\net8.0\Spovyz.dll
@@ -153,3 +147,4 @@ C:\Users\honzi\Documents\GitHub\Spovyz\Server\Spovyz\Spovyz\bin\Debug\net8.0\Mic
 C:\Users\honzi\Documents\GitHub\Spovyz\Server\Spovyz\Spovyz\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\honzi\Documents\GitHub\Spovyz\Server\Spovyz\Spovyz\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\honzi\Documents\GitHub\Spovyz\Server\Spovyz\Spovyz\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\honzi\Documents\GitHub\Spovyz\Server\Spovyz\Spovyz\obj\Debug\net8.0\staticwebassets.build.json.cache

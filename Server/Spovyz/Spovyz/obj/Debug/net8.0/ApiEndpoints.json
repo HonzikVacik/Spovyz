@@ -271,6 +271,16 @@
   },
   {
     "ContainingType": "Spovyz.Controllers.EmployeeInformation",
+    "Method": "GetAllEmployees",
+    "RelativePath": "api/EmployeeInformation/GetAllEmployees",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Spovyz.Controllers.EmployeeInformation",
     "Method": "GetName",
     "RelativePath": "api/EmployeeInformation/GetName/{id}",
     "HttpMethod": "GET",

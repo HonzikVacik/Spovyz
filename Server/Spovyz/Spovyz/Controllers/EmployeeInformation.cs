@@ -2,12 +2,14 @@
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Spovyz.IRepositories;
 using Spovyz.Models;
 using Spovyz.Transport_models;
 using System.Diagnostics.Metrics;
 using System.IO;
 using System.Reflection.Emit;
 using System.Security.Cryptography;
+using System.Threading.Tasks;
 using static Spovyz.Models.Enums;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -20,10 +22,30 @@ namespace Spovyz.Controllers
     public class EmployeeInformation : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IEmployeeRepository _employeeRepository;
 
-        public EmployeeInformation(ApplicationDbContext context)
+        public EmployeeInformation(ApplicationDbContext context, IEmployeeRepository employeeRepository)
         {
             this._context = context;
+            this._employeeRepository = employeeRepository;
+        }
+
+        [HttpGet("GetAllEmployees")]
+        [Authorize]
+        public async Task<IActionResult> GetAllEmployees()
+        {
+            Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
+            Employee[] employees = await _employeeRepository.GetAllEmployees(activeUser.Company.Id);
+            List<Transport_models.NameBasic> employeeList = new List<Transport_models.NameBasic>();
+            foreach (var employee in employees)
+            {
+                employeeList.Add(new NameBasic()
+                {
+                    Id = employee.Id,
+                    Name = employee.Username
+                });
+            }
+            return Ok(employeeList);
         }
 
         // GET: api/<EmployeeInformation>

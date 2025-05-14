@@ -33,6 +33,18 @@
         }
       }
     },
+    "/api/EmployeeInformation/GetAllEmployees": {
+      "get": {
+        "tags": [
+          "EmployeeInformation"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/EmployeeInformation": {
       "get": {
         "tags": [

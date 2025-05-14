@@ -13,6 +13,13 @@ namespace Spovyz.Repositories
             _context = context;
         }
 
+        public async Task<Employee[]> GetAllEmployees(uint CompanyId)
+        {
+            return await _context.Employees
+                .Where(e => e.Company.Id == CompanyId)
+                .ToArrayAsync();
+        }
+
         public async Task<Employee[]> GetEmployeesByIds(uint[] employees)
         {
             return await _context.Employees
