@@ -56,5 +56,12 @@ namespace Spovyz.Repositories
                 .Select(te => te.Employee.Id)
                 .ToArrayAsync();
         }
+
+        public async System.Threading.Tasks.Task UpdateEmployeeSalary(uint companyId, uint employeeId, uint salary)
+        {
+            await _context.Employees
+                .Where(e => e.Company.Id == companyId && e.Id == employeeId)
+                .ExecuteUpdateAsync(e => e.SetProperty(x => x.Pay, salary));
+        }
     }
 }

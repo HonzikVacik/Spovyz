@@ -57,6 +57,17 @@ namespace Spovyz.Controllers
             return Ok(employeeSalaries);
         }
 
+        [HttpGet("UpdateEmployeeSalary")]
+        [Authorize]
+        public async Task<IActionResult> UpdateEmployeeSalary(uint id, uint salary)
+        {
+            Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
+            if(ValidityControl.Check_salary(salary) == false)
+                return BadRequest("Salary must be positive number");
+            await _employeeRepository.UpdateEmployeeSalary(activeUser.Company.Id, id, salary);
+            return Ok();
+        }
+
         // GET: api/<EmployeeInformation>
         [HttpGet]
         [Authorize]

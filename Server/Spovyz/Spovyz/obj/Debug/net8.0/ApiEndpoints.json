@@ -368,6 +368,27 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Spovyz.Controllers.EmployeeInformation",
+    "Method": "UpdateEmployeeSalary",
+    "RelativePath": "api/EmployeeInformation/UpdateEmployeeSalary",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.UInt32",
+        "IsRequired": false
+      },
+      {
+        "Name": "salary",
+        "Type": "System.UInt32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Spovyz.Controllers.ProjectController",
     "Method": "Get",
     "RelativePath": "api/Project",

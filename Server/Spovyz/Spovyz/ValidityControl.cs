@@ -102,6 +102,14 @@ namespace Spovyz
             return (ResultStatus.Ok, null);
         }
 
+        public static bool Check_salary(uint salary)
+        {
+            if (salary > 0)
+                return true;
+            else
+                return false;
+        }
+
         private static bool Username(string username, uint activeUserCompanyId, ApplicationDbContext _context)
         {
             Employee[] e = [.. _context.Employees
