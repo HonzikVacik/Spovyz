@@ -25,6 +25,7 @@ namespace Spovyz
         public DbSet<Project_employee> Project_employees { get; set; }
         public DbSet<Task_employee> Task_employees { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<MonthSalary> MonthSalaries { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
