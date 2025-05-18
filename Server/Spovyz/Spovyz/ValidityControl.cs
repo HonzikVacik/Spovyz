@@ -102,6 +102,16 @@ namespace Spovyz
             return (ResultStatus.Ok, null);
         }
 
+        public static (ValidityControl.ResultStatus, string? error) Check_FI(string Name)
+        {
+            (bool isEmpty, string? emptyError) = FinanceInformationEmpty(Name);
+            if (isEmpty)
+                return (ResultStatus.Error, emptyError);
+            else
+                return (ResultStatus.Ok, null);
+
+        }
+
         public static bool Check_salary(uint salary)
         {
             if (salary > 0)
@@ -367,6 +377,18 @@ namespace Spovyz
             else if(Employees.Length == 0)
             {
                 return (true, "Task must have at least one employee");
+            }
+            else
+            {
+                return (false, null);
+            }
+        }
+
+        private static (bool, string?) FinanceInformationEmpty(string Name)
+        {
+            if(string.IsNullOrEmpty(Name) || string.IsNullOrWhiteSpace(Name))
+            {
+                return (true, "Finance name is empty");
             }
             else
             {

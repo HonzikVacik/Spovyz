@@ -51,6 +51,7 @@ namespace Spovyz
 
             builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             builder.Services.AddScoped<IChatRepository, ChatRepository>();
+            builder.Services.AddScoped<IFinanceRepository, FinanceRepository>();
             builder.Services.AddScoped<IProjectEmployeeRepository, ProjectEmployeeRepository>();
             builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
             builder.Services.AddScoped<IProjectTagRepository, ProjectTagRepository>();
@@ -59,6 +60,7 @@ namespace Spovyz
             builder.Services.AddScoped<ITaskRepository, TaskRepository>();
             builder.Services.AddScoped<ITaskTagRepository, TaskTagRepository>();
 
+            builder.Services.AddScoped<IFinanceService, FinanceService>();
             builder.Services.AddScoped<IProjectService, ProjectService>();
             builder.Services.AddScoped<ITaskService, TaskService>();
 
