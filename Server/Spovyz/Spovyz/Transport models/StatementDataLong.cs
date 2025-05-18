@@ -6,7 +6,7 @@
         public decimal EmployeeSalary { get; set; }
         public byte[] Den { get; set; }
         public byte Mesic { get; set; }
-        public short Rok { get; set; }
-        public byte PocetHodin { get; set; }
+        public ushort Rok { get; set; }
+        public uint PocetHodin { get; set; }
     }
 }

@@ -13,7 +13,16 @@ namespace Spovyz.Repositories
             _context = context;
         }
 
-        public async System.Threading.Tasks.Task<string?> UpdateMonthSalary(uint CompanyId, uint EmployeeId, uint Salary)
+        public async Task<Accounting?> GetAccounting(uint CompanyId, uint EmployeeId, DateOnly Date)
+        {
+            return await _context.Accountings
+                .Include(a => a.Employee)
+                .ThenInclude(e => e.Company)
+                .Where(a => a.Employee.Company.Id == CompanyId && a.Employee.Id == EmployeeId && a.Month == (Enums.Month)Date.Month && a.Year == Date.Year)
+                .FirstOrDefaultAsync();
+        }
+
+        public async System.Threading.Tasks.Task<string?> SetAccounting(uint CompanyId, uint EmployeeId, uint Salary)
         {
             Employee? employee = await _context.Employees
                 .Include(e => e.Company)

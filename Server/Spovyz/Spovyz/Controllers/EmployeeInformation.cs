@@ -67,7 +67,7 @@ namespace Spovyz.Controllers
             if(ValidityControl.Check_salary(salary) == false)
                 return BadRequest("Salary must be positive number");
             await _employeeRepository.UpdateEmployeeSalary(activeUser.Company.Id, id, salary);
-            string? error = await _accountingRepository.UpdateMonthSalary(activeUser.Company.Id, id, salary);
+            string? error = await _accountingRepository.SetAccounting(activeUser.Company.Id, id, salary);
             if (error != null)
                 return BadRequest(error);
             return Ok();

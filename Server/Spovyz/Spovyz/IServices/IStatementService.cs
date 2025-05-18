@@ -5,9 +5,9 @@ namespace Spovyz.IServices
 {
     public interface IStatementService
     {
-        Task<(ValidityControl.ResultStatus, string? error)> AddStatement(string UserName, uint? ProjectId, uint? TaskId, byte statementType, DateOnly datum, byte pocetHodin, string? Description);
-        Task<(ValidityControl.ResultStatus, string? error)> DeleteStatement(string UserName, uint id);
-        Task<(ValidityControl.ResultStatus, string? error, StatementDataShort?)> GetDay(string UserName, DateOnly datum);
-        Task<(ValidityControl.ResultStatus, string? error, StatementDataLong?)> GetMonth(string UserName, uint EmployeeId, byte Day, short Month);
+        Task<(ValidityControl.ResultStatus, string? error)> AddStatement(string UserName, byte StatementType, DateOnly Datum, byte PocetHodin, string? Description);
+        Task<(ValidityControl.ResultStatus, string? error)> DeleteStatement(string UserName, uint Id);
+        Task<(ValidityControl.ResultStatus, string? error, StatementDataShort[]?)> GetDay(string UserName, DateOnly Datum);
+        Task<(ValidityControl.ResultStatus, string? error, StatementDataLong?)> GetMonth(string UserName, uint EmployeeId, byte Month, ushort Year);
     }
 }

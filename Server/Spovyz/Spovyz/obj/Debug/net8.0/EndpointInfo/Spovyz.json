@@ -1159,20 +1159,20 @@
         }
       }
     },
-    "/api/Statement": {
+    "/api/Statement/StatementDataShort": {
       "get": {
         "tags": [
           "Statement"
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
+        "parameters": [
+          {
+            "name": "dateOnly",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
           }
-        }
-      },
-      "post": {
-        "tags": [
-          "Statement"
         ],
         "responses": {
           "200": {
@@ -1181,16 +1181,31 @@
         }
       }
     },
-    "/api/Statement/{id}": {
+    "/api/Statement/StatementDataLong": {
       "get": {
         "tags": [
           "Statement"
         ],
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
+            "name": "EmployeeId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Month",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Year",
+            "in": "query",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -1202,7 +1217,54 @@
             "description": "OK"
           }
         }
-      },
+      }
+    },
+    "/api/Statement": {
+      "post": {
+        "tags": [
+          "Statement"
+        ],
+        "parameters": [
+          {
+            "name": "StatementType",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Datum",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "PocetHodin",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Description",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Statement/{id}": {
       "delete": {
         "tags": [
           "Statement"

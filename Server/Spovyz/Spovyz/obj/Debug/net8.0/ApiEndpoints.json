@@ -787,36 +787,31 @@
   },
   {
     "ContainingType": "Spovyz.Controllers.StatementController",
-    "Method": "Get",
-    "RelativePath": "api/Statement",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Spovyz.Controllers.StatementController",
     "Method": "Post",
     "RelativePath": "api/Statement",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Spovyz.Controllers.StatementController",
-    "Method": "Get",
-    "RelativePath": "api/Statement/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
+        "Name": "StatementType",
+        "Type": "System.Byte",
+        "IsRequired": false
+      },
+      {
+        "Name": "Datum",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "PocetHodin",
+        "Type": "System.Byte",
+        "IsRequired": false
+      },
+      {
+        "Name": "Description",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -833,6 +828,48 @@
         "Name": "id",
         "Type": "System.UInt32",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Spovyz.Controllers.StatementController",
+    "Method": "Get",
+    "RelativePath": "api/Statement/StatementDataLong",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "EmployeeId",
+        "Type": "System.UInt32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Month",
+        "Type": "System.Byte",
+        "IsRequired": false
+      },
+      {
+        "Name": "Year",
+        "Type": "System.UInt16",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Spovyz.Controllers.StatementController",
+    "Method": "Get",
+    "RelativePath": "api/Statement/StatementDataShort",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dateOnly",
+        "Type": "System.DateOnly",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

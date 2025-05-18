@@ -61,7 +61,7 @@ namespace Spovyz
                     return (ResultStatus.Error, "Project name already exists");
             }
 
-            if (NotValidDeadLine(Deadline))
+            if (InvalidDeadLine(Deadline))
                 return (ResultStatus.Error, "DeadLine must be newer than yestedrday");
 
             if (ExistCustomer(_context, CustomerId) is null)
@@ -89,7 +89,7 @@ namespace Spovyz
                     return (ResultStatus.Error, "Task name already exists");
             }
 
-            (bool neplatny, string? error) = NotValidTaskDeadLine(_context, DeadLine, ProjectId);
+            (bool neplatny, string? error) = InvalidTaskDeadLine(_context, DeadLine, ProjectId);
             if (neplatny)
                 return (ResultStatus.Error, error);
 
@@ -109,7 +109,17 @@ namespace Spovyz
                 return (ResultStatus.Error, emptyError);
             else
                 return (ResultStatus.Ok, null);
+        }
 
+        public static (ValidityControl.ResultStatus, string? error) Check_SI(byte statementType, DateOnly datum, byte pocetHodin)
+        {
+            if(InvalidStatementType(statementType))
+                return (ResultStatus.Error, "Invalid statement type");
+            if(StatementDate(datum))
+                return (ResultStatus.Error, "Statement date must be in actual month");
+            if(StatementHours(pocetHodin))
+                return (ResultStatus.Error, "Number of hours must be between 1 and 24");
+            return (ResultStatus.Ok, null);
         }
 
         public static bool Check_salary(uint salary)
@@ -253,7 +263,7 @@ namespace Spovyz
             return !(project_employee is null);
         }
 
-        private static bool NotValidDeadLine(DateOnly? DeadLine)
+        private static bool InvalidDeadLine(DateOnly? DeadLine)
         {
             if(DeadLine != null)
             {
@@ -314,7 +324,7 @@ namespace Spovyz
             return !(task is null);
         }
 
-        private static (bool, string?) NotValidTaskDeadLine(ApplicationDbContext _context, DateOnly? DeadLine, uint ProjectId)
+        private static (bool, string?) InvalidTaskDeadLine(ApplicationDbContext _context, DateOnly? DeadLine, uint ProjectId)
         {
             DateOnly? projectDeadLine = _context.Projects
                 .Where(p => p.Id == ProjectId)
@@ -394,6 +404,35 @@ namespace Spovyz
             {
                 return (false, null);
             }
+        }
+
+        private static bool InvalidStatementType(byte statementType)
+        {
+            try
+            {
+                Enums.StatementType validStatementType = (Enums.StatementType)statementType;
+                return false;
+            }
+            catch
+            {
+                return true;
+            }
+        }
+
+        private static bool StatementDate(DateOnly datum)
+        {
+            if (datum.Month == DateTime.Now.Month)
+                return false;
+            else
+                return true;
+        }
+
+        private static bool StatementHours(byte pocetHodin)
+        {
+            if (pocetHodin > 0 && pocetHodin <= 24)
+                return false;
+            else
+                return true;
         }
     }
 }

@@ -1,5 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Spovyz.IServices;
+using Spovyz.Models;
+using Spovyz.Services;
+using Spovyz.Transport_models;
+using System;
+using static Spovyz.Models.Enums;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -17,35 +22,53 @@ namespace Spovyz.Controllers
         }
 
         // GET: api/<Statement>
-        [HttpGet]
-        public async Task<IActionResult> Get()
+        [HttpGet("StatementDataShort")]
+        public async Task<IActionResult> Get(DateOnly dateOnly)
         {
             string? UserName = User.Identity?.Name?.ToString();
             if (UserName == null)
                 return NotFound();
 
-            return Ok();
+            (ValidityControl.ResultStatus status, string? error, StatementDataShort[]? statementDataShorts) result = await _statementService.GetDay(UserName, dateOnly);
+
+            if (result.status == ValidityControl.ResultStatus.Error)
+                return BadRequest(result.error);
+            if (result.status == ValidityControl.ResultStatus.NotFound)
+                return NotFound(result.error);
+            return Ok(result.statementDataShorts);
         }
 
         // GET api/<Statement>/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        [HttpGet("StatementDataLong")]
+        public async Task<IActionResult> Get(uint EmployeeId, byte Month, ushort Year)
         {
             string? UserName = User.Identity?.Name?.ToString();
             if (UserName == null)
                 return NotFound();
 
-            return Ok();
+            (ValidityControl.ResultStatus status, string? error, StatementDataLong? statementDataLong) result = await _statementService.GetMonth(UserName, EmployeeId, Month, Year);
+
+            if (result.status == ValidityControl.ResultStatus.Error)
+                return BadRequest(result.error);
+            if (result.status == ValidityControl.ResultStatus.NotFound)
+                return NotFound(result.error);
+            return Ok(result.statementDataLong);
         }
 
         // POST api/<Statement>
         [HttpPost]
-        public async Task<IActionResult> Post()
+        public async Task<IActionResult> Post(byte StatementType, DateOnly Datum, byte PocetHodin, string? Description)
         {
             string? UserName = User.Identity?.Name?.ToString();
             if (UserName == null)
                 return NotFound();
 
+            (ValidityControl.ResultStatus status, string? error) result = await _statementService.AddStatement(UserName, StatementType, Datum, PocetHodin, Description);
+
+            if (result.status == ValidityControl.ResultStatus.Error)
+                return BadRequest(result.error);
+            if (result.status == ValidityControl.ResultStatus.NotFound)
+                return NotFound(result.error);
             return Ok();
         }
 
@@ -57,6 +80,12 @@ namespace Spovyz.Controllers
             if (UserName == null)
                 return NotFound();
 
+            (ValidityControl.ResultStatus status, string? error) result = await _statementService.DeleteStatement(UserName, id);
+
+            if (result.status == ValidityControl.ResultStatus.Error)
+                return BadRequest(result.error);
+            if (result.status == ValidityControl.ResultStatus.NotFound)
+                return NotFound(result.error);
             return Ok();
         }
     }
