@@ -4,7 +4,8 @@
     {
         public uint Id { get; set; }
         public Enums.Month Month { get; set; }
+        public ushort Year { get; set; }
+        public uint Salary { get; set; }
         public Employee Employee { get; set; }
-        public uint Pay { get; set; }
     }
 }

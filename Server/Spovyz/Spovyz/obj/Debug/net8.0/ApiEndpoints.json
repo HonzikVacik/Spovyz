@@ -786,6 +786,58 @@
     ]
   },
   {
+    "ContainingType": "Spovyz.Controllers.StatementController",
+    "Method": "Get",
+    "RelativePath": "api/Statement",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Spovyz.Controllers.StatementController",
+    "Method": "Post",
+    "RelativePath": "api/Statement",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Spovyz.Controllers.StatementController",
+    "Method": "Get",
+    "RelativePath": "api/Statement/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Spovyz.Controllers.StatementController",
+    "Method": "Delete",
+    "RelativePath": "api/Statement/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.UInt32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Spovyz.Controllers.TaskController",
     "Method": "GetList",
     "RelativePath": "api/Task",

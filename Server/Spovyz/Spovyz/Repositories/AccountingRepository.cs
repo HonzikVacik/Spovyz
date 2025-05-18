@@ -4,11 +4,11 @@ using Spovyz.Models;
 
 namespace Spovyz.Repositories
 {
-    public class MonthSalaryRepository : IMonthSalaryRepository
+    public class AccountingRepository : IAccountingRepository
     {
         private readonly ApplicationDbContext _context;
 
-        public MonthSalaryRepository(ApplicationDbContext context)
+        public AccountingRepository(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -22,26 +22,26 @@ namespace Spovyz.Repositories
             if (employee == null)
                 return "Employee not found";
 
-            MonthSalary? monthSalary = await _context.MonthSalaries
+            Accounting? accounting = await _context.Accountings
                 .Include(ms => ms.Employee)
-                .Where(ms => ms.Employee.Company.Id == CompanyId && ms.Employee.Id == EmployeeId && ms.Month == DateTime.Now.Month && ms.Year == DateTime.Now.Year)
+                .Where(ms => ms.Employee.Company.Id == CompanyId && ms.Employee.Id == EmployeeId && ms.Month == (Enums.Month)DateTime.Now.Month && ms.Year == DateTime.Now.Year)
                 .FirstOrDefaultAsync();
             
-            if (monthSalary != null)
+            if (accounting != null)
             {
-                monthSalary.Salary = Salary;
-                _context.MonthSalaries.Update(monthSalary);
+                accounting.Salary = Salary;
+                _context.Accountings.Update(accounting);
             }
             else
             {
-                monthSalary = new MonthSalary
+                accounting = new Accounting
                 {
-                    Month = (byte)DateTime.Now.Month,
+                    Month = (Enums.Month)DateTime.Now.Month,
                     Year = (ushort)DateTime.Now.Year,
                     Salary = Salary,
                     Employee = employee
                 };
-                _context.MonthSalaries.Add(monthSalary);
+                _context.Accountings.Add(accounting);
             }
 
             await _context.SaveChangesAsync();
