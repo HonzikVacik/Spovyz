@@ -5,6 +5,30 @@
     "version": "1.0"
   },
   "paths": {
+    "/api/Accounting": {
+      "get": {
+        "tags": [
+          "Accounting"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Accounting/GetAll": {
+      "get": {
+        "tags": [
+          "Accounting"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Auth/token": {
       "post": {
         "tags": [

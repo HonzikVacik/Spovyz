@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Spovyz.IRepositories;
 using Spovyz.Models;
+using Spovyz.Transport_models;
 
 namespace Spovyz.Repositories
 {
@@ -13,6 +14,29 @@ namespace Spovyz.Repositories
             _context = context;
         }
 
+        public async Task<AccountingDataShort[]> Get(uint ActiveUserId)
+        {
+            List<Accounting> accountings = await _context.Accountings
+                .Include(a => a.Employee)
+                .Where(a => a.Employee.Id == ActiveUserId)
+                .ToListAsync();
+            
+            AccountingDataShort[] accountingDataShorts = new AccountingDataShort[accountings.Count];
+
+            for (int i = 0; i < accountings.Count; i++)
+            {
+                accountingDataShorts[i] = new AccountingDataShort
+                {
+                    Id = accountings[i].Id,
+                    Month = (byte)accountings[i].Month,
+                    Year = accountings[i].Year,
+                    Salary = accountings[i].Salary
+                };
+            }
+            
+            return accountingDataShorts;
+        }
+
         public async Task<Accounting?> GetAccounting(uint CompanyId, uint EmployeeId, DateOnly Date)
         {
             return await _context.Accountings
@@ -20,6 +44,31 @@ namespace Spovyz.Repositories
                 .ThenInclude(e => e.Company)
                 .Where(a => a.Employee.Company.Id == CompanyId && a.Employee.Id == EmployeeId && a.Month == (Enums.Month)Date.Month && a.Year == Date.Year)
                 .FirstOrDefaultAsync();
+        }
+
+        public async Task<AccountingDataLong[]> GetAll(uint CompanyId)
+        {
+            List<Accounting> accountings = await _context.Accountings
+                .Include(a => a.Employee)
+                .ThenInclude(e => e.Company)
+                .Where(a => a.Employee.Company.Id == CompanyId)
+                .ToListAsync();
+
+            AccountingDataLong[] accountingDataLongs = new AccountingDataLong[accountings.Count];
+
+            for (int i = 0; i < accountings.Count; i++)
+            {
+                accountingDataLongs[i] = new AccountingDataLong
+                {
+                    Id = accountings[i].Id,
+                    Month = (byte)accountings[i].Month,
+                    Year = accountings[i].Year,
+                    Salary = accountings[i].Salary,
+                    EmployeeName = accountings[i].Employee.Username
+                };
+            }
+
+            return accountingDataLongs;
         }
 
         public async System.Threading.Tasks.Task<string?> SetAccounting(uint CompanyId, uint EmployeeId, uint Salary)
