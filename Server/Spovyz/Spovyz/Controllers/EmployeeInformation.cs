@@ -23,11 +23,13 @@ namespace Spovyz.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IEmployeeRepository _employeeRepository;
+        private readonly IMonthSalaryRepository _monthSalaryRepository;
 
-        public EmployeeInformation(ApplicationDbContext context, IEmployeeRepository employeeRepository)
+        public EmployeeInformation(ApplicationDbContext context, IEmployeeRepository employeeRepository, IMonthSalaryRepository monthSalaryRepository)
         {
             this._context = context;
             this._employeeRepository = employeeRepository;
+            this._monthSalaryRepository = monthSalaryRepository;
         }
 
         [HttpGet("GetAllEmployees")]
@@ -65,6 +67,9 @@ namespace Spovyz.Controllers
             if(ValidityControl.Check_salary(salary) == false)
                 return BadRequest("Salary must be positive number");
             await _employeeRepository.UpdateEmployeeSalary(activeUser.Company.Id, id, salary);
+            string? error = await _monthSalaryRepository.UpdateMonthSalary(activeUser.Company.Id, id, salary);
+            if (error != null)
+                return BadRequest(error);
             return Ok();
         }
 
