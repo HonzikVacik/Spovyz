@@ -49,19 +49,23 @@ namespace Spovyz
             // Configuration DbContext
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+            builder.Services.AddScoped<IAccountingRepository, AccountingRepository>();
             builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-            builder.Services.AddScoped<IChatRepository, ChatRepository>();
             builder.Services.AddScoped<IFinanceRepository, FinanceRepository>();
+            builder.Services.AddScoped<IChatRepository, ChatRepository>();
             builder.Services.AddScoped<IProjectEmployeeRepository, ProjectEmployeeRepository>();
             builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
             builder.Services.AddScoped<IProjectTagRepository, ProjectTagRepository>();
+            builder.Services.AddScoped<IStatementRepository, StatementRepository>();
             builder.Services.AddScoped<ITagRepository, TagRepository>();
             builder.Services.AddScoped<ITaskEmployeeRepository, TaskEmployeeRepository>();
             builder.Services.AddScoped<ITaskRepository, TaskRepository>();
             builder.Services.AddScoped<ITaskTagRepository, TaskTagRepository>();
 
+            builder.Services.AddScoped<IAccountingService, AccountingService>();
             builder.Services.AddScoped<IFinanceService, FinanceService>();
             builder.Services.AddScoped<IProjectService, ProjectService>();
+            builder.Services.AddScoped<IStatementService, StatementService>();
             builder.Services.AddScoped<ITaskService, TaskService>();
 
             // Configuration Swagger
