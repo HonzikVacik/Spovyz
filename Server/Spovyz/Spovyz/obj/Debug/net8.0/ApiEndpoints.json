@@ -311,6 +311,32 @@
   },
   {
     "ContainingType": "Spovyz.Controllers.EmployeeInformation",
+    "Method": "GetEmployeesToProject",
+    "RelativePath": "api/EmployeeInformation/GetEmployeesToProject",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Spovyz.Controllers.EmployeeInformation",
+    "Method": "GetEmployeesToTask",
+    "RelativePath": "api/EmployeeInformation/GetEmployeesToTask",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ProjectId",
+        "Type": "System.UInt32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Spovyz.Controllers.EmployeeInformation",
     "Method": "GetName",
     "RelativePath": "api/EmployeeInformation/GetName/{id}",
     "HttpMethod": "GET",

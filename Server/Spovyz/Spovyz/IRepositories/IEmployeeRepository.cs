@@ -1,4 +1,5 @@
 ﻿using Spovyz.Models;
+using Spovyz.Transport_models;
 
 namespace Spovyz.IRepositories
 {
@@ -6,6 +7,8 @@ namespace Spovyz.IRepositories
     {
         Task<Employee[]> GetEmployeesByIds(uint[] employees);
         Task<Employee[]> GetAllEmployees(uint CompanyId);
+        Task<NameBasic[]> GetEmployeesToProject(uint CompanyId);
+        Task<NameBasic[]> GetEmployeesToTask(uint CompanyId, uint ProjectId);
         Task<uint[]?> GetEmployeesIdsByProjectId(uint ProjectId);
         Task<uint[]> GetEmployeesIdsByTaskId(uint TaskId);
         Task<Transport_models.EmployeeSalary[]> EmployeeSalary(uint CompanyId);

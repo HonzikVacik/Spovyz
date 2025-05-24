@@ -50,6 +50,24 @@ namespace Spovyz.Controllers
             return Ok(employeeList);
         }
 
+        [HttpGet("GetEmployeesToProject")]
+        [Authorize]
+        public async Task<IActionResult> GetEmployeesToProject()
+        {
+            Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
+            NameBasic[] employeeArray = await _employeeRepository.GetEmployeesToProject(activeUser.Company.Id);
+            return Ok(employeeArray);
+        }
+
+        [HttpGet("GetEmployeesToTask")]
+        [Authorize]
+        public async Task<IActionResult> GetEmployeesToTask(uint ProjectId)
+        {
+            Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
+            NameBasic[] employeeArray = await _employeeRepository.GetEmployeesToTask(activeUser.Company.Id, ProjectId);
+            return Ok(employeeArray);
+        }
+
         [HttpGet("GetEmployeesSalary")]
         [Authorize]
         public async Task<IActionResult> GetEmployeesSalary()

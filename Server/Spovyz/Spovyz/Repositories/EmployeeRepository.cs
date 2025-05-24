@@ -57,6 +57,36 @@ namespace Spovyz.Repositories
                 .ToArrayAsync();
         }
 
+        public async Task<NameBasic[]> GetEmployeesToProject(uint CompanyId)
+        {
+            return await _context.Employees
+                .Include(e => e.Company)
+                .Where(e => e.Company.Id == CompanyId && (e.Account_type == Enums.Role.Manager || e.Account_type == Enums.Role.Supervisor || e.Account_type == Enums.Role.Worker))
+                .Select(e => new NameBasic
+                {
+                    Id = e.Id,
+                    Name = e.Username
+                })
+                .OrderBy(nb => nb.Name)
+                .ToArrayAsync();
+        }
+
+        public async Task<NameBasic[]> GetEmployeesToTask(uint CompanyId, uint ProjectId)
+        {
+            return await _context.Project_employees
+                .Include(pe => pe.Project)
+                .Include(pe => pe.Employee)
+                .ThenInclude(e => e.Company)
+                .Where(pe => pe.Project.Id == ProjectId && pe.Employee.Company.Id == CompanyId)
+                .Select(pe => new NameBasic
+                {
+                    Id = pe.Employee.Id,
+                    Name = pe.Employee.Username
+                })
+                .OrderBy(nb => nb.Name)
+                .ToArrayAsync();
+        }
+
         public async System.Threading.Tasks.Task UpdateEmployeeSalary(uint companyId, uint employeeId, uint salary)
         {
             await _context.Employees

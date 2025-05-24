@@ -69,6 +69,40 @@
         }
       }
     },
+    "/api/EmployeeInformation/GetEmployeesToProject": {
+      "get": {
+        "tags": [
+          "EmployeeInformation"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/EmployeeInformation/GetEmployeesToTask": {
+      "get": {
+        "tags": [
+          "EmployeeInformation"
+        ],
+        "parameters": [
+          {
+            "name": "ProjectId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/EmployeeInformation/GetEmployeesSalary": {
       "get": {
         "tags": [
