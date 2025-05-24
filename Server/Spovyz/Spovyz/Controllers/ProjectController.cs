@@ -29,14 +29,14 @@ namespace Spovyz.Controllers
         [Authorize]
         public async Task<IActionResult> Get()
         {
-            /*// Testovací hodnoty
+            // Testovací hodnoty
             List<EmployeeDashboardProject> datas = new List<EmployeeDashboardProject>();
             datas.Add(new EmployeeDashboardProject() { Id = 0, Name = "Project1" });
             datas.Add(new EmployeeDashboardProject() { Id = 1, Name = "Project2" });
             datas.Add(new EmployeeDashboardProject() { Id = 2, Name = "Project3" });
-            return datas;*/
+            return Ok(datas);
 
-            string? UserName = User.Identity?.Name?.ToString();
+            /*string? UserName = User.Identity?.Name?.ToString();
             if (UserName == null)
                 return NotFound();
 
@@ -44,7 +44,7 @@ namespace Spovyz.Controllers
             
             if (error != null)
                 return NotFound(error);
-            return Ok(data);
+            return Ok(data);*/
 
             /*Employee? activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
 

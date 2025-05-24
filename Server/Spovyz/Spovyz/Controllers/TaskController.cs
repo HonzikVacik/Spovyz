@@ -31,7 +31,7 @@ namespace Spovyz.Controllers
         [Authorize]
         public async Task<IActionResult> GetList(uint ProjectId)
         {
-            /*// Testovací hodnoty
+            // Testovací hodnoty
             List<EmployeeDashboardTask> datas = new List<EmployeeDashboardTask>();
             switch(ProjectId)
             {
@@ -57,9 +57,9 @@ namespace Spovyz.Controllers
                     }
                     break;
             }
-            return Ok(datas);*/
+            return Ok(datas);
 
-            //e1 - projekt neexistuje
+            /*//e1 - projekt neexistuje
             string? UserName = User.Identity.Name;
             if (UserName == null)
                 return NotFound("A");
@@ -67,7 +67,7 @@ namespace Spovyz.Controllers
             (List<EmployeeDashboardTask>? data, string? error) = await _taskService.GetTaskList(UserName, ProjectId);
             if (error != null)
                 return NotFound(error);
-            return Ok(data);
+            return Ok(data);*/
         }
 
         // GET api/<TaskController>/5
