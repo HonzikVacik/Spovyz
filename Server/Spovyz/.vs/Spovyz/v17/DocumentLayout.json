@@ -50,8 +50,7 @@
               "RelativeToolTip": "Spovyz\\Controllers\\ProjectController.cs",
               "ViewState": "AgIAAGwAAAAAAAAAAAAAAH0AAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-25T12:58:57.883Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-25T12:58:57.883Z"
             },
             {
               "$type": "Document",
@@ -63,8 +62,7 @@
               "RelativeToolTip": "Spovyz\\Repositories\\ProjectRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAC4AAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-25T16:01:29.292Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-25T16:01:29.292Z"
             },
             {
               "$type": "Document",
@@ -76,8 +74,7 @@
               "RelativeToolTip": "Spovyz\\Repositories\\TaskRepository.cs",
               "ViewState": "AgIAAB4AAAAAAAAAAAAAAC8AAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-25T16:03:36.391Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-25T16:03:36.391Z"
             },
             {
               "$type": "Document",
@@ -87,7 +84,7 @@
               "RelativeDocumentMoniker": "Spovyz\\Controllers\\EmployeeInformation.cs",
               "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Controllers\\EmployeeInformation.cs",
               "RelativeToolTip": "Spovyz\\Controllers\\EmployeeInformation.cs",
-              "ViewState": "AgIAAKgAAAAAAAAAAAAAALEAAAApAAAAAAAAAA==",
+              "ViewState": "AgIAALsAAAAAAAAAAAASwG4BAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-25T16:21:50.712Z",
               "EditorCaption": ""
@@ -102,8 +99,7 @@
               "RelativeToolTip": "Spovyz\\Repositories\\EmployeeRepository.cs",
               "ViewState": "AgIAABUAAAAAAAAAAAAAACEAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-25T16:22:33.538Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-25T16:22:33.538Z"
             }
           ]
         }

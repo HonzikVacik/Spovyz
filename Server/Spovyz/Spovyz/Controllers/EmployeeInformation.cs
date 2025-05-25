@@ -103,7 +103,7 @@ namespace Spovyz.Controllers
                 .Where(e => e.Company.Id == activeUser.Company.Id)
                 .OrderBy(e => e.Username)
                 .ToArray()];
-            List<AdminDashboardData> data = employees.Select(e => new AdminDashboardData{ Id = i++, Username = e.Username, NeedResetPassword = e.NeedResetPassword}).ToList();
+            List<AdminDashboardData> data = employees.Select(e => new AdminDashboardData{ Id = e.Id, Username = e.Username, NeedResetPassword = e.NeedResetPassword}).ToList();
             return data;
         }
 
@@ -172,14 +172,13 @@ namespace Spovyz.Controllers
             string error = "e1";
 
             Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
-            Employee[] employees = [.. _context.Employees
+            Employee? result = _context.Employees
                 .Include(e => e.Company)
-                .Where(e => e.Company.Id == activeUser.Company.Id)
+                .Where(e => e.Company.Id == activeUser.Company.Id && e.Id == id)
                 .OrderBy(e => e.Username)
-                .ToArray()];
-            if (id < 0 || id >= employees.Length)
+                .FirstOrDefault();
+            if (result == null)
                 return Ok(new { error });
-            Employee result = employees[id];
             EmployeeInformationData data = new EmployeeInformationData()
             {
                 Username = result.Username,
@@ -266,14 +265,14 @@ namespace Spovyz.Controllers
             string accept = "a";
             Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
 
-            Employee[] employees = [.. _context.Employees
+            Employee? result = _context.Employees
                 .Include(e => e.Company)
-                .Where(e => e.Company.Id == activeUser.Company.Id)
-                .ToArray()];
-            if (id < 0 || id >= employees.Length)
-                return Ok(error4);
-            Employee result = employees[id];
-            
+                .Where(e => e.Company.Id == activeUser.Company.Id && e.Id == id)
+                .OrderBy(e => e.Username)
+                .FirstOrDefault();
+            if (result == null)
+                return Ok(new { error4 });
+
             byte[] salt = result.Salt;
             string hashedPassword = "";
             bool controlUsername = true;
@@ -345,13 +344,13 @@ namespace Spovyz.Controllers
             string accept = "a";
 
             Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
-            Employee[] employees = [.. _context.Employees
+            Employee? result = _context.Employees
                 .Include(e => e.Company)
-                .Where(e => e.Company.Id == activeUser.Company.Id)
-                .ToArray()];
-            if (id < 0 || id >= employees.Length)
+                .Where(e => e.Company.Id == activeUser.Company.Id && e.Id == id)
+                .OrderBy(e => e.Username)
+                .FirstOrDefault();
+            if (result == null)
                 return Ok(new { error });
-            Employee e = employees[id];
             if (!string.IsNullOrEmpty(password))
             {
                 if (!ValidityControl.Password(password))
@@ -360,13 +359,13 @@ namespace Spovyz.Controllers
                 {
                     string hashedPassword = Convert.ToBase64String(KeyDerivation.Pbkdf2(
                         password: password!,
-                        salt: e.Salt,
+                        salt: result.Salt,
                         prf: KeyDerivationPrf.HMACSHA256,
                         iterationCount: 100000,
                         numBytesRequested: 256 / 8));
-                    e.Password = hashedPassword;
-                    e.NeedResetPassword = false;
-                    _context.Update(e);
+                    result.Password = hashedPassword;
+                    result.NeedResetPassword = false;
+                    _context.Update(result);
                     _context.SaveChanges();
                     return Ok(new { accept });
                 }
@@ -405,13 +404,13 @@ namespace Spovyz.Controllers
             string accept = "a";
             Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
 
-            Employee[] employees = [.. _context.Employees
+            Employee? result = _context.Employees
                 .Include(e => e.Company)
-                .Where(e => e.Company.Id == activeUser.Company.Id)
-                .ToArray()];
-            if (id < 0 || id >= employees.Length)
-                return Ok(error);
-            Employee result = employees[id];
+                .Where(e => e.Company.Id == activeUser.Company.Id && e.Id == id)
+                .OrderBy(e => e.Username)
+                .FirstOrDefault();
+            if (result == null)
+                return Ok(new { error });
             _context.Remove(result);
             _context.SaveChanges();
             return Ok(accept);
