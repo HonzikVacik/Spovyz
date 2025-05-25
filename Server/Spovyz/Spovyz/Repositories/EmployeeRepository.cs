@@ -31,6 +31,7 @@ namespace Spovyz.Repositories
         {
             return await _context.Employees
                 .Where(e => e.Company.Id == CompanyId)
+                .OrderBy(e => e.Username)
                 .ToArrayAsync();
         }
 

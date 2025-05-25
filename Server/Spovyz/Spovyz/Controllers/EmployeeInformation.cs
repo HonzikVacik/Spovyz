@@ -101,6 +101,7 @@ namespace Spovyz.Controllers
             Employee[] employees = [.. _context.Employees
                 .Include(e => e.Company)
                 .Where(e => e.Company.Id == activeUser.Company.Id)
+                .OrderBy(e => e.Username)
                 .ToArray()];
             List<AdminDashboardData> data = employees.Select(e => new AdminDashboardData{ Id = i++, Username = e.Username, NeedResetPassword = e.NeedResetPassword}).ToList();
             return data;
@@ -174,6 +175,7 @@ namespace Spovyz.Controllers
             Employee[] employees = [.. _context.Employees
                 .Include(e => e.Company)
                 .Where(e => e.Company.Id == activeUser.Company.Id)
+                .OrderBy(e => e.Username)
                 .ToArray()];
             if (id < 0 || id >= employees.Length)
                 return Ok(new { error });

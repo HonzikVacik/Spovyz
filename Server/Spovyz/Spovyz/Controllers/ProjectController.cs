@@ -123,7 +123,7 @@ namespace Spovyz.Controllers
             if (result != "Accept")
                 return NotFound(result);
 
-            return Ok(result);
+            return Ok();
         }
     }
 }
