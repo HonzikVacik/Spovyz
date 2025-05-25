@@ -52,22 +52,26 @@ namespace Spovyz
 
         public static async Task<(ValidityControl.ResultStatus, string?)> Check_PI(ApplicationDbContext _context, uint CompanyId, string ProjectName, string ProjectDescription, uint CustomerId, DateOnly? Deadline, uint[] Employees, bool checkProjectName)
         {
-            if (ExistCompany(_context, CompanyId) is null)
+            Company? company = await ExistCompany(_context, CompanyId);
+            if (company is null)
                 return (ResultStatus.Error, "Company does not exist");
 
             if(checkProjectName)
             {
-                if (await ExistProjectName(_context, CompanyId, ProjectName))
+                bool existProjectName = await ExistProjectName(_context, CompanyId, ProjectName);
+                if (existProjectName)
                     return (ResultStatus.Error, "Project name already exists");
             }
 
             if (InvalidDeadLine(Deadline))
                 return (ResultStatus.Error, "DeadLine must be newer than yestedrday");
 
-            if (ExistCustomer(_context, CustomerId) is null)
+            Customer? customer = await ExistCustomer(_context, CustomerId);
+            if (customer is null)
                 return (ResultStatus.Error, "Customer does not exist");
 
-            if (await ExistEmployees(_context, CompanyId, Employees))
+            bool existEmployees = await ExistEmployees(_context, CompanyId, Employees);
+            if (existEmployees)
                 return (ResultStatus.Error, "Some employee does not exist");
 
             (bool isEmpty, string? error) = ProjectInformationEmpty(ProjectName, ProjectDescription, Employees);

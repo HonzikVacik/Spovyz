@@ -1581,8 +1581,7 @@
           "customerId",
           "description",
           "employees",
-          "name",
-          "tags"
+          "name"
         ],
         "type": "object",
         "properties": {
@@ -1607,7 +1606,8 @@
             "type": "array",
             "items": {
               "type": "string"
-            }
+            },
+            "nullable": true
           },
           "employees": {
             "type": "array",
@@ -1627,8 +1627,7 @@
           "employees",
           "name",
           "projectId",
-          "status",
-          "tags"
+          "status"
         ],
         "type": "object",
         "properties": {
@@ -1660,7 +1659,8 @@
             "type": "array",
             "items": {
               "type": "string"
-            }
+            },
+            "nullable": true
           },
           "employees": {
             "type": "array",
