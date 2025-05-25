@@ -31,9 +31,35 @@ namespace Spovyz
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Enums>().HasNoKey();
             modelBuilder.Entity<Project_employee>().HasNoKey();
-            modelBuilder.Entity<Project_tag>().HasNoKey();
+            //modelBuilder.Entity<Project_tag>().HasNoKey();
             modelBuilder.Entity<Task_employee>().HasNoKey();
             modelBuilder.Entity<Task_tag>().HasNoKey();
+
+            modelBuilder.Entity<Project_tag>()
+    .HasKey(pt => new { pt.ProjectId, pt.TagId });
+
+            modelBuilder.Entity<Project_tag>()
+                .HasOne(pt => pt.Project)
+                .WithMany(p => p.Project_tags)
+                .HasForeignKey(pt => pt.ProjectId);
+
+            modelBuilder.Entity<Project_tag>()
+                .HasOne(pt => pt.Tag)
+                .WithMany(t => t.Project_tags)
+                .HasForeignKey(pt => pt.TagId);
+
+            modelBuilder.Entity<Project_employee>()
+    .HasKey(pt => new { pt.ProjectId, pt.EmployeeId });
+
+            modelBuilder.Entity<Project_employee>()
+                .HasOne(pt => pt.Project)
+                .WithMany(p => p.Project_employees)
+                .HasForeignKey(pt => pt.ProjectId);
+
+            modelBuilder.Entity<Project_employee>()
+                .HasOne(pt => pt.Employee)
+                .WithMany(t => t.Project_employees)
+                .HasForeignKey(pt => pt.EmployeeId);
         }
     }
 }

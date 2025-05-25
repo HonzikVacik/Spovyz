@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Spovyz;
@@ -11,9 +12,11 @@ using Spovyz;
 namespace Spovyz.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250525121603_DvanactaMigrace")]
+    partial class DvanactaMigrace
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -282,15 +285,15 @@ namespace Spovyz.Migrations
 
             modelBuilder.Entity("Spovyz.Models.Project_employee", b =>
                 {
-                    b.Property<long>("ProjectId")
-                        .HasColumnType("bigint");
-
                     b.Property<long>("EmployeeId")
                         .HasColumnType("bigint");
 
-                    b.HasKey("ProjectId", "EmployeeId");
+                    b.Property<long>("ProjectId")
+                        .HasColumnType("bigint");
 
                     b.HasIndex("EmployeeId");
+
+                    b.HasIndex("ProjectId");
 
                     b.ToTable("Project_employees");
                 });
@@ -494,13 +497,13 @@ namespace Spovyz.Migrations
             modelBuilder.Entity("Spovyz.Models.Project_employee", b =>
                 {
                     b.HasOne("Spovyz.Models.Employee", "Employee")
-                        .WithMany("Project_employees")
+                        .WithMany()
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Spovyz.Models.Project", "Project")
-                        .WithMany("Project_employees")
+                        .WithMany()
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -589,15 +592,8 @@ namespace Spovyz.Migrations
                     b.Navigation("Task");
                 });
 
-            modelBuilder.Entity("Spovyz.Models.Employee", b =>
-                {
-                    b.Navigation("Project_employees");
-                });
-
             modelBuilder.Entity("Spovyz.Models.Project", b =>
                 {
-                    b.Navigation("Project_employees");
-
                     b.Navigation("Project_tags");
                 });
 

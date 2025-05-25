@@ -24,5 +24,6 @@
         public uint Pay { get; set; }
         public Company Company { get; set; }
         public bool NeedResetPassword { get; set; }
+        public ICollection<Project_employee> Project_employees { get; set; }
     }
 }
