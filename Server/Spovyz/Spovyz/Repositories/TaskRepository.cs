@@ -45,6 +45,7 @@ namespace Spovyz.Repositories
                 .Include(t => t.Employee)
                 .Where(t => t.Task.Project.Id == ProjectId && t.Employee.Id == ActiveUserId)
                 .Select(t => t.Task)
+                .OrderBy(t => t.Name)
                 .ToListAsync();
         }
 

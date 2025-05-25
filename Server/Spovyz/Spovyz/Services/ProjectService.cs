@@ -86,9 +86,9 @@ namespace Spovyz.Services
                 Description = project.Description,
                 Customer = project.Customer.Id,
                 Status = (uint)project.Status,
-                Deathline = project.Dead_line,
-                WorkedOut = "3 dny",
-                WorkedByMe = "9 hodin",
+                Deadline = project.Dead_line,
+                WorkedOut = "3",
+                WorkedByMe = "9",
                 Tags = tagNames,
                 Employees = employeesIds,
                 Tasks = taskNames
@@ -141,22 +141,29 @@ namespace Spovyz.Services
 
             Customer customer = await _context.Customers.FindAsync(CustomerId);
 
-            uint[] originalEmployees = await _employeeRepository.GetEmployeesIdsByProjectId(originalProject.Id);
-            uint[] DelEmployees = originalEmployees.Except(Employees).ToArray();
-            uint[] AddEmployees = Employees.Except(originalEmployees).ToArray();
+            uint[] originalEmployeesId = await _employeeRepository.GetEmployeesIdsByProjectId(originalProject.Id);
+            uint[] DelEmployeesId = originalEmployeesId.Except(Employees).ToArray();
+            uint[] AddEmployeesId = Employees.Except(originalEmployeesId).ToArray();
 
-            string[]? originalTags = await _tagRepository.GetTagNamesByProject(originalProject.Id);
-            string[] DelTags = Array.Empty<string>();
-            string[] AddTags = Array.Empty<string>();
-            if (originalTags != null)
+            string[]? originalTagsString = await _tagRepository.GetTagNamesByProject(originalProject.Id);
+            string[] DelTagsString = Array.Empty<string>();
+            string[] AddTagsString = Array.Empty<string>();
+            if (originalTagsString != null)
             {
-                DelTags = originalTags.Except(Tags).ToArray();
-                AddTags = Tags.Except(originalTags).ToArray();
+                DelTagsString = originalTagsString.Except(Tags).ToArray();
+                AddTagsString = Tags.Except(originalTagsString).ToArray();
             }
             else
             {
-                AddTags = Tags;
+                AddTagsString = Tags;
             }
+
+            Employee[] DelEmployees = await _employeeRepository.GetEmployeesByIds(DelEmployeesId);
+            Employee[] AddEmployees = await _employeeRepository.GetEmployeesByIds(AddEmployeesId);
+            Tag[] DelTags = await _tagRepository.PostGetTags(DelTagsString);
+            Tag[] AddTags = await _tagRepository.PostGetTags(AddTagsString);
+
+            await _projectRepository.PutProject(originalProject, Name, Description, customer, DeadLine, (Enums.Status)Status, DelEmployees, AddEmployees, DelTags, AddTags);
 
             return (ValidityControl.ResultStatus.Ok, null);
         }

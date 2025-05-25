@@ -30,6 +30,7 @@ namespace Spovyz.Repositories
         {
             return await _context.Project_employees
                 .Include(pe => pe.Project)
+                .ThenInclude(p => p.Customer)
                 .Include(pe => pe.Employee)
                 .Where(pe => pe.Project.Id == ProjectId && pe.Employee.Id == activeUserId)
                 .Select(pe => pe.Project)
@@ -43,6 +44,7 @@ namespace Spovyz.Repositories
                 .Include(te => te.Employee)
                 .Where(te => te.Employee.Id == ActiveUserId)
                 .Select(te => te.Project)
+                .OrderBy(te => te.Name)
                 .ToListAsync();
         }
 

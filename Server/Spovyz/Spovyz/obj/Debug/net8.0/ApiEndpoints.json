@@ -602,29 +602,8 @@
   },
   {
     "ContainingType": "Spovyz.Controllers.ProjectController",
-    "Method": "Get",
-    "RelativePath": "api/Project/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "ProjectId",
-        "Type": "System.UInt32",
-        "IsRequired": false
-      },
-      {
-        "Name": "id",
-        "Type": "",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Spovyz.Controllers.ProjectController",
     "Method": "Put",
-    "RelativePath": "api/Project/{id}",
+    "RelativePath": "api/Project",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -632,11 +611,6 @@
       {
         "Name": "projectPutInput",
         "Type": "Spovyz.InputModels.ProjectPutInput",
-        "IsRequired": true
-      },
-      {
-        "Name": "id",
-        "Type": "",
         "IsRequired": true
       }
     ],
@@ -652,6 +626,22 @@
     "Parameters": [
       {
         "Name": "id",
+        "Type": "System.UInt32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Spovyz.Controllers.ProjectController",
+    "Method": "Get",
+    "RelativePath": "api/Project/{ProjectId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ProjectId",
         "Type": "System.UInt32",
         "IsRequired": true
       }

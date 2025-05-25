@@ -62,7 +62,7 @@ namespace Spovyz.Controllers
             return Ok(data);*/
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{ProjectId}")]
         [Authorize]
         public async Task<IActionResult> Get(uint ProjectId)
         {
@@ -78,6 +78,7 @@ namespace Spovyz.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Post(ProjectPostInput ProjectPostInput)
         {
             string? UserName = User.Identity?.Name?.ToString();
@@ -93,7 +94,8 @@ namespace Spovyz.Controllers
             return Ok();
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
+        [Authorize]
         public async Task<IActionResult> Put(ProjectPutInput projectPutInput)
         {
             string? UserName = User.Identity?.Name?.ToString();
