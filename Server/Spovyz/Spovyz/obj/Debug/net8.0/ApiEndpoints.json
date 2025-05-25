@@ -41,6 +41,16 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Spovyz.Controllers.CustomerController",
+    "Method": "Get",
+    "RelativePath": "api/Customer",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Spovyz.Controllers.EmployeeInformation",
     "Method": "Get",
     "RelativePath": "api/EmployeeInformation",
