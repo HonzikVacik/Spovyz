@@ -30,13 +30,15 @@ namespace Spovyz
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Enums>().HasNoKey();
-            modelBuilder.Entity<Project_employee>().HasNoKey();
+            //modelBuilder.Entity<Project_employee>().HasNoKey();
             //modelBuilder.Entity<Project_tag>().HasNoKey();
-            modelBuilder.Entity<Task_employee>().HasNoKey();
-            modelBuilder.Entity<Task_tag>().HasNoKey();
+            //modelBuilder.Entity<Task_employee>().HasNoKey();
+            //modelBuilder.Entity<Task_tag>().HasNoKey();
 
+
+            //Project_tag
             modelBuilder.Entity<Project_tag>()
-    .HasKey(pt => new { pt.ProjectId, pt.TagId });
+                .HasKey(pt => new { pt.ProjectId, pt.TagId });
 
             modelBuilder.Entity<Project_tag>()
                 .HasOne(pt => pt.Project)
@@ -48,8 +50,10 @@ namespace Spovyz
                 .WithMany(t => t.Project_tags)
                 .HasForeignKey(pt => pt.TagId);
 
+
+            //Project_employee
             modelBuilder.Entity<Project_employee>()
-    .HasKey(pt => new { pt.ProjectId, pt.EmployeeId });
+                .HasKey(pt => new { pt.ProjectId, pt.EmployeeId });
 
             modelBuilder.Entity<Project_employee>()
                 .HasOne(pt => pt.Project)
@@ -59,6 +63,36 @@ namespace Spovyz
             modelBuilder.Entity<Project_employee>()
                 .HasOne(pt => pt.Employee)
                 .WithMany(t => t.Project_employees)
+                .HasForeignKey(pt => pt.EmployeeId);
+
+
+            //Task_tag
+            modelBuilder.Entity<Task_tag>()
+                .HasKey(pt => new { pt.TaskId, pt.TagId });
+
+            modelBuilder.Entity<Task_tag>()
+                .HasOne(pt => pt.Task)
+                .WithMany(p => p.Task_tags)
+                .HasForeignKey(pt => pt.TaskId);
+
+            modelBuilder.Entity<Task_tag>()
+                .HasOne(pt => pt.Tag)
+                .WithMany(t => t.Task_tags)
+                .HasForeignKey(pt => pt.TagId);
+
+
+            //Task_employee
+            modelBuilder.Entity<Task_employee>()
+                .HasKey(pt => new { pt.TaskId, pt.EmployeeId });
+
+            modelBuilder.Entity<Task_employee>()
+                .HasOne(pt => pt.Task)
+                .WithMany(p => p.Task_employees)
+                .HasForeignKey(pt => pt.TaskId);
+
+            modelBuilder.Entity<Task_employee>()
+                .HasOne(pt => pt.Employee)
+                .WithMany(t => t.Task_employees)
                 .HasForeignKey(pt => pt.EmployeeId);
         }
     }

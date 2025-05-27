@@ -25,5 +25,6 @@
         public Company Company { get; set; }
         public bool NeedResetPassword { get; set; }
         public ICollection<Project_employee> Project_employees { get; set; }
+        public ICollection<Task_employee> Task_employees { get; set; }
     }
 }

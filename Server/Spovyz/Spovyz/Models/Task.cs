@@ -8,5 +8,7 @@
         public Project Project { get; set; }
         public DateOnly? Dead_line { get; set; }
         public Enums.Status Status { get; set; }
+        public ICollection<Task_tag> Task_tags { get; set; }
+        public ICollection<Task_employee> Task_employees { get; set; }
     }
 }
