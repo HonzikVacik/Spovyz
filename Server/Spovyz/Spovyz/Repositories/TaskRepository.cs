@@ -31,6 +31,7 @@ namespace Spovyz.Repositories
         public async Task<Models.Task?> GetTaskById(uint TaskId, uint ActiveUserId)
         {
             return await _context.Task_employees
+                .Include(t => t.Task.Project)
                 .Include(t => t.Task)
                 .Include(t => t.Employee)
                 .Where(t => t.Task.Id == TaskId && t.Employee.Id == ActiveUserId)

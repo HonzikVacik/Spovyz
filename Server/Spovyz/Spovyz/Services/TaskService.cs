@@ -57,21 +57,26 @@ namespace Spovyz.Services
             if (task == null)
                 return (null, "Task not found");
 
-            TaskCardData result = new TaskCardData()
-            {
-                Name = task.Name,
-                Description = task.Description,
-                Status = (uint)task.Status,
-                Deathline = task.Dead_line,
-                WorkedOut = 0.ToString(),
-                WorkedByMe = 0.ToString(),
-                Tags = await _tagRepository.GetTagNamesByTask(task.Id),
-                Employees = await _context.Task_employees
+            string[]? tags = await _tagRepository.GetTagNamesByTask(task.Id);
+            
+            uint[] employees = await _context.Task_employees
                     .Include(t => t.Task)
                     .Include(t => t.Employee)
                     .Where(t => t.Task.Id == task.Id)
                     .Select(t => t.Employee.Id)
-                    .ToArrayAsync(),
+                    .ToArrayAsync();
+
+            TaskCardData result = new TaskCardData()
+            {
+                Name = task.Name,
+                Description = task.Description,
+                ProjectId = task.Project.Id,
+                Status = (uint)task.Status,
+                Deadline = task.Dead_line,
+                WorkedOut = 0.ToString(),
+                WorkedByMe = 0.ToString(),
+                Tags = tags,
+                Employees = employees
             };
 
             return (result, null);
