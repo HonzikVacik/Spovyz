@@ -72,6 +72,7 @@ namespace Spovyz.Controllers
 
         // GET api/<TaskController>/5
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<IActionResult> Get(int id)
         {
             string? UserName = User.Identity.Name;
@@ -86,6 +87,7 @@ namespace Spovyz.Controllers
 
         // POST api/<TaskController>
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Post(TaskPostInput TaskPostInput)
         {
             string? UserName = User.Identity.Name;
@@ -101,7 +103,8 @@ namespace Spovyz.Controllers
         }
 
         // PUT api/<TaskController>/5
-        [HttpPut("{id}")]
+        [HttpPut]
+        [Authorize]
         public async Task<IActionResult> Put(TaskPutInput TaskPutInput)
         {
             string? UserName = User.Identity.Name;

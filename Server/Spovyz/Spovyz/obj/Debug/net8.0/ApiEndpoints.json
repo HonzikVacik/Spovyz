@@ -954,6 +954,22 @@
   },
   {
     "ContainingType": "Spovyz.Controllers.TaskController",
+    "Method": "Put",
+    "RelativePath": "api/Task",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "TaskPutInput",
+        "Type": "Spovyz.InputModels.TaskPutInput",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Spovyz.Controllers.TaskController",
     "Method": "Get",
     "RelativePath": "api/Task/{id}",
     "HttpMethod": "GET",
@@ -963,27 +979,6 @@
       {
         "Name": "id",
         "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Spovyz.Controllers.TaskController",
-    "Method": "Put",
-    "RelativePath": "api/Task/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "TaskPutInput",
-        "Type": "Spovyz.InputModels.TaskPutInput",
-        "IsRequired": true
-      },
-      {
-        "Name": "id",
-        "Type": "",
         "IsRequired": true
       }
     ],
