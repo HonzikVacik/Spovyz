@@ -127,7 +127,7 @@ namespace Spovyz.Controllers
         {
             //e1 - projekt neexistuje
             string error = "e1";
-            string accept = "a";
+            string accept = "accept";
 
             string? UserName = User.Identity.Name;
             if (UserName == null)
@@ -135,7 +135,7 @@ namespace Spovyz.Controllers
 
             string result = await _taskService.DeleteTask(UserName, id);
             if (result == accept)
-                return Ok(accept);
+                return Ok();
             else
                 return NotFound(error);
         }
