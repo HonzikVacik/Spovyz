@@ -42,6 +42,25 @@ namespace Spovyz.Controllers
             return items;
         }
 
+        [HttpGet("StatementTypeEnum")]
+        [Authorize]
+        public IEnumerable<string> GetStatementType()
+        {
+            List<string> items = new List<string>();
+            foreach (Enums.StatementType statementType in Enums.StatementType.GetValues(typeof(Enums.StatementType)))
+            {
+                RoleCeskyAttribute attribute = (RoleCeskyAttribute)statementType.GetType()
+                    .GetField(statementType.ToString())
+                    .GetCustomAttribute(typeof(RoleCeskyAttribute));
+
+                if (attribute != null)
+                {
+                    items.Add(attribute.Nazev);
+                }
+            }
+            return items;
+        }
+
         [HttpGet("SexEnum")]
         [Authorize]
         public IEnumerable<string> GetSex()
