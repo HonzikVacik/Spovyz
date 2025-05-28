@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Spovyz.IServices;
 using Spovyz.Transport_models;
 using System;
@@ -20,6 +21,7 @@ namespace Spovyz.Controllers
 
         // GET: api/<AccountingController>
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Get()
         {
             string? UserName = User.Identity?.Name?.ToString();
@@ -37,6 +39,7 @@ namespace Spovyz.Controllers
 
         // GET api/<AccountingController>/5
         [HttpGet("GetAll")]
+        [Authorize]
         public async Task<IActionResult> GetAll()
         {
             string? UserName = User.Identity?.Name?.ToString();

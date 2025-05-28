@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Spovyz.IServices;
 using Spovyz.Models;
 using Spovyz.Services;
@@ -23,6 +24,7 @@ namespace Spovyz.Controllers
 
         // GET: api/<Statement>
         [HttpGet("StatementDataShort")]
+        [Authorize]
         public async Task<IActionResult> Get(DateOnly dateOnly)
         {
             string? UserName = User.Identity?.Name?.ToString();
@@ -40,6 +42,7 @@ namespace Spovyz.Controllers
 
         // GET api/<Statement>/5
         [HttpGet("StatementDataLong")]
+        [Authorize]
         public async Task<IActionResult> Get(uint EmployeeId, byte Month, ushort Year)
         {
             string? UserName = User.Identity?.Name?.ToString();
@@ -57,6 +60,7 @@ namespace Spovyz.Controllers
 
         // POST api/<Statement>
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Post(byte StatementType, DateOnly Datum, byte PocetHodin, string? Description)
         {
             string? UserName = User.Identity?.Name?.ToString();
@@ -74,6 +78,7 @@ namespace Spovyz.Controllers
 
         // DELETE api/<Statement>/5
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> Delete(uint id)
         {
             string? UserName = User.Identity?.Name?.ToString();
