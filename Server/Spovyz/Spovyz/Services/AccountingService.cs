@@ -23,7 +23,7 @@ namespace Spovyz.Services
             if (activeUser == null)
                 return (ValidityControl.ResultStatus.NotFound, "User not found", null);
 
-            AccountingDataShort[]? accountingDataShorts = await _accountingRepository.Get(activeUser.Company.Id);
+            AccountingDataShort[]? accountingDataShorts = await _accountingRepository.Get(activeUser.Id);
             if (accountingDataShorts == null)
                 return (ValidityControl.ResultStatus.NotFound, "No accounting data found", null);
 

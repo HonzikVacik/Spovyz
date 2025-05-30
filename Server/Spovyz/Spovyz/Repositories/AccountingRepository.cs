@@ -19,6 +19,8 @@ namespace Spovyz.Repositories
             List<Accounting> accountings = await _context.Accountings
                 .Include(a => a.Employee)
                 .Where(a => a.Employee.Id == ActiveUserId)
+                .OrderByDescending(a => a.Year)
+                .ThenByDescending(a => a.Month)
                 .ToListAsync();
             
             AccountingDataShort[] accountingDataShorts = new AccountingDataShort[accountings.Count];
@@ -52,6 +54,9 @@ namespace Spovyz.Repositories
                 .Include(a => a.Employee)
                 .ThenInclude(e => e.Company)
                 .Where(a => a.Employee.Company.Id == CompanyId)
+                .OrderByDescending(a => a.Year)
+                .ThenByDescending(a => a.Month)
+                .ThenByDescending(a => a.Employee.Username)
                 .ToListAsync();
 
             AccountingDataLong[] accountingDataLongs = new AccountingDataLong[accountings.Count];
@@ -82,6 +87,7 @@ namespace Spovyz.Repositories
 
             Accounting? accounting = await _context.Accountings
                 .Include(ms => ms.Employee)
+                .ThenInclude(e => e.Company)
                 .Where(ms => ms.Employee.Company.Id == CompanyId && ms.Employee.Id == EmployeeId && ms.Month == (Enums.Month)DateTime.Now.Month && ms.Year == DateTime.Now.Year)
                 .FirstOrDefaultAsync();
             
