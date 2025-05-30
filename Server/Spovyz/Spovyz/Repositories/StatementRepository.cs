@@ -77,13 +77,14 @@ namespace Spovyz.Repositories
                 .Where(s => s.Accounting == accounting)
                 .SumAsync(s => s.Number_of_hours);
 
-            byte[] days = await _context.Statements
+            int[] days = await _context.Statements
                 .Include(s => s.Accounting)
                 .ThenInclude(a => a.Employee)
                 .ThenInclude(e => e.Company)
                 .Where(s => s.Accounting == accounting)
-                .Select(s => s.Day)
+                .Select(s => (int)s.Day)
                 .Distinct()
+                .OrderBy(s => s)
                 .ToArrayAsync();
 
             StatementDataLong statementDataLong = new StatementDataLong

@@ -55,7 +55,7 @@ namespace Spovyz.Services
 
             await _statementRepository.DeleteStatement(activeUser.Id, activeUser.Company.Id, Id);
 
-            throw new NotImplementedException();
+            return(ValidityControl.ResultStatus.Ok, null);
         }
 
         public async Task<(ValidityControl.ResultStatus, string? error, StatementDataShort[]?)> GetDay(string UserName, byte Day, uint AccountingId)

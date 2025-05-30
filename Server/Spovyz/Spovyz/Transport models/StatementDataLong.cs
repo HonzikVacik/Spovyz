@@ -4,7 +4,7 @@
     {
         public string EmployeeName { get; set; } = string.Empty;
         public decimal EmployeeSalary { get; set; }
-        public byte[] Den { get; set; }
+        public int[] Den { get; set; }
         public byte Mesic { get; set; }
         public ushort Rok { get; set; }
         public uint PocetHodin { get; set; }
