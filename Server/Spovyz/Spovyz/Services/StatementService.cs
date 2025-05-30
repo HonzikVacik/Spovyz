@@ -58,34 +58,34 @@ namespace Spovyz.Services
             throw new NotImplementedException();
         }
 
-        public async Task<(ValidityControl.ResultStatus, string? error, StatementDataShort[]?)> GetDay(string UserName, DateOnly Datum)
+        public async Task<(ValidityControl.ResultStatus, string? error, StatementDataShort[]?)> GetDay(string UserName, byte Day, uint AccountingId)
         {
             Employee? activeUser = await _context.Employees.Include(e => e.Company).FirstOrDefaultAsync(e => e.Username == UserName);
             if (activeUser == null)
                 return (ValidityControl.ResultStatus.NotFound, "User not found", null);
+
+            Accounting? accounting = await _accountingRepository.GetAccountingById(AccountingId);
+            if (accounting == null)
+                return (ValidityControl.ResultStatus.Error, "Accounting not found", null);
+
+            DateOnly Datum = new DateOnly(accounting.Year, (byte)accounting.Month, Day);
 
             StatementDataShort[]? statementDataShorts = await _statementRepository.GetDay(activeUser.Id, Datum);
 
             return (ValidityControl.ResultStatus.Ok, null, statementDataShorts);
         }
 
-        public async Task<(ValidityControl.ResultStatus, string? error, StatementDataLong?)> GetMonth(string UserName, uint EmployeeId, byte Month, ushort Year)
+        public async Task<(ValidityControl.ResultStatus, string? error, StatementDataLong?)> GetMonth(string UserName, uint AccountingId)
         {
             Employee? activeUser = await _context.Employees.Include(e => e.Company).FirstOrDefaultAsync(e => e.Username == UserName);
             if (activeUser == null)
                 return (ValidityControl.ResultStatus.NotFound, "User not found", null);
 
-            string? accountingError = await _accountingRepository.SetAccounting(activeUser.Company.Id, EmployeeId, activeUser.Pay);
-            if (accountingError != null)
-                return (ValidityControl.ResultStatus.Error, accountingError, null);
-
-            DateOnly Datum = new DateOnly(Year, Month, 1);
-
-            Accounting? accounting = await _accountingRepository.GetAccounting(activeUser.Company.Id, activeUser.Id, Datum);
+            Accounting? accounting = await _accountingRepository.GetAccountingById(AccountingId);
             if (accounting == null)
                 return (ValidityControl.ResultStatus.Error, "Accounting not found", null);
 
-            StatementDataLong? statementDataLong = await _statementRepository.GetMonth(EmployeeId, Month, Year, accounting);
+            StatementDataLong? statementDataLong = await _statementRepository.GetMonth(accounting);
 
             return (ValidityControl.ResultStatus.Ok, null, statementDataLong);
         }

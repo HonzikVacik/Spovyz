@@ -58,6 +58,7 @@ namespace Spovyz.Repositories
             {
                 StatementDataShort statementDataShort = new StatementDataShort
                 {
+                    Id = statement.Id,
                     Datum = datum,
                     PocetHodin = statement.Number_of_hours,
                     Description = statement.Description,
@@ -67,22 +68,20 @@ namespace Spovyz.Repositories
             return statementDataShorts.ToArray();
         }
 
-        public async System.Threading.Tasks.Task<StatementDataLong?> GetMonth(uint EmployeeId, byte Month, ushort Year, Accounting accounting)
+        public async System.Threading.Tasks.Task<StatementDataLong?> GetMonth(Accounting accounting)
         {
             uint NumberOfHours = 0;
 
             NumberOfHours += (uint) await _context.Statements
                 .Include(s => s.Accounting)
-                .ThenInclude(a => a.Employee)
-                .ThenInclude(e => e.Company)
-                .Where(s => s.Accounting.Employee.Id == EmployeeId && s.Accounting.Month == (Enums.Month)Month && s.Accounting.Year == Year)
+                .Where(s => s.Accounting == accounting)
                 .SumAsync(s => s.Number_of_hours);
 
             byte[] days = await _context.Statements
                 .Include(s => s.Accounting)
                 .ThenInclude(a => a.Employee)
                 .ThenInclude(e => e.Company)
-                .Where(s => s.Accounting.Employee.Id == EmployeeId && s.Accounting.Month == (Enums.Month)Month && s.Accounting.Year == Year)
+                .Where(s => s.Accounting == accounting)
                 .Select(s => s.Day)
                 .Distinct()
                 .ToArrayAsync();

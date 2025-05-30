@@ -25,13 +25,13 @@ namespace Spovyz.Controllers
         // GET: api/<Statement>
         [HttpGet("StatementDataShort")]
         [Authorize]
-        public async Task<IActionResult> Get(DateOnly dateOnly)
+        public async Task<IActionResult> Get(byte Day, uint AccountingId)
         {
             string? UserName = User.Identity?.Name?.ToString();
             if (UserName == null)
                 return NotFound();
 
-            (ValidityControl.ResultStatus status, string? error, StatementDataShort[]? statementDataShorts) result = await _statementService.GetDay(UserName, dateOnly);
+            (ValidityControl.ResultStatus status, string? error, StatementDataShort[]? statementDataShorts) result = await _statementService.GetDay(UserName, Day, AccountingId);
 
             if (result.status == ValidityControl.ResultStatus.Error)
                 return BadRequest(result.error);
@@ -43,13 +43,13 @@ namespace Spovyz.Controllers
         // GET api/<Statement>/5
         [HttpGet("StatementDataLong")]
         [Authorize]
-        public async Task<IActionResult> Get(uint EmployeeId, byte Month, ushort Year)
+        public async Task<IActionResult> Get(uint AccountingId)
         {
             string? UserName = User.Identity?.Name?.ToString();
             if (UserName == null)
                 return NotFound();
 
-            (ValidityControl.ResultStatus status, string? error, StatementDataLong? statementDataLong) result = await _statementService.GetMonth(UserName, EmployeeId, Month, Year);
+            (ValidityControl.ResultStatus status, string? error, StatementDataLong? statementDataLong) result = await _statementService.GetMonth(UserName, AccountingId);
 
             if (result.status == ValidityControl.ResultStatus.Error)
                 return BadRequest(result.error);

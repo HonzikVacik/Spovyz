@@ -1259,11 +1259,19 @@
         ],
         "parameters": [
           {
-            "name": "dateOnly",
+            "name": "Day",
             "in": "query",
             "schema": {
-              "type": "string",
-              "format": "date"
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "AccountingId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
@@ -1281,23 +1289,7 @@
         ],
         "parameters": [
           {
-            "name": "EmployeeId",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "Month",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "Year",
+            "name": "AccountingId",
             "in": "query",
             "schema": {
               "type": "integer",

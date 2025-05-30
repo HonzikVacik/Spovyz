@@ -907,18 +907,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "EmployeeId",
+        "Name": "AccountingId",
         "Type": "System.UInt32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Month",
-        "Type": "System.Byte",
-        "IsRequired": false
-      },
-      {
-        "Name": "Year",
-        "Type": "System.UInt16",
         "IsRequired": false
       }
     ],
@@ -933,8 +923,13 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "dateOnly",
-        "Type": "System.DateOnly",
+        "Name": "Day",
+        "Type": "System.Byte",
+        "IsRequired": false
+      },
+      {
+        "Name": "AccountingId",
+        "Type": "System.UInt32",
         "IsRequired": false
       }
     ],

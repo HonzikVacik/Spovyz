@@ -48,6 +48,15 @@ namespace Spovyz.Repositories
                 .FirstOrDefaultAsync();
         }
 
+        public async Task<Accounting?> GetAccountingById(uint AccountingId)
+        {
+            return await _context.Accountings
+                .Include(a => a.Employee)
+                .ThenInclude(e => e.Company)
+                .Where(a => a.Id == AccountingId)
+                .FirstOrDefaultAsync();
+        }
+
         public async Task<AccountingDataLong[]> GetAll(uint CompanyId)
         {
             List<Accounting> accountings = await _context.Accountings
