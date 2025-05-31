@@ -356,6 +356,18 @@
         }
       }
     },
+    "/api/EmployeeInformation/GetSelfAccountType": {
+      "get": {
+        "tags": [
+          "EmployeeInformation"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/EmployeeInformation/GetName/{id}": {
       "get": {
         "tags": [

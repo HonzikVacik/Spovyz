@@ -373,6 +373,16 @@
   },
   {
     "ContainingType": "Spovyz.Controllers.EmployeeInformation",
+    "Method": "GetSelfAccountType",
+    "RelativePath": "api/EmployeeInformation/GetSelfAccountType",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Spovyz.Controllers.EmployeeInformation",
     "Method": "GetSelfId",
     "RelativePath": "api/EmployeeInformation/GetSelfId",
     "HttpMethod": "GET",

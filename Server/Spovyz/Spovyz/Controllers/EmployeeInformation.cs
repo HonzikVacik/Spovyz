@@ -146,6 +146,14 @@ namespace Spovyz.Controllers
             return Ok(activeUser.Id);
         }
 
+        [HttpGet("GetSelfAccountType")]
+        [Authorize]
+        public IActionResult GetSelfAccountType()
+        {
+            Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
+            return Ok(activeUser.Account_type);
+        }
+
         [HttpGet("GetName/{id}")]
         [Authorize]
         public IActionResult GetName(int id)
