@@ -70,7 +70,7 @@ namespace Spovyz.Services
 
             DateOnly Datum = new DateOnly(accounting.Year, (byte)accounting.Month, Day);
 
-            StatementDataShort[]? statementDataShorts = await _statementRepository.GetDay(activeUser.Id, Datum);
+            StatementDataShort[]? statementDataShorts = await _statementRepository.GetDay(activeUser.Company.Id, Datum);
 
             return (ValidityControl.ResultStatus.Ok, null, statementDataShorts);
         }
