@@ -128,7 +128,7 @@
       }
     },
     "/api/EmployeeInformation/UpdateEmployeeSalary": {
-      "get": {
+      "put": {
         "tags": [
           "EmployeeInformation"
         ],

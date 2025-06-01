@@ -437,7 +437,7 @@
     "ContainingType": "Spovyz.Controllers.EmployeeInformation",
     "Method": "UpdateEmployeeSalary",
     "RelativePath": "api/EmployeeInformation/UpdateEmployeeSalary",
-    "HttpMethod": "GET",
+    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [

@@ -77,7 +77,7 @@ namespace Spovyz.Controllers
             return Ok(employeeSalaries);
         }
 
-        [HttpGet("UpdateEmployeeSalary")]
+        [HttpPut("UpdateEmployeeSalary")]
         [Authorize]
         public async Task<IActionResult> UpdateEmployeeSalary(uint id, uint salary)
         {

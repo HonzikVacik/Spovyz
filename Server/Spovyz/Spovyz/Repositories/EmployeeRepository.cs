@@ -23,7 +23,9 @@ namespace Spovyz.Repositories
                     EmployeeId = e.Id,
                     EmployeeName = e.Username,
                     Salary = e.Pay
-                }).ToArrayAsync();
+                })
+                .OrderBy(e => e.EmployeeName)
+                .ToArrayAsync();
             return employeeSalaries;
         }
 
