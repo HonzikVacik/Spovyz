@@ -83,6 +83,17 @@ namespace Spovyz.Services
             return (ValidityControl.ResultStatus.Ok, financeData, null);
         }
 
+        public async Task<(ValidityControl.ResultStatus, string?, FinanceResult?)> GetFinanceResult(string UserName, bool Current_planned)
+        {
+            Employee? activeUser = await _context.Employees.Include(e => e.Company).FirstOrDefaultAsync(e => e.Username == UserName);
+            if (activeUser == null)
+                return (ValidityControl.ResultStatus.NotFound, "User not found", null);
+
+            FinanceResult financeResult = await _financeRepository.GetFinanceResult(activeUser.Company.Id, Current_planned);
+            
+            return (ValidityControl.ResultStatus.Ok, null, financeResult);
+        }
+
         public async Task<(ValidityControl.ResultStatus, string?)> UpdateFinance(string UserName, uint Id, string Name, uint Cost, string? Description, bool Income_expenditure, bool Current_planned)
         {
             Employee? activeUser = await _context.Employees.Include(e => e.Company).FirstOrDefaultAsync(e => e.Username == UserName);

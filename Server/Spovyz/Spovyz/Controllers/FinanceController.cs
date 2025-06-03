@@ -20,6 +20,24 @@ namespace Spovyz.Controllers
         }
 
         // GET: api/<FinanceController>
+        [HttpGet("FinanceResult")]
+        [Authorize]
+        public async Task<IActionResult> GetFinanceResult(bool Current_planned)
+        {
+            string? UserName = User.Identity?.Name?.ToString();
+            if (UserName == null)
+                return NotFound();
+
+            (ValidityControl.ResultStatus status, string? error, FinanceResult financeResult) result = await _financeService.GetFinanceResult(UserName, Current_planned);
+
+            if (result.status == ValidityControl.ResultStatus.Error)
+                return BadRequest(result.error);
+            if (result.status == ValidityControl.ResultStatus.NotFound)
+                return NotFound(result.error);
+            return Ok(result.financeResult);
+        }
+
+        // GET: api/<FinanceController>
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> Get(bool Income_expenditure, bool Current_planned)

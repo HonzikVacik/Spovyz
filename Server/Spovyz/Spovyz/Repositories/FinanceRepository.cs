@@ -56,6 +56,30 @@ namespace Spovyz.Repositories
                 .FirstOrDefaultAsync();
         }
 
+        public async System.Threading.Tasks.Task<FinanceResult> GetFinanceResult(uint CompanyId, bool Current_planned)
+        {
+            long revenue = _context.Finances
+                .Include(f => f.Employee)
+                .ThenInclude(e => e.Company)
+                .Where(f => f.Employee.Company.Id == CompanyId && f.Income_expenditure == true && f.Current_planned == Current_planned)
+                .Sum(f => f.Cost);
+
+            long expenditure = _context.Finances
+                .Include(f => f.Employee)
+                .ThenInclude(e => e.Company)
+                .Where(f => f.Employee.Company.Id == CompanyId && f.Income_expenditure == false && f.Current_planned == Current_planned)
+                .Sum(f => f.Cost);
+
+            long profit = revenue - expenditure;
+
+            return new FinanceResult
+            {
+                Revenue = revenue,
+                Expense = expenditure,
+                Profit = profit
+            };
+        }
+
         public async System.Threading.Tasks.Task UpdateTask(Finance finance, string Name, uint Cost, string? Description, bool Income_expenditure, bool Current_planned)
         {
             finance.Name = Name;

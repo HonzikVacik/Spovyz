@@ -5,6 +5,7 @@ namespace Spovyz.IRepositories
 {
     public interface IFinanceRepository
     {
+        System.Threading.Tasks.Task<FinanceResult> GetFinanceResult(uint CompanyId, bool Current_planned);
         Task<List<NameBasic>?> GetAllFinances(uint CompanyId, bool Income_expenditure, bool Current_planned);
         Task<Finance?> GetFinanceById(uint CompanyId, uint Id);
         System.Threading.Tasks.Task DeleteFinance(Finance finance);

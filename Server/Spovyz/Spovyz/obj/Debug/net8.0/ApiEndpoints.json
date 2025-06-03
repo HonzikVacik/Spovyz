@@ -585,6 +585,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Spovyz.Controllers.FinanceController",
+    "Method": "GetFinanceResult",
+    "RelativePath": "api/Finance/FinanceResult",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Current_planned",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Spovyz.Controllers.ChatController",
     "Method": "Post",
     "RelativePath": "api/Chat",

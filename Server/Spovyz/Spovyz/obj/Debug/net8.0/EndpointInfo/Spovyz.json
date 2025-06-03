@@ -639,6 +639,27 @@
         }
       }
     },
+    "/api/Finance/FinanceResult": {
+      "get": {
+        "tags": [
+          "Finance"
+        ],
+        "parameters": [
+          {
+            "name": "Current_planned",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Finance": {
       "get": {
         "tags": [
