@@ -585,6 +585,80 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Spovyz.Controllers.ChatController",
+    "Method": "Post",
+    "RelativePath": "api/Chat",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ProjectId",
+        "Type": "System.Nullable\u00601[[System.UInt32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "TaskId",
+        "Type": "System.Nullable\u00601[[System.UInt32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Message",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Spovyz.Controllers.ChatController",
+    "Method": "Delete",
+    "RelativePath": "api/Chat/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.UInt32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Spovyz.Controllers.ChatController",
+    "Method": "GetByProject",
+    "RelativePath": "api/Chat/GetChatsByProject",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ProjectId",
+        "Type": "System.UInt32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Spovyz.Controllers.ChatController",
+    "Method": "GetByTask",
+    "RelativePath": "api/Chat/GetChatsByTask",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "TaskId",
+        "Type": "System.UInt32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Spovyz.Controllers.ProjectController",
     "Method": "Get",
     "RelativePath": "api/Project",

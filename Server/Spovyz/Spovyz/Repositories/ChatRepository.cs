@@ -29,27 +29,31 @@ namespace Spovyz.Repositories
             }
         }
 
-        public async Task<List<ChatData>> GetChatsByProject(uint ActiveUserId, uint ProjectId)
+        public async Task<List<ChatData>> GetChatsByProject(uint ActiveUserCompanyId, uint ProjectId)
         {
             Message[] messages = await _context.Messages
                 .Include(m => m.Employee)
+                .ThenInclude(e => e.Company)
                 .Include(m => m.Project)
-                .Where(m => m.Employee.Id == ActiveUserId && m.Project.Id == ProjectId)
+                .Where(m => m.Employee.Company.Id == ActiveUserCompanyId && m.Project.Id == ProjectId)
+                .OrderByDescending(m => m.DateTime)
                 .ToArrayAsync();
             return messages.Select(m => new ChatData() { Id = m.Id, dateTime = m.DateTime, Descrition = m.Text, EmployeeName = m.Employee.Username }).ToList();
         }
 
-        public async Task<List<ChatData>> GetChatsByTask(uint ActiveUserId, uint TaskId)
+        public async Task<List<ChatData>> GetChatsByTask(uint ActiveUserCompanyId, uint TaskId)
         {
             Message[] messages = await _context.Messages
                 .Include(m => m.Employee)
+                .ThenInclude(e => e.Company)
                 .Include(m => m.Task)
-                .Where(m => m.Employee.Id == ActiveUserId && m.Task.Id == TaskId)
+                .Where(m => m.Employee.Company.Id == ActiveUserCompanyId && m.Task.Id == TaskId)
+                .OrderByDescending(m => m.DateTime)
                 .ToArrayAsync();
             return messages.Select(m => new ChatData() { Id = m.Id, dateTime = m.DateTime, Descrition = m.Text, EmployeeName = m.Employee.Username }).ToList();
         }
 
-        public async Task PostChat(Employee ActiveUser, Models.Task Task, Project Project, string Message)
+        public async Task PostChat(Employee ActiveUser, Models.Task? Task, Project? Project, string Message)
         {
             Message message = new Message()
             {

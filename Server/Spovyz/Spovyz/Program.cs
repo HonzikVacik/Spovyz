@@ -64,6 +64,7 @@ namespace Spovyz
 
             builder.Services.AddScoped<IAccountingService, AccountingService>();
             builder.Services.AddScoped<IFinanceService, FinanceService>();
+            builder.Services.AddScoped<IChatService, ChatService>();
             builder.Services.AddScoped<IProjectService, ProjectService>();
             builder.Services.AddScoped<IStatementService, StatementService>();
             builder.Services.AddScoped<ITaskService, TaskService>();
