@@ -25,8 +25,8 @@
 
         public enum Status
         {
-            [RoleCesky("Nový")] New,
             [RoleCesky("Aktivní")] Active,
+            [RoleCesky("Nový")] New,
             [RoleCesky("Vyřešený")] Resolved,
             [RoleCesky("Uzavřený")] Deleted
         }

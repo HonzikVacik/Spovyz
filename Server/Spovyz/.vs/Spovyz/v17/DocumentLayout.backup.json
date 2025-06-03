@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\controllers\\employeeinformation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\controllers\\employeeinformation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\services\\projectservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\services\\projectservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -13,6 +13,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\models\\enums.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\models\\enums.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\controllers\\employeeinformation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\controllers\\employeeinformation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 180,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -53,13 +57,14 @@
               "RelativeDocumentMoniker": "Spovyz\\Models\\Enums.cs",
               "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Models\\Enums.cs",
               "RelativeToolTip": "Spovyz\\Models\\Enums.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAtAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABsAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T14:39:14.4Z"
+              "WhenOpened": "2025-06-03T14:39:14.4Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "EmployeeInformation.cs",
               "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Controllers\\EmployeeInformation.cs",
               "RelativeDocumentMoniker": "Spovyz\\Controllers\\EmployeeInformation.cs",
@@ -68,6 +73,19 @@
               "ViewState": "AgIAADABAAAAAAAAAAAMwE8BAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-03T17:25:20.324Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ProjectService.cs",
+              "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Services\\ProjectService.cs",
+              "RelativeDocumentMoniker": "Spovyz\\Services\\ProjectService.cs",
+              "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Services\\ProjectService.cs",
+              "RelativeToolTip": "Spovyz\\Services\\ProjectService.cs",
+              "ViewState": "AgIAAH4AAAAAAAAAAAAAAHcAAAC+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T17:58:10.779Z",
               "EditorCaption": ""
             }
           ]

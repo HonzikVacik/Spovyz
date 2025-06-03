@@ -50,7 +50,7 @@ namespace Spovyz
             return "a";
         }
 
-        public static async Task<(ValidityControl.ResultStatus, string?)> Check_PI(ApplicationDbContext _context, uint CompanyId, string ProjectName, string ProjectDescription, uint CustomerId, DateOnly? Deadline, uint[] Employees, bool checkProjectName)
+        public static async Task<(ValidityControl.ResultStatus, string?)> Check_PI(ApplicationDbContext _context, uint CompanyId, string ProjectName, string ProjectDescription, uint CustomerId, DateOnly? Deadline, uint[] Employees, int Status, bool checkProjectName)
         {
             Company? company = await ExistCompany(_context, CompanyId);
             if (company is null)
@@ -62,6 +62,9 @@ namespace Spovyz
                 if (existProjectName)
                     return (ResultStatus.Error, "Project name already exists");
             }
+
+            if (InvalidStatus(Status))
+                return (ResultStatus.Error, "Invalid status");
 
             if (InvalidDeadLine(Deadline))
                 return (ResultStatus.Error, "DeadLine must be newer than yestedrday");

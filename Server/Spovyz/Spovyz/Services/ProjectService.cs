@@ -117,7 +117,7 @@ namespace Spovyz.Services
             if (activeUser == null)
                 return (ValidityControl.ResultStatus.NotFound, "User not found");
 
-            (ValidityControl.ResultStatus resultStatus, string? error) = await ValidityControl.Check_PI(_context, activeUser.Company.Id, Name, Description, CustomerId, Deadline, Employees, true);
+            (ValidityControl.ResultStatus resultStatus, string? error) = await ValidityControl.Check_PI(_context, activeUser.Company.Id, Name, Description, CustomerId, Deadline, Employees, 1, true);
 
             if (resultStatus != ValidityControl.ResultStatus.Ok)
                 return (resultStatus, error);
@@ -141,7 +141,7 @@ namespace Spovyz.Services
             if (originalProject == null)
                 return (ValidityControl.ResultStatus.NotFound, "Project does not exist");
 
-            (ValidityControl.ResultStatus resultStatus, string? error) = await ValidityControl.Check_PI(_context, activeUser.Company.Id, Name, Description, CustomerId, DeadLine, Employees, false);
+            (ValidityControl.ResultStatus resultStatus, string? error) = await ValidityControl.Check_PI(_context, activeUser.Company.Id, Name, Description, CustomerId, DeadLine, Employees, Status, false);
 
             Customer customer = await _context.Customers.FindAsync(CustomerId);
 
