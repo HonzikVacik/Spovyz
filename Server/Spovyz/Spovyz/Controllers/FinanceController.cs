@@ -74,7 +74,7 @@ namespace Spovyz.Controllers
         }
 
         // PUT api/<FinanceController>/5
-        [HttpPut("{id}")]
+        [HttpPut]
         [Authorize]
         public async Task<IActionResult> Put(uint id, string Name, uint Cost, string? Description, bool Income_expenditure, bool Current_planned)
         {

@@ -513,24 +513,8 @@
   },
   {
     "ContainingType": "Spovyz.Controllers.FinanceController",
-    "Method": "Get",
-    "RelativePath": "api/Finance/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.UInt32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Spovyz.Controllers.FinanceController",
     "Method": "Put",
-    "RelativePath": "api/Finance/{id}",
+    "RelativePath": "api/Finance",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -538,7 +522,7 @@
       {
         "Name": "id",
         "Type": "System.UInt32",
-        "IsRequired": true
+        "IsRequired": false
       },
       {
         "Name": "Name",
@@ -564,6 +548,22 @@
         "Name": "Current_planned",
         "Type": "System.Boolean",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Spovyz.Controllers.FinanceController",
+    "Method": "Get",
+    "RelativePath": "api/Finance/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.UInt32",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
