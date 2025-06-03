@@ -3,20 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\services\\chatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\services\\chatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\controllers\\chatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\controllers\\chatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\services\\chatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\services\\chatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\repositories\\taskrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\repositories\\taskrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\irepositories\\ichatrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\irepositories\\ichatrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\transport models\\chatdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\transport models\\chatdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\repositories\\chatrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\repositories\\chatrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\irepositories\\itaskrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\irepositories\\itaskrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|c:\\users\\honzi\\documents\\github\\spovyz\\server\\spovyz\\spovyz\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3195D79-1AC4-4600-B5B0-6236043CD570}|Spovyz\\Spovyz.csproj|solutionrelative:spovyz\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +42,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 180,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,7 +54,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 7,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "Spovyz\\ApplicationDbContext.cs",
@@ -57,35 +73,87 @@
               "RelativeDocumentMoniker": "Spovyz\\Controllers\\ChatController.cs",
               "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Controllers\\ChatController.cs",
               "RelativeToolTip": "Spovyz\\Controllers\\ChatController.cs",
-              "ViewState": "AgIAADYAAAAAAAAAAAAAAEcAAAAYAAAAAAAAAA==",
+              "ViewState": "AgIAACcAAAAAAAAAAAAAACQAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-03T07:00:10.749Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "ChatService.cs",
               "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Services\\ChatService.cs",
               "RelativeDocumentMoniker": "Spovyz\\Services\\ChatService.cs",
               "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Services\\ChatService.cs",
               "RelativeToolTip": "Spovyz\\Services\\ChatService.cs",
-              "ViewState": "AgIAACAAAAAAAAAAAAAAAD0AAABDAAAAAAAAAA==",
+              "ViewState": "AgIAACwAAAAAAAAAAAAAADYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-03T07:00:45.277Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "ChatRepository.cs",
               "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Repositories\\ChatRepository.cs",
               "RelativeDocumentMoniker": "Spovyz\\Repositories\\ChatRepository.cs",
               "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Repositories\\ChatRepository.cs",
               "RelativeToolTip": "Spovyz\\Repositories\\ChatRepository.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAACYAAAAzAAAAAAAAAA==",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAACgAAAC/AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-03T06:35:06.211Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ChatData.cs",
+              "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Transport models\\ChatData.cs",
+              "RelativeDocumentMoniker": "Spovyz\\Transport models\\ChatData.cs",
+              "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Transport models\\ChatData.cs",
+              "RelativeToolTip": "Spovyz\\Transport models\\ChatData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T08:43:32.047Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IChatRepository.cs",
+              "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\IRepositories\\IChatRepository.cs",
+              "RelativeDocumentMoniker": "Spovyz\\IRepositories\\IChatRepository.cs",
+              "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\IRepositories\\IChatRepository.cs",
+              "RelativeToolTip": "Spovyz\\IRepositories\\IChatRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T08:44:22.537Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TaskRepository.cs",
+              "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Repositories\\TaskRepository.cs",
+              "RelativeDocumentMoniker": "Spovyz\\Repositories\\TaskRepository.cs",
+              "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Repositories\\TaskRepository.cs",
+              "RelativeToolTip": "Spovyz\\Repositories\\TaskRepository.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAACAAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T11:28:46.663Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ITaskRepository.cs",
+              "DocumentMoniker": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\IRepositories\\ITaskRepository.cs",
+              "RelativeDocumentMoniker": "Spovyz\\IRepositories\\ITaskRepository.cs",
+              "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\IRepositories\\ITaskRepository.cs",
+              "RelativeToolTip": "Spovyz\\IRepositories\\ITaskRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T11:30:34.19Z",
               "EditorCaption": ""
             }
           ]

@@ -42,7 +42,7 @@ namespace Spovyz.Services
             if (project == null)
                 return (ValidityControl.ResultStatus.NotFound, "Project not found", null);
 
-            List<ChatData> chatData = await _chatRepository.GetChatsByProject(activeUser.Company.Id, ProjectId);
+            List<ChatData> chatData = await _chatRepository.GetChatsByProject(activeUser, ProjectId);
 
             return (ValidityControl.ResultStatus.Ok, null, chatData);
         }
@@ -53,11 +53,11 @@ namespace Spovyz.Services
             if (activeUser == null)
                 return (ValidityControl.ResultStatus.NotFound, "User not found", null);
 
-            Models.Task? task = await _taskRepository.GetTaskById(activeUser.Id, TaskId);
+            Models.Task? task = await _taskRepository.GetTaskById(TaskId, activeUser.Id);
             if (task == null)
                 return (ValidityControl.ResultStatus.NotFound, "Project not found", null);
 
-            List<ChatData> chatData = await _chatRepository.GetChatsByTask(activeUser.Company.Id, TaskId);
+            List<ChatData> chatData = await _chatRepository.GetChatsByTask(activeUser, task.Id);
 
             return (ValidityControl.ResultStatus.Ok, null, chatData);
         }
@@ -79,7 +79,7 @@ namespace Spovyz.Services
             }
             else if(TaskId != null)
             {
-                task = await _taskRepository.GetTaskById(activeUser.Id, (uint)TaskId);
+                task = await _taskRepository.GetTaskById((uint)TaskId, activeUser.Id);
                 if (task == null)
                     return (ValidityControl.ResultStatus.NotFound, "Task not found");
             }

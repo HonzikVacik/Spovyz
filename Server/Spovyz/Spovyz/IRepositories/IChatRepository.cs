@@ -6,8 +6,8 @@ namespace Spovyz.IRepositories
 {
     public interface IChatRepository
     {
-        Task<List<ChatData>> GetChatsByTask(uint ActiveUserCompanyId, uint TaskId);
-        Task<List<ChatData>> GetChatsByProject(uint ActiveUserCompanyId, uint ProjectId);
+        Task<List<ChatData>> GetChatsByTask(Employee ActiveUser, uint TaskId);
+        Task<List<ChatData>> GetChatsByProject(Employee ActiveUser, uint ProjectId);
         Task DeleteChatById(uint ActiveUserId, uint ChatId);
         Task PostChat(Employee ActiveUser, Models.Task? Task, Project? Project, string Message);
     }
