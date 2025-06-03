@@ -79,6 +79,11 @@ namespace Spovyz.Services
 
             NameBasic[]? taskNames = await _taskRepository.GetTaskNames(project, activeUser.Id);
 
+            uint? remains = null;
+            if (project.Dead_line != null)
+            {
+                remains = (uint)(((DateOnly)project.Dead_line).ToDateTime(TimeOnly.MinValue) - DateTime.Now).Days;
+            }
 
             ProjectCardData data = new ProjectCardData()
             {
@@ -87,8 +92,7 @@ namespace Spovyz.Services
                 Customer = project.Customer.Id,
                 Status = (uint)project.Status,
                 Deadline = project.Dead_line,
-                WorkedOut = "3",
-                WorkedByMe = "9",
+                Remains = remains,
                 Tags = tagNames,
                 Employees = employeesIds,
                 Tasks = taskNames

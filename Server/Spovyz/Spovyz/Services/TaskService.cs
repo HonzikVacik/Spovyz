@@ -66,6 +66,12 @@ namespace Spovyz.Services
                     .Select(t => t.Employee.Id)
                     .ToArrayAsync();
 
+            uint? remains = null;
+            if (task.Dead_line != null)
+            {
+                remains = (uint)(((DateOnly)task.Dead_line).ToDateTime(TimeOnly.MinValue) - DateTime.Now).Days;
+            }
+
             TaskCardData result = new TaskCardData()
             {
                 Name = task.Name,
@@ -73,8 +79,7 @@ namespace Spovyz.Services
                 ProjectId = task.Project.Id,
                 Status = (uint)task.Status,
                 Deadline = task.Dead_line,
-                WorkedOut = 0.ToString(),
-                WorkedByMe = 0.ToString(),
+                Remains = remains,
                 Tags = tags,
                 Employees = employees
             };
