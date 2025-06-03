@@ -335,7 +335,6 @@ namespace Spovyz.Controllers
             result.Descriptive_number = decNumber;
             result.Account_type = (Enums.Role)accountType;
             result.Supervisor = null;
-            result.Pay = 0;
             result.Company = activeUser.Company;
 
             _context.Update(result);
