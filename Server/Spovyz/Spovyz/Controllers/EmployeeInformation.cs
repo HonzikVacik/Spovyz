@@ -334,7 +334,6 @@ namespace Spovyz.Controllers
             result.Street = street;
             result.Descriptive_number = decNumber;
             result.Account_type = (Enums.Role)accountType;
-            result.Supervisor = null;
             result.Company = activeUser.Company;
 
             _context.Update(result);
