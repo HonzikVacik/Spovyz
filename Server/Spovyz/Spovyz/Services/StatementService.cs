@@ -24,11 +24,11 @@ namespace Spovyz.Services
             _taskRepository = taskRepository;
         }
 
-        public async Task<(ValidityControl.ResultStatus, string? error)> AddStatement(string UserName, byte StatementType, DateOnly Datum, byte PocetHodin, string? Description)
+        public async System.Threading.Tasks.Task<(ValidityControl.ResultStatus, string? error)> AddStatement(string UserName, byte StatementType, DateOnly Datum, byte PocetHodin, string? Description)
         {
             Employee? activeUser = await _context.Employees.Include(e => e.Company).FirstOrDefaultAsync(e => e.Username == UserName);
             if (activeUser == null)
-                return (ValidityControl.ResultStatus.NotFound, "User not found");
+                return (ValidityControl.ResultStatus.NotFound, "Uživatel nenalezen");
 
             string? accountingError = await _accountingRepository.SetAccounting(activeUser.Company.Id, activeUser.Id, activeUser.Pay);
             if (accountingError != null)
@@ -36,7 +36,7 @@ namespace Spovyz.Services
 
             Accounting? accounting = await _accountingRepository.GetAccounting(activeUser.Company.Id, activeUser.Id, Datum);
             if (accounting == null)
-                return (ValidityControl.ResultStatus.Error, "Accounting not found");
+                return (ValidityControl.ResultStatus.Error, "Účtovací období nenalezeno");
 
             (ValidityControl.ResultStatus status, string? error) = ValidityControl.Check_SI(StatementType, Datum, PocetHodin);
             if (status != ValidityControl.ResultStatus.Ok)
@@ -47,26 +47,26 @@ namespace Spovyz.Services
             return (ValidityControl.ResultStatus.Ok, null);
         }
 
-        public async Task<(ValidityControl.ResultStatus, string? error)> DeleteStatement(string UserName, uint Id)
+        public async System.Threading.Tasks.Task<(ValidityControl.ResultStatus, string? error)> DeleteStatement(string UserName, uint Id)
         {
             Employee? activeUser = await _context.Employees.Include(e => e.Company).FirstOrDefaultAsync(e => e.Username == UserName);
             if (activeUser == null)
-                return (ValidityControl.ResultStatus.NotFound, "User not found");
+                return (ValidityControl.ResultStatus.NotFound, "Uživatel nenalezen");
 
             await _statementRepository.DeleteStatement(activeUser.Id, activeUser.Company.Id, Id);
 
             return(ValidityControl.ResultStatus.Ok, null);
         }
 
-        public async Task<(ValidityControl.ResultStatus, string? error, StatementDataShort[]?)> GetDay(string UserName, byte Day, uint AccountingId)
+        public async System.Threading.Tasks.Task<(ValidityControl.ResultStatus, string? error, StatementDataShort[]?)> GetDay(string UserName, byte Day, uint AccountingId)
         {
             Employee? activeUser = await _context.Employees.Include(e => e.Company).FirstOrDefaultAsync(e => e.Username == UserName);
             if (activeUser == null)
-                return (ValidityControl.ResultStatus.NotFound, "User not found", null);
+                return (ValidityControl.ResultStatus.NotFound, "Uživatel nenalezen", null);
 
             Accounting? accounting = await _accountingRepository.GetAccountingById(AccountingId);
             if (accounting == null)
-                return (ValidityControl.ResultStatus.Error, "Accounting not found", null);
+                return (ValidityControl.ResultStatus.Error, "Účtovací období nenalezeno", null);
 
             DateOnly Datum = new DateOnly(accounting.Year, (byte)accounting.Month, Day);
 
@@ -75,15 +75,15 @@ namespace Spovyz.Services
             return (ValidityControl.ResultStatus.Ok, null, statementDataShorts);
         }
 
-        public async Task<(ValidityControl.ResultStatus, string? error, StatementDataLong?)> GetMonth(string UserName, uint AccountingId)
+        public async System.Threading.Tasks.Task<(ValidityControl.ResultStatus, string? error, StatementDataLong?)> GetMonth(string UserName, uint AccountingId)
         {
             Employee? activeUser = await _context.Employees.Include(e => e.Company).FirstOrDefaultAsync(e => e.Username == UserName);
             if (activeUser == null)
-                return (ValidityControl.ResultStatus.NotFound, "User not found", null);
+                return (ValidityControl.ResultStatus.NotFound, "Uživatel nenalezen", null);
 
             Accounting? accounting = await _accountingRepository.GetAccountingById(AccountingId);
             if (accounting == null)
-                return (ValidityControl.ResultStatus.Error, "Accounting not found", null);
+                return (ValidityControl.ResultStatus.Error, "Účtovací období nenalezeno", null);
 
             StatementDataLong? statementDataLong = await _statementRepository.GetMonth(accounting);
 

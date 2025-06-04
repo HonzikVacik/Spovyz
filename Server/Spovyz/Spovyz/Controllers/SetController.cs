@@ -7,8 +7,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.Eventing.Reader;
 using System.Reflection;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace Spovyz.Controllers
 {
     [Route("api/[controller]")]
@@ -22,7 +20,6 @@ namespace Spovyz.Controllers
             this._context = context;
         }
 
-        // GET: api/<SetController>
         [HttpGet("RoleEnum")]
         [Authorize]
         public IEnumerable<string> GetRole()
@@ -141,32 +138,6 @@ namespace Spovyz.Controllers
                     .ToArray()];
                 return employees1.Concat(GetJuniorChild(employees1 , activeUser)).ToArray();
             }
-        }
-
-
-        // GET api/<SetController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<SetController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<SetController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<SetController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }

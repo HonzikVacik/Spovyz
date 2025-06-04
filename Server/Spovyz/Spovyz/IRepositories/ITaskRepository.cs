@@ -5,9 +5,9 @@ namespace Spovyz.IRepositories
 {
     public interface ITaskRepository
     {
-        Task<List<Models.Task>> GetTaskList(uint ProjectId, uint ActiveUserId);
-        Task<NameBasic[]?> GetTaskNames(Project Project, uint ActiveUserId);
-        Task<Models.Task?> GetTaskById(uint TaskId, uint ActiveUserId);
+        System.Threading.Tasks.Task<List<Models.Task>> GetTaskList(uint ProjectId, uint ActiveUserId);
+        System.Threading.Tasks.Task<NameBasic[]?> GetTaskNames(Project Project, uint ActiveUserId);
+        System.Threading.Tasks.Task<Models.Task?> GetTaskById(uint TaskId, uint ActiveUserId);
         System.Threading.Tasks.Task DeleteTask(Models.Task Task, Task_employee[] t_employees, Task_tag[] t_tags);
         System.Threading.Tasks.Task PostTask(string Name, string? Description, Project Project, DateOnly? DeadLine, Employee[] Employees, Tag[] Tags);
         System.Threading.Tasks.Task PutTask(Models.Task Task, string Name, string? Description, Project Project, DateOnly? DeadLine, Enums.Status Status, Employee[] DelEmployees, Employee[] AddEmployees, Tag[] DelTags, Tag[] AddTags);

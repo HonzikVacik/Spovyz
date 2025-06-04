@@ -30,15 +30,15 @@ namespace Spovyz.Services
             _employeeRepository = employeeRepository;
         }
 
-        public async Task<string> DeleteTask(string UserName, uint TaskId)
+        public async System.Threading.Tasks.Task<string> DeleteTask(string UserName, uint TaskId)
         {
             Employee? activeUser = await _context.Employees.FirstOrDefaultAsync(e => e.Username == UserName);
             if (activeUser == null)
-                return "User not found";
+                return "Uživatel nenalezen";
 
             Models.Task? task = await _taskRepository.GetTaskById(TaskId, activeUser.Id);
             if(task == null)
-                return "Task not found";
+                return "Task nenalezen";
 
             Models.Task_employee[] t_employees = await _taskEmployeeRepository.GetTaskEmployeeByTask(task);
             Models.Task_tag[] t_tags = await _taskTagRepository.GetTaskTagByTask(task);
@@ -47,15 +47,15 @@ namespace Spovyz.Services
             return "accept";
         }
 
-        public async Task<(TaskCardData?, string?)> GetTaskById(string UserName, uint TaskId)
+        public async System.Threading.Tasks.Task<(TaskCardData?, string?)> GetTaskById(string UserName, uint TaskId)
         {
             Employee? activeUser = await _context.Employees.FirstOrDefaultAsync(e => e.Username == UserName);
             if (activeUser == null)
-                return (null, "User not found");
+                return (null, "Uživatel nenalezen");
 
             Models.Task? task = await _taskRepository.GetTaskById(TaskId, activeUser.Id);
             if (task == null)
-                return (null, "Task not found");
+                return (null, "Task nenalezen");
 
             string[]? tags = await _tagRepository.GetTagNamesByTask(task.Id);
             
@@ -87,30 +87,30 @@ namespace Spovyz.Services
             return (result, null);
         }
 
-        public async Task<(List<EmployeeDashboardTask>?, string?)> GetTaskList(string UserName, uint ProjectId)
+        public async System.Threading.Tasks.Task<(List<EmployeeDashboardTask>?, string?)> GetTaskList(string UserName, uint ProjectId)
         {
             Employee? activeUser = await _context.Employees.FirstOrDefaultAsync(e => e.Username == UserName);
             if (activeUser == null)
-                return (null, "User not found");
+                return (null, "Uživatel nenalezen");
 
             Project? project = await _projectRepository.GetProjectById(ProjectId, activeUser.Id);
             if (project == null)
-                return (null, "Project not found");
+                return (null, "Projekt nenalezen");
 
             List<Models.Task> tasks = await _taskRepository.GetTaskList(ProjectId, activeUser.Id);
             List<EmployeeDashboardTask> data = tasks.Select(t => new EmployeeDashboardTask() { Id = t.Id, Name = t.Name }).ToList();
             return (data, null);
         }
 
-        public async Task<(ValidityControl.ResultStatus, string?)> AddTask(string UserName, string Name, string? Description, uint ProjectId, DateOnly? DeadLine, int Status, string[] Tags, uint[] Employees)
+        public async System.Threading.Tasks.Task<(ValidityControl.ResultStatus, string?)> AddTask(string UserName, string Name, string? Description, uint ProjectId, DateOnly? DeadLine, int Status, string[] Tags, uint[] Employees)
         {
             Employee? activeUser = await _context.Employees.FirstOrDefaultAsync(e => e.Username == UserName);
             if (activeUser == null)
-                return (ValidityControl.ResultStatus.NotFound, "User not found");
+                return (ValidityControl.ResultStatus.NotFound, "Uživatel nenalezen");
 
             Project? project = await _projectRepository.GetProjectById(ProjectId, activeUser.Id);
             if (project == null)
-                return (ValidityControl.ResultStatus.NotFound, "Project not found");
+                return (ValidityControl.ResultStatus.NotFound, "Projekt nenalezen");
 
             (ValidityControl.ResultStatus resultStatus, string? error) = await ValidityControl.Check_TI(_context, Name, ProjectId, DeadLine, Status, Employees, true);
 
@@ -122,19 +122,19 @@ namespace Spovyz.Services
             return (ValidityControl.ResultStatus.Ok, null);
         }
 
-        public async Task<(ValidityControl.ResultStatus, string?)> UpdateTask(string UserName, uint TaskId, string Name, string? Description, uint ProjectId, DateOnly? DeadLine, int Status, string[] Tags, uint[] Employees)
+        public async System.Threading.Tasks.Task<(ValidityControl.ResultStatus, string?)> UpdateTask(string UserName, uint TaskId, string Name, string? Description, uint ProjectId, DateOnly? DeadLine, int Status, string[] Tags, uint[] Employees)
         {
             Employee? activeUser = await _context.Employees.Include(e => e.Company).FirstOrDefaultAsync(e => e.Username == UserName);
             if (activeUser == null)
-                return (ValidityControl.ResultStatus.NotFound, "User not found");
+                return (ValidityControl.ResultStatus.NotFound, "Uživatel nenalezen");
 
             Project? project = await _projectRepository.GetProjectById(ProjectId, activeUser.Id);
             if (project == null)
-                return (ValidityControl.ResultStatus.NotFound, "Project not found");
+                return (ValidityControl.ResultStatus.NotFound, "Projekt nenalezen");
 
             Models.Task? originalTask = await _taskRepository.GetTaskById(TaskId, activeUser.Id);
             if (originalTask == null)
-                return (ValidityControl.ResultStatus.NotFound, "Task does not exist");
+                return (ValidityControl.ResultStatus.NotFound, "Tento task neexistuje");
 
             (ValidityControl.ResultStatus resultStatus, string? error) = await ValidityControl.Check_TI(_context, Name, ProjectId, DeadLine, Status, Employees, originalTask.Name != Name);
 

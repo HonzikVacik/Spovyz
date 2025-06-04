@@ -30,11 +30,6 @@ namespace Spovyz
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Enums>().HasNoKey();
-            //modelBuilder.Entity<Project_employee>().HasNoKey();
-            //modelBuilder.Entity<Project_tag>().HasNoKey();
-            //modelBuilder.Entity<Task_employee>().HasNoKey();
-            //modelBuilder.Entity<Task_tag>().HasNoKey();
-
 
             //Project_tag
             modelBuilder.Entity<Project_tag>()

@@ -54,28 +54,28 @@ namespace Spovyz
         {
             Company? company = await ExistCompany(_context, CompanyId);
             if (company is null)
-                return (ResultStatus.Error, "Company does not exist");
+                return (ResultStatus.Error, "Společnost neexistuje");
 
             if(checkProjectName)
             {
                 bool existProjectName = await ExistProjectName(_context, CompanyId, ProjectName);
                 if (existProjectName)
-                    return (ResultStatus.Error, "Project name already exists");
+                    return (ResultStatus.Error, "Projekt s tímto názvem už existuje");
             }
 
             if (InvalidStatus(Status))
-                return (ResultStatus.Error, "Invalid status");
+                return (ResultStatus.Error, "Neplatný status");
 
             if (InvalidDeadLine(Deadline))
-                return (ResultStatus.Error, "DeadLine must be newer than yestedrday");
+                return (ResultStatus.Error, "DeadLine není možné zadat v minulosti");
 
             Customer? customer = await ExistCustomer(_context, CustomerId);
             if (customer is null)
-                return (ResultStatus.Error, "Customer does not exist");
+                return (ResultStatus.Error, "Zákazník neexistuje");
 
             bool existEmployees = await ExistEmployees(_context, CompanyId, Employees);
             if (existEmployees)
-                return (ResultStatus.Error, "Some employee does not exist");
+                return (ResultStatus.Error, "Nějaký z přiřazených zaměstnanců neexituje");
 
             (bool isEmpty, string? error) = ProjectInformationEmpty(ProjectName, ProjectDescription, Employees);
             if (isEmpty)
@@ -93,7 +93,7 @@ namespace Spovyz
             if(checkTaskName)
             {
                 if (await ExistTaskName(_context, ProjectId, Name))
-                    return (ResultStatus.Error, "Task name already exists");
+                    return (ResultStatus.Error, "Task s tímto názvem už existuje");
             }
 
             (bool neplatny, string? error) = InvalidTaskDeadLine(_context, DeadLine, ProjectId);
@@ -101,10 +101,10 @@ namespace Spovyz
                 return (ResultStatus.Error, error);
 
             if (InvalidStatus(Status))
-                return (ResultStatus.Error, "Invalid status");
+                return (ResultStatus.Error, "Neplatný status");
 
             if (await InvalidEmployees(_context, ProjectId, Employees))
-                return (ResultStatus.Error, "Some employees are not assigned to the project");
+                return (ResultStatus.Error, "Nějaký z přiřazených zaměstnanců není přiřazen k tomuto projektu");
 
             return (ResultStatus.Ok, null);
         }
@@ -121,11 +121,11 @@ namespace Spovyz
         public static (ValidityControl.ResultStatus, string? error) Check_SI(byte statementType, DateOnly datum, byte pocetHodin)
         {
             if(InvalidStatementType(statementType))
-                return (ResultStatus.Error, "Invalid statement type");
+                return (ResultStatus.Error, "Neplatný typ výkazu");
             if(StatementDate(datum))
-                return (ResultStatus.Error, "Statement date must be in actual month");
+                return (ResultStatus.Error, "Datum výkazu musí být v aktuálním měsíci");
             if(StatementHours(pocetHodin))
-                return (ResultStatus.Error, "Number of hours must be between 1 and 24");
+                return (ResultStatus.Error, "Počet hodin musí být v rozmezí 1 - 24");
             return (ResultStatus.Ok, null);
         }
 
@@ -306,15 +306,15 @@ namespace Spovyz
         {
             if(string.IsNullOrEmpty(Name) || string.IsNullOrWhiteSpace(Name))
             {
-                return (true, "Project name is empty");
+                return (true, "Název projektu nesmí být prázdný");
             }
             else if(string.IsNullOrEmpty(Description) || string.IsNullOrWhiteSpace(Description))
             {
-                return (true, "Project description is empty");
+                return (true, "Popis projektu nesmí být prázdný");
             }
             else if (Employees.Length == 0)
             {
-                return (true, "Project must have at least one employee");
+                return (true, "Projekt musí mít alespoň jednoho přiřazeného zaměstnance");
             }
             else
             {
@@ -343,14 +343,14 @@ namespace Spovyz
                 if(projectDeadLine != null)
                 {
                     if (DeadLine > projectDeadLine)
-                        return (true, "DeadLine must be older than the DeadLine of Project");
+                        return (true, "DeadLine musí být v rozmezí DeadLine projektu");
                     else
                         return (false, null);
                 }
                 else
                 {
                     if (DeadLine < DateOnly.FromDateTime(DateTime.Now.Date))
-                        return (true, "DeadLine must be newer than yestedrday");
+                        return (true, "DeadLine není možné zadat v minulosti");
                     else
                         return (false, null);
                 }
@@ -389,11 +389,11 @@ namespace Spovyz
         {
             if (string.IsNullOrEmpty(Name) || string.IsNullOrWhiteSpace(Name))
             {
-                return (true, "Task name is empty");
+                return (true, "Název tasku nesmí být prázdný");
             }
             else if(Employees.Length == 0)
             {
-                return (true, "Task must have at least one employee");
+                return (true, "Task musí mít přiřazeného alespoň jednoho zaměstnance");
             }
             else
             {
@@ -405,7 +405,7 @@ namespace Spovyz
         {
             if(string.IsNullOrEmpty(Name) || string.IsNullOrWhiteSpace(Name))
             {
-                return (true, "Finance name is empty");
+                return (true, "Název financí nesmí být prázdný");
             }
             else
             {

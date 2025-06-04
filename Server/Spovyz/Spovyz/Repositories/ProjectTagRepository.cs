@@ -13,7 +13,7 @@ namespace Spovyz.Repositories
             _context = context;
         }
 
-        public async Task<Project_tag[]> GetProjectTagByProject(Project project)
+        public async System.Threading.Tasks.Task<Project_tag[]> GetProjectTagByProject(Project project)
         {
             return await _context.Project_tags
                 .Include(p => p.Project)

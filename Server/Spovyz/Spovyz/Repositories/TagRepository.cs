@@ -13,7 +13,7 @@ namespace Spovyz.Repositories
             _context = context;
         }
 
-        public async Task<string[]?> GetTagNamesByProject(uint ProjectId)
+        public async System.Threading.Tasks.Task<string[]?> GetTagNamesByProject(uint ProjectId)
         {
             return await _context.Project_tags
                 .Include(pt => pt.Project)
@@ -23,7 +23,7 @@ namespace Spovyz.Repositories
                 .ToArrayAsync();
         }
 
-        public async Task<string[]?> GetTagNamesByTask(uint TaskId)
+        public async System.Threading.Tasks.Task<string[]?> GetTagNamesByTask(uint TaskId)
         {
             return await _context.Task_tags
                 .Include(tt => tt.Task)
@@ -33,7 +33,7 @@ namespace Spovyz.Repositories
                 .ToArrayAsync();
         }
 
-        public async Task<Tag> PostGetTag(string TagName)
+        public async System.Threading.Tasks.Task<Tag> PostGetTag(string TagName)
         {
             Tag? tag = await _context.Tags.FirstOrDefaultAsync(t => t.Name == TagName);
             if(tag == null)
@@ -46,7 +46,7 @@ namespace Spovyz.Repositories
             return tag;
         }
 
-        public async Task<Tag[]> PostGetTags(string[] TagNames)
+        public async System.Threading.Tasks.Task<Tag[]> PostGetTags(string[] TagNames)
         {
             List<Tag> tags = new List<Tag>();
             foreach (string tagName in TagNames)

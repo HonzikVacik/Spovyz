@@ -15,7 +15,7 @@ namespace Spovyz.Repositories
             _context = context;
         }
 
-        public async Task DeleteChatById(uint ActiveUserId, uint ChatId)
+        public async System.Threading.Tasks.Task DeleteChatById(uint ActiveUserId, uint ChatId)
         {
             Message? message = await _context.Messages
                 .Include(m => m.Employee)
@@ -29,7 +29,7 @@ namespace Spovyz.Repositories
             }
         }
 
-        public async Task<List<ChatData>> GetChatsByProject(Employee ActiveUser, uint ProjectId)
+        public async System.Threading.Tasks.Task<List<ChatData>> GetChatsByProject(Employee ActiveUser, uint ProjectId)
         {
             Message[] messages = await _context.Messages
                 .Include(m => m.Employee)
@@ -41,7 +41,7 @@ namespace Spovyz.Repositories
             return messages.Select(m => new ChatData() { Id = m.Id, dateTime = DateTime.Parse(DateTime.SpecifyKind(m.DateTime, DateTimeKind.Utc).ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")), Description = m.Text, EmployeeName = m.Employee.Username, MyMessage = m.Employee.Id == ActiveUser.Id }).ToList();
         }
 
-        public async Task<List<ChatData>> GetChatsByTask(Employee ActiveUser, uint TaskId)
+        public async System.Threading.Tasks.Task<List<ChatData>> GetChatsByTask(Employee ActiveUser, uint TaskId)
         {
             Message[] messages = await _context.Messages
                 .Include(m => m.Employee)
@@ -53,7 +53,7 @@ namespace Spovyz.Repositories
             return messages.Select(m => new ChatData() { Id = m.Id, dateTime = DateTime.Parse(DateTime.SpecifyKind(m.DateTime, DateTimeKind.Utc).ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")), Description = m.Text, EmployeeName = m.Employee.Username, MyMessage = m.Employee.Id == ActiveUser.Id }).ToList();
         }
 
-        public async Task PostChat(Employee ActiveUser, Models.Task? Task, Project? Project, string Message)
+        public async System.Threading.Tasks.Task PostChat(Employee ActiveUser, Models.Task? Task, Project? Project, string Message)
         {
             Message message = new Message()
             {

@@ -14,7 +14,7 @@ namespace Spovyz.Repositories
             _context = context;
         }
 
-        public async Task<AccountingDataShort[]> Get(uint ActiveUserId)
+        public async System.Threading.Tasks.Task<AccountingDataShort[]> Get(uint ActiveUserId)
         {
             List<Accounting> accountings = await _context.Accountings
                 .Include(a => a.Employee)
@@ -39,7 +39,7 @@ namespace Spovyz.Repositories
             return accountingDataShorts;
         }
 
-        public async Task<Accounting?> GetAccounting(uint CompanyId, uint EmployeeId, DateOnly Date)
+        public async System.Threading.Tasks.Task<Accounting?> GetAccounting(uint CompanyId, uint EmployeeId, DateOnly Date)
         {
             return await _context.Accountings
                 .Include(a => a.Employee)
@@ -48,7 +48,7 @@ namespace Spovyz.Repositories
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<Accounting?> GetAccountingById(uint AccountingId)
+        public async System.Threading.Tasks.Task<Accounting?> GetAccountingById(uint AccountingId)
         {
             return await _context.Accountings
                 .Include(a => a.Employee)
@@ -57,7 +57,7 @@ namespace Spovyz.Repositories
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<AccountingDataLong[]> GetAll(uint CompanyId)
+        public async System.Threading.Tasks.Task<AccountingDataLong[]> GetAll(uint CompanyId)
         {
             List<Accounting> accountings = await _context.Accountings
                 .Include(a => a.Employee)

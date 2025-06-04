@@ -17,28 +17,28 @@ namespace Spovyz.Services
             _accountingRepository = accountingRepository;
         }
 
-        public async Task<(ValidityControl.ResultStatus, string? error, AccountingDataShort[]?)> Get(string UserName)
+        public async System.Threading.Tasks.Task<(ValidityControl.ResultStatus, string? error, AccountingDataShort[]?)> Get(string UserName)
         {
             Employee? activeUser = await _context.Employees.Include(e => e.Company).FirstOrDefaultAsync(e => e.Username == UserName);
             if (activeUser == null)
-                return (ValidityControl.ResultStatus.NotFound, "User not found", null);
+                return (ValidityControl.ResultStatus.NotFound, "Uživatel nenalezen", null);
 
             AccountingDataShort[]? accountingDataShorts = await _accountingRepository.Get(activeUser.Id);
             if (accountingDataShorts == null)
-                return (ValidityControl.ResultStatus.NotFound, "No accounting data found", null);
+                return (ValidityControl.ResultStatus.NotFound, "Žádná účtovací období nenalezena", null);
 
             return (ValidityControl.ResultStatus.Ok, null, accountingDataShorts);
         }
 
-        public async Task<(ValidityControl.ResultStatus, string? error, AccountingDataLong[]?)> GetAll(string UserName)
+        public async System.Threading.Tasks.Task<(ValidityControl.ResultStatus, string? error, AccountingDataLong[]?)> GetAll(string UserName)
         {
             Employee? activeUser = await _context.Employees.Include(e => e.Company).FirstOrDefaultAsync(e => e.Username == UserName);
             if (activeUser == null)
-                return (ValidityControl.ResultStatus.NotFound, "User not found", null);
+                return (ValidityControl.ResultStatus.NotFound, "Uživatel nenalezen", null);
 
             AccountingDataLong[]? accountingDataLongs = await _accountingRepository.GetAll(activeUser.Company.Id);
             if (accountingDataLongs == null)
-                return (ValidityControl.ResultStatus.NotFound, "No accounting data found", null);
+                return (ValidityControl.ResultStatus.NotFound, "Žádná účtovací období nenalezena", null);
 
             return (ValidityControl.ResultStatus.Ok, null, accountingDataLongs);
         }

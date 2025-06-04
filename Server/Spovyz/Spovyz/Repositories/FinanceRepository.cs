@@ -35,7 +35,7 @@ namespace Spovyz.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<NameBasic>?> GetAllFinances(uint CompanyId, bool Income_expenditure, bool Current_planned)
+        public async System.Threading.Tasks.Task<List<NameBasic>?> GetAllFinances(uint CompanyId, bool Income_expenditure, bool Current_planned)
         {
             return await _context.Finances
                 .Include(f => f.Employee)
@@ -48,9 +48,9 @@ namespace Spovyz.Repositories
                 .ToListAsync();
         }
 
-        public Task<Finance?> GetFinanceById(uint CompanyId, uint Id)
+        public async System.Threading.Tasks.Task<Finance?> GetFinanceById(uint CompanyId, uint Id)
         {
-            return _context.Finances
+            return await _context.Finances
                 .Include(f => f.Employee)
                 .Where(f => f.Employee.Company.Id == CompanyId && f.Id == Id)
                 .FirstOrDefaultAsync();

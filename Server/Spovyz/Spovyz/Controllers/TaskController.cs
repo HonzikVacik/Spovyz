@@ -9,8 +9,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace Spovyz.Controllers
 {
     [Route("api/[controller]")]
@@ -26,39 +24,10 @@ namespace Spovyz.Controllers
             this._taskService = taskService;
         }
 
-        // GET: api/<TaskController>
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> GetList(uint ProjectId)
         {
-            // Testovací hodnoty
-            /*List<EmployeeDashboardTask> datas = new List<EmployeeDashboardTask>();
-            switch(ProjectId)
-            {
-                case 0:
-                    {
-                        datas.Add(new EmployeeDashboardTask() { Id = 0, Name = "Task1" });
-                        datas.Add(new EmployeeDashboardTask() { Id = 1, Name = "Task2" });
-                        datas.Add(new EmployeeDashboardTask() { Id = 2, Name = "Task3" });
-                    }
-                    break;
-                case 1:
-                    {
-                        datas.Add(new EmployeeDashboardTask() { Id = 0, Name = "Task4" });
-                        datas.Add(new EmployeeDashboardTask() { Id = 1, Name = "Task5" });
-                        datas.Add(new EmployeeDashboardTask() { Id = 2, Name = "Task6" });
-                    }
-                    break;
-                case 2:
-                    {
-                        datas.Add(new EmployeeDashboardTask() { Id = 0, Name = "Task7" });
-                        datas.Add(new EmployeeDashboardTask() { Id = 1, Name = "Task8" });
-                        datas.Add(new EmployeeDashboardTask() { Id = 2, Name = "Task9" });
-                    }
-                    break;
-            }
-            return Ok(datas);*/
-
             //e1 - projekt neexistuje
             string? UserName = User.Identity.Name;
             if (UserName == null)
@@ -70,29 +39,27 @@ namespace Spovyz.Controllers
             return Ok(data);
         }
 
-        // GET api/<TaskController>/5
         [HttpGet("{id}")]
         [Authorize]
         public async Task<IActionResult> Get(int id)
         {
             string? UserName = User.Identity.Name;
             if (UserName == null)
-                return NotFound("User not found");
-            
+                return NotFound("Uživatel nenalezen");
+
             (TaskCardData? data, string? error) = await _taskService.GetTaskById(UserName, (uint)id);
             if (error != null)
                 return NotFound(error);
             return Ok(data);
         }
 
-        // POST api/<TaskController>
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> Post(TaskPostInput TaskPostInput)
         {
             string? UserName = User.Identity.Name;
             if (UserName == null)
-                return NotFound("User not found");
+                return NotFound("Uživatel nenalezen");
             (ValidityControl.ResultStatus ResultStatus, string? Description) result = await _taskService.AddTask(UserName, TaskPostInput.Name, TaskPostInput.Description, TaskPostInput.ProjectId, TaskPostInput.DeadLine, TaskPostInput.Status, TaskPostInput.Tags, TaskPostInput.Employees);
 
             if (result.ResultStatus == ValidityControl.ResultStatus.Error)
@@ -102,14 +69,13 @@ namespace Spovyz.Controllers
             return Ok();
         }
 
-        // PUT api/<TaskController>/5
         [HttpPut]
         [Authorize]
         public async Task<IActionResult> Put(TaskPutInput TaskPutInput)
         {
             string? UserName = User.Identity.Name;
             if (UserName == null)
-                return NotFound("User not found");
+                return NotFound("Uživatel nenalezen");
 
             (ValidityControl.ResultStatus ResultStatus, string? Description) result = await _taskService.UpdateTask(UserName, TaskPutInput.TaskId, TaskPutInput.Name, TaskPutInput.Description, TaskPutInput.ProjectId, TaskPutInput.DeadLine, TaskPutInput.Status, TaskPutInput.Tags, TaskPutInput.Employees);
 
@@ -120,7 +86,6 @@ namespace Spovyz.Controllers
             return Ok();
         }
 
-        // DELETE api/<TaskController>/5
         [HttpDelete("{id}")]
         [Authorize]
         public async Task<IActionResult> Delete(uint id)

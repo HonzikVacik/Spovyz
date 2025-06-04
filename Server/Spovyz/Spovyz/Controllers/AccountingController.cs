@@ -4,8 +4,6 @@ using Spovyz.IServices;
 using Spovyz.Transport_models;
 using System;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace Spovyz.Controllers
 {
     [Route("api/[controller]")]
@@ -19,14 +17,13 @@ namespace Spovyz.Controllers
             _accountingService = accountingService;
         }
 
-        // GET: api/<AccountingController>
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> Get()
         {
             string? UserName = User.Identity?.Name?.ToString();
             if (UserName == null)
-                return NotFound();
+                return NotFound("Uživatel nenalezen");
 
             (ValidityControl.ResultStatus status, string? error, AccountingDataShort[]? accountingDataShorts) result = await _accountingService.Get(UserName);
 
@@ -37,14 +34,13 @@ namespace Spovyz.Controllers
             return Ok(result.accountingDataShorts);
         }
 
-        // GET api/<AccountingController>/5
         [HttpGet("GetAll")]
         [Authorize]
         public async Task<IActionResult> GetAll()
         {
             string? UserName = User.Identity?.Name?.ToString();
             if (UserName == null)
-                return NotFound();
+                return NotFound("Uživatel nenalezen");
 
             (ValidityControl.ResultStatus status, string? error, AccountingDataLong[]? accountingDataLongs) result = await _accountingService.GetAll(UserName);
 

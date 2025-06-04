@@ -32,15 +32,15 @@ namespace Spovyz.Services
             _tagRepository = tagRepository;
         }
 
-        public async Task<string> DeleteProject(string UserName, uint ProjectId)
+        public async System.Threading.Tasks.Task<string> DeleteProject(string UserName, uint ProjectId)
         {
             Employee? activeUser = await _context.Employees.Include(e => e.Company).FirstOrDefaultAsync(e => e.Username == UserName);
             if (activeUser == null)
-                return "User not found";
+                return "Uživatel nenalezen";
 
             Project? project = await _projectRepository.GetProjectById(ProjectId, activeUser.Id);
             if (project == null)
-                return "Project not found";
+                return "Projekt nenalezen";
 
             Project_employee[] p_employees = await _projectEmployeeRepository.GetProjectEmployeeByProject(project);
             Project_tag[] p_tag = await _projectTagRepository.GetProjectTagByProject(project);
@@ -59,15 +59,15 @@ namespace Spovyz.Services
             return "Accept";
         }
 
-        public async Task<(ProjectCardData?, string?)> GetProjectById(string Username, uint ProjectId)
+        public async System.Threading.Tasks.Task<(ProjectCardData?, string?)> GetProjectById(string Username, uint ProjectId)
         {
             Employee? activeUser = await _context.Employees.Include(e => e.Company).FirstOrDefaultAsync(e => e.Username == Username);
             if (activeUser == null)
-                return (null, "User not found");
+                return (null, "Uživatel nenalezen");
 
             Project? project = await _projectRepository.GetProjectById(ProjectId, activeUser.Id);
             if (project == null)
-                return (null, "Project not found");
+                return (null, "Projekt nenalezen");
 
 
 
@@ -100,11 +100,11 @@ namespace Spovyz.Services
             return (data, null);
         }
 
-        public async Task<(List<EmployeeDashboardProject>?, string?)> GetProjectList(string UserName)
+        public async System.Threading.Tasks.Task<(List<EmployeeDashboardProject>?, string?)> GetProjectList(string UserName)
         {
             Employee? activeUser =  await _context.Employees.Include(e => e.Company).FirstOrDefaultAsync(e => e.Username == UserName);
             if (activeUser == null)
-                return (null, "User not found");
+                return (null, "Uživatel nenalezen");
 
             List<Project> projects = await _projectRepository.GetProjectList(activeUser.Id);
             List<EmployeeDashboardProject> data = projects.Select(t => new EmployeeDashboardProject() { Id = t.Id, Name = t.Name }).ToList();
@@ -115,7 +115,7 @@ namespace Spovyz.Services
         {
             Employee? activeUser = await _context.Employees.Include(e => e.Company).FirstOrDefaultAsync(e => e.Username == UserName);
             if (activeUser == null)
-                return (ValidityControl.ResultStatus.NotFound, "User not found");
+                return (ValidityControl.ResultStatus.NotFound, "Uživatel nenalezen");
 
             (ValidityControl.ResultStatus resultStatus, string? error) = await ValidityControl.Check_PI(_context, activeUser.Company.Id, Name, Description, CustomerId, Deadline, Employees, 1, true);
 
@@ -135,11 +135,11 @@ namespace Spovyz.Services
         {
             Employee? activeUser = await _context.Employees.Include(e => e.Company).FirstOrDefaultAsync(e => e.Username == UserName);
             if (activeUser == null)
-                return (ValidityControl.ResultStatus.NotFound, "User not found");
+                return (ValidityControl.ResultStatus.NotFound, "Uživatel nenalezen");
 
             Project? originalProject = await _projectRepository.GetProjectById(ProjectId, activeUser.Id);
             if (originalProject == null)
-                return (ValidityControl.ResultStatus.NotFound, "Project does not exist");
+                return (ValidityControl.ResultStatus.NotFound, "Projekt neexistuje");
 
             (ValidityControl.ResultStatus resultStatus, string? error) = await ValidityControl.Check_PI(_context, activeUser.Company.Id, Name, Description, CustomerId, DeadLine, Employees, Status, false);
 

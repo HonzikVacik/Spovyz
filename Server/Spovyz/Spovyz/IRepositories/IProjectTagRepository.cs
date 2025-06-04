@@ -4,6 +4,6 @@ namespace Spovyz.IRepositories
 {
     public interface IProjectTagRepository
     {
-        Task<Project_tag[]> GetProjectTagByProject(Project project);
+        System.Threading.Tasks.Task<Project_tag[]> GetProjectTagByProject(Project project);
     }
 }

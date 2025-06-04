@@ -14,7 +14,7 @@ namespace Spovyz.Repositories
             _context = context;
         }
 
-        public async Task<EmployeeSalary[]> EmployeeSalary(uint CompanyId)
+        public async System.Threading.Tasks.Task<EmployeeSalary[]> EmployeeSalary(uint CompanyId)
         {
             Transport_models.EmployeeSalary[] employeeSalaries = await _context.Employees
                 .Where(e => e.Company.Id == CompanyId)
@@ -29,7 +29,7 @@ namespace Spovyz.Repositories
             return employeeSalaries;
         }
 
-        public async Task<Employee[]> GetAllEmployees(uint CompanyId)
+        public async System.Threading.Tasks.Task<Employee[]> GetAllEmployees(uint CompanyId)
         {
             return await _context.Employees
                 .Where(e => e.Company.Id == CompanyId)
@@ -37,7 +37,7 @@ namespace Spovyz.Repositories
                 .ToArrayAsync();
         }
 
-        public async Task<Employee[]> GetEmployeesByIds(uint[] employees)
+        public async System.Threading.Tasks.Task<Employee[]> GetEmployeesByIds(uint[] employees)
         {
             return await _context.Employees
                 .Where(e => employees.Contains(e.Id))
@@ -45,7 +45,7 @@ namespace Spovyz.Repositories
                 .ToArrayAsync();
         }
 
-        public async Task<uint[]?> GetEmployeesIdsByProjectId(uint ProjectId)
+        public async System.Threading.Tasks.Task<uint[]?> GetEmployeesIdsByProjectId(uint ProjectId)
         {
             return await _context.Project_employees
                 .Where(pe => pe.Project.Id == ProjectId)
@@ -53,7 +53,7 @@ namespace Spovyz.Repositories
                 .ToArrayAsync();
         }
 
-        public async Task<uint[]> GetEmployeesIdsByTaskId(uint TaskId)
+        public async System.Threading.Tasks.Task<uint[]> GetEmployeesIdsByTaskId(uint TaskId)
         {
             return await _context.Task_employees
                 .Where(te => te.Task.Id == TaskId)
@@ -61,7 +61,7 @@ namespace Spovyz.Repositories
                 .ToArrayAsync();
         }
 
-        public async Task<NameBasic[]> GetEmployeesToProject(uint CompanyId)
+        public async System.Threading.Tasks.Task<NameBasic[]> GetEmployeesToProject(uint CompanyId)
         {
             return await _context.Employees
                 .Include(e => e.Company)
@@ -75,7 +75,7 @@ namespace Spovyz.Repositories
                 .ToArrayAsync();
         }
 
-        public async Task<NameBasic[]> GetEmployeesToTask(uint CompanyId, uint ProjectId)
+        public async System.Threading.Tasks.Task<NameBasic[]> GetEmployeesToTask(uint CompanyId, uint ProjectId)
         {
             return await _context.Project_employees
                 .Include(pe => pe.Project)

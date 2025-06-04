@@ -4,6 +4,6 @@ namespace Spovyz.IRepositories
 {
     public interface IProjectEmployeeRepository
     {
-        Task<Project_employee[]> GetProjectEmployeeByProject(Project project);
+        System.Threading.Tasks.Task<Project_employee[]> GetProjectEmployeeByProject(Project project);
     }
 }

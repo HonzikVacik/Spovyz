@@ -4,9 +4,9 @@ namespace Spovyz.IRepositories
 {
     public interface ITagRepository
     {
-        Task<string[]?> GetTagNamesByProject(uint ProjectId);
-        Task<string[]?> GetTagNamesByTask(uint TaskId);
-        Task<Tag> PostGetTag(string TagName);
-        Task<Tag[]> PostGetTags(string[] TagNames);
+        System.Threading.Tasks.Task<string[]?> GetTagNamesByProject(uint ProjectId);
+        System.Threading.Tasks.Task<string[]?> GetTagNamesByTask(uint TaskId);
+        System.Threading.Tasks.Task<Tag> PostGetTag(string TagName);
+        System.Threading.Tasks.Task<Tag[]> PostGetTags(string[] TagNames);
     }
 }

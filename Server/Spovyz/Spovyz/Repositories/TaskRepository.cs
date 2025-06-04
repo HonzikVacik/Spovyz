@@ -28,7 +28,7 @@ namespace Spovyz.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Models.Task?> GetTaskById(uint TaskId, uint ActiveUserId)
+        public async System.Threading.Tasks.Task<Models.Task?> GetTaskById(uint TaskId, uint ActiveUserId)
         {
             return await _context.Task_employees
                 .Include(t => t.Task.Project)
@@ -39,7 +39,7 @@ namespace Spovyz.Repositories
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<List<Models.Task>> GetTaskList(uint ProjectId, uint ActiveUserId)
+        public async System.Threading.Tasks.Task<List<Models.Task>> GetTaskList(uint ProjectId, uint ActiveUserId)
         {
             return await _context.Task_employees
                 .Include(t => t.Task)
@@ -50,7 +50,7 @@ namespace Spovyz.Repositories
                 .ToListAsync();
         }
 
-        public async Task<NameBasic[]?> GetTaskNames(Project Project, uint ActiveUserId)
+        public async System.Threading.Tasks.Task<NameBasic[]?> GetTaskNames(Project Project, uint ActiveUserId)
         {
             return await _context.Task_employees
                 .Include(t => t.Task)

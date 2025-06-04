@@ -26,7 +26,7 @@ namespace Spovyz.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Project?> GetProjectById(uint ProjectId, uint activeUserId)
+        public async System.Threading.Tasks.Task<Project?> GetProjectById(uint ProjectId, uint activeUserId)
         {
             return await _context.Project_employees
                 .Include(pe => pe.Project)
@@ -37,7 +37,7 @@ namespace Spovyz.Repositories
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<List<Project>> GetProjectList(uint ActiveUserId)
+        public async System.Threading.Tasks.Task<List<Project>> GetProjectList(uint ActiveUserId)
         {
             return await _context.Project_employees
                 .Include(te => te.Project)

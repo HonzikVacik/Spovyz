@@ -13,8 +13,6 @@ using System.Threading.Tasks;
 using static Spovyz.Models.Enums;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace Spovyz.Controllers
 {
     [Route("api/[controller]")]
@@ -83,7 +81,7 @@ namespace Spovyz.Controllers
         {
             Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
             if(ValidityControl.Check_salary(salary) == false)
-                return BadRequest("Salary must be positive number");
+                return BadRequest("Mzda musí být pozitivní číslo");
             await _employeeRepository.UpdateEmployeeSalary(activeUser.Company.Id, id, salary);
             string? error = await _accountingRepository.SetAccounting(activeUser.Company.Id, id, salary);
             if (error != null)
@@ -91,7 +89,6 @@ namespace Spovyz.Controllers
             return Ok();
         }
 
-        // GET: api/<EmployeeInformation>
         [HttpGet]
         [Authorize]
         public IEnumerable<AdminDashboardData> Get()
@@ -171,7 +168,6 @@ namespace Spovyz.Controllers
             return Ok(new { username = employees[id].Username });
         }
 
-        // GET api/<EmployeeInformation>/5
         [HttpGet("{id}")]
         [Authorize]
         public IActionResult Get(int id)
@@ -209,7 +205,6 @@ namespace Spovyz.Controllers
             return Ok(data);
         }
 
-        // POST api/<EmployeeInformation>
         [HttpPost]
         [Authorize]
         public IActionResult Post(string username, string password, string securityVerification, string firstName, string surname, string phoneNumber, string email, DateOnly dateOfBirth, int sex, string pronoun, string country, string city, int zipCode, string street, uint decNumber, int accountType, int supervisorId)
@@ -263,7 +258,6 @@ namespace Spovyz.Controllers
             return Ok(accept);
         }
 
-        // PUT api/<EmployeeInformation>/5
         [HttpPut("{id}")]
         [Authorize]
         public IActionResult Put(int id, string username, string? password, string securityVerification, string firstName, string surname, string phoneNumber, string email, DateOnly dateOfBirth, int sex, string pronoun, string country, string city, int zipCode, string street, uint decNumber, int accountType, int supervisorId)
@@ -401,7 +395,6 @@ namespace Spovyz.Controllers
                 return Ok(error);
         }
 
-        // DELETE api/<EmployeeInformation>/5
         [HttpDelete("{id}")]
         [Authorize]
         public IActionResult Delete(int id)
