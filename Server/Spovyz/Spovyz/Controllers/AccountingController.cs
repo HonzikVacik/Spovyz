@@ -35,7 +35,7 @@ namespace Spovyz.Controllers
         }
 
         [HttpGet("GetAll")]
-        [Authorize]
+        [Authorize(Roles = "Accountant,Owner")]
         public async Task<IActionResult> GetAll()
         {
             string? UserName = User.Identity?.Name?.ToString();

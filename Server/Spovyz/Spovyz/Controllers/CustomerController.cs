@@ -19,7 +19,7 @@ namespace Spovyz.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "Worker,Supervisor,Manager")]
         public async Task<IActionResult> Get()
         {
             NameBasic[] customers = await _context.Customers

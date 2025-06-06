@@ -31,7 +31,7 @@ namespace Spovyz.Controllers
         }
 
         [HttpGet("GetAllEmployees")]
-        [Authorize]
+        [Authorize(Roles = "Admin,Owner")]
         public async Task<IActionResult> GetAllEmployees()
         {
             Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
@@ -49,7 +49,7 @@ namespace Spovyz.Controllers
         }
 
         [HttpGet("GetEmployeesToProject")]
-        [Authorize]
+        [Authorize(Roles = "Worker,Supervisor,Manager")]
         public async Task<IActionResult> GetEmployeesToProject()
         {
             Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
@@ -58,7 +58,7 @@ namespace Spovyz.Controllers
         }
 
         [HttpGet("GetEmployeesToTask")]
-        [Authorize]
+        [Authorize(Roles = "Worker,Supervisor,Manager")]
         public async Task<IActionResult> GetEmployeesToTask(uint ProjectId)
         {
             Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
@@ -67,7 +67,7 @@ namespace Spovyz.Controllers
         }
 
         [HttpGet("GetEmployeesSalary")]
-        [Authorize]
+        [Authorize(Roles = "Accountant")]
         public async Task<IActionResult> GetEmployeesSalary()
         {
             Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
@@ -76,7 +76,7 @@ namespace Spovyz.Controllers
         }
 
         [HttpPut("UpdateEmployeeSalary")]
-        [Authorize]
+        [Authorize(Roles = "Accountant")]
         public async Task<IActionResult> UpdateEmployeeSalary(uint id, uint salary)
         {
             Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
@@ -90,7 +90,7 @@ namespace Spovyz.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public IEnumerable<AdminDashboardData> Get()
         {
             uint i = 0;
@@ -206,7 +206,7 @@ namespace Spovyz.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public IActionResult Post(string username, string password, string securityVerification, string firstName, string surname, string phoneNumber, string email, DateOnly dateOfBirth, int sex, string pronoun, string country, string city, int zipCode, string street, uint decNumber, int accountType, int supervisorId)
         {
             string accept = "a";
@@ -259,7 +259,7 @@ namespace Spovyz.Controllers
         }
 
         [HttpPut("{id}")]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public IActionResult Put(int id, string username, string? password, string securityVerification, string firstName, string surname, string phoneNumber, string email, DateOnly dateOfBirth, int sex, string pronoun, string country, string city, int zipCode, string street, uint decNumber, int accountType, int supervisorId)
         {
             string error1 = "e1";
@@ -337,7 +337,7 @@ namespace Spovyz.Controllers
         }
 
         [HttpPut("ResetPassword/{id}")]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public IActionResult Put(int id,string password)
         {
             string error = "e1";
@@ -396,7 +396,7 @@ namespace Spovyz.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         {
             string error = "e1";

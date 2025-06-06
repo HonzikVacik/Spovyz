@@ -17,7 +17,7 @@ namespace Spovyz.Controllers
         }
 
         [HttpGet("GetChatsByProject")]
-        [Authorize]
+        [Authorize(Roles = "Worker,Supervisor,Manager")]
         public async Task<IActionResult> GetByProject(uint ProjectId)
         {
             string? UserName = User.Identity?.Name?.ToString();
@@ -34,7 +34,7 @@ namespace Spovyz.Controllers
         }
 
         [HttpGet("GetChatsByTask")]
-        [Authorize]
+        [Authorize(Roles = "Worker,Supervisor,Manager")]
         public async Task<IActionResult> GetByTask(uint TaskId)
         {
             string? UserName = User.Identity?.Name?.ToString();
@@ -51,7 +51,7 @@ namespace Spovyz.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Worker,Supervisor,Manager")]
         public async Task<IActionResult> Post(uint? ProjectId, uint? TaskId, string Message)
         {
             string? UserName = User.Identity?.Name?.ToString();
@@ -68,7 +68,7 @@ namespace Spovyz.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize]
+        [Authorize(Roles = "Worker,Supervisor,Manager")]
         public async Task<IActionResult> Delete(uint id)
         {
             string? UserName = User.Identity?.Name?.ToString();

@@ -25,7 +25,7 @@ namespace Spovyz.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "Worker,Supervisor,Manager")]
         public async Task<IActionResult> GetList(uint ProjectId)
         {
             //e1 - projekt neexistuje
@@ -40,7 +40,7 @@ namespace Spovyz.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize]
+        [Authorize(Roles = "Worker,Supervisor,Manager")]
         public async Task<IActionResult> Get(int id)
         {
             string? UserName = User.Identity.Name;
@@ -54,7 +54,7 @@ namespace Spovyz.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Supervisor,Manager")]
         public async Task<IActionResult> Post(TaskPostInput TaskPostInput)
         {
             string? UserName = User.Identity.Name;
@@ -70,7 +70,7 @@ namespace Spovyz.Controllers
         }
 
         [HttpPut]
-        [Authorize]
+        [Authorize(Roles = "Worker,Supervisor,Manager")]
         public async Task<IActionResult> Put(TaskPutInput TaskPutInput)
         {
             string? UserName = User.Identity.Name;
@@ -87,7 +87,7 @@ namespace Spovyz.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize]
+        [Authorize(Roles = "Worker,Supervisor,Manager")]
         public async Task<IActionResult> Delete(uint id)
         {
             //e1 - projekt neexistuje

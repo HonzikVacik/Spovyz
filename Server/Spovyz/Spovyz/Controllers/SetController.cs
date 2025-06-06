@@ -78,7 +78,7 @@ namespace Spovyz.Controllers
         }
 
         [HttpGet("StatusEnum")]
-        [Authorize]
+        [Authorize(Roles = "Worker,Supervisor,Manager")]
         public IEnumerable<string> GetStatus()
         {
             List<string> items = new List<string>();

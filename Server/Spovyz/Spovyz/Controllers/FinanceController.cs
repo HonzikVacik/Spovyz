@@ -18,7 +18,7 @@ namespace Spovyz.Controllers
         }
 
         [HttpGet("FinanceResult")]
-        [Authorize]
+        [Authorize(Roles = "Accountant,Owner")]
         public async Task<IActionResult> GetFinanceResult(bool Current_planned)
         {
             string? UserName = User.Identity?.Name?.ToString();
@@ -35,7 +35,7 @@ namespace Spovyz.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "Accountant,Owner")]
         public async Task<IActionResult> Get(bool Income_expenditure, bool Current_planned)
         {
             string? UserName = User.Identity?.Name?.ToString();
@@ -52,7 +52,7 @@ namespace Spovyz.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize]
+        [Authorize(Roles = "Accountant,Owner")]
         public async Task<IActionResult> Get(uint id)
         {
             string? UserName = User.Identity?.Name?.ToString();
@@ -69,7 +69,7 @@ namespace Spovyz.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Accountant")]
         public async Task<IActionResult> Post(string Name, uint Cost, string? Description, bool Income_expenditure, bool Current_planned)
         {
             string? UserName = User.Identity?.Name?.ToString();
@@ -86,7 +86,7 @@ namespace Spovyz.Controllers
         }
 
         [HttpPut]
-        [Authorize]
+        [Authorize(Roles = "Accountant")]
         public async Task<IActionResult> Put(uint id, string Name, uint Cost, string? Description, bool Income_expenditure, bool Current_planned)
         {
             string? UserName = User.Identity?.Name?.ToString();
@@ -103,7 +103,7 @@ namespace Spovyz.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize]
+        [Authorize(Roles = "Accountant")]
         public async Task<IActionResult> Delete(uint id)
         {
             string? UserName = User.Identity?.Name?.ToString();
