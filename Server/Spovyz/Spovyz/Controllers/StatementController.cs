@@ -37,7 +37,6 @@ namespace Spovyz.Controllers
             return Ok(result.statementDataShorts);
         }
 
-        // GET api/<Statement>/5
         [HttpGet("StatementDataLong")]
         [Authorize]
         public async Task<IActionResult> Get(uint AccountingId)
@@ -55,7 +54,6 @@ namespace Spovyz.Controllers
             return Ok(result.statementDataLong);
         }
 
-        // POST api/<Statement>
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> Post(byte StatementType, DateOnly Datum, byte PocetHodin, string? Description)
@@ -73,7 +71,6 @@ namespace Spovyz.Controllers
             return Ok();
         }
 
-        // DELETE api/<Statement>/5
         [HttpDelete("{id}")]
         [Authorize]
         public async Task<IActionResult> Delete(uint id)
