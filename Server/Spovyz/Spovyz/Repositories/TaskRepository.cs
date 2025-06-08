@@ -18,6 +18,13 @@ namespace Spovyz.Repositories
 
         public async System.Threading.Tasks.Task DeleteTask(Models.Task Task, Task_employee[] t_employees, Task_tag[] t_tags)
         {
+            Message[]? messages = await _context.Messages
+                .Include(m => m.Task)
+                .Where(m => m.Task == Task)
+                .ToArrayAsync();
+            if (messages != null && messages.Length > 0)
+                _context.Messages.RemoveRange(messages);
+
             _context.RemoveRange(t_employees);
             _context.RemoveRange(t_tags);
             _context.Remove(Task);

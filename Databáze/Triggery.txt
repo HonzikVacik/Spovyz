@@ -210,7 +210,7 @@ begin
 
     elseif tg_op = 'DELETE' then
 		user_id := NEW."EmployeeId";
-		select "CompanyId" into company_id from public."Employee" where Id = NEW."EmployeeId";
+		select "CompanyId" into company_id from public."Employees" where "Id" = NEW."EmployeeId";
         insert into logs(company_id, user_id, action_type, old_data)
         values (company_id, user_id, 'INSERT', to_jsonb(OLD));
         return OLD;
