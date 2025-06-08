@@ -1,0 +1,369 @@
+-- log table
+create table logs (
+    id serial primary key,
+	company_id bigint,
+	user_id bigint,
+    action_type text not null,
+    action_timestamp timestamp default now(),
+    old_data jsonb,
+    new_data jsonb
+);
+
+-- log function for companies
+create or replace function log_company_changes()
+returns trigger as $$
+begin
+    if tg_op = 'INSERT' then
+        insert into logs(action_type, new_data)
+        values ('INSERT', to_jsonb(NEW));
+        return NEW;
+
+    elseif tg_op = 'UPDATE' then
+        insert into logs(action_type, old_data, new_data)
+        values ('UPDATE', to_jsonb(OLD), to_jsonb(NEW));
+        return NEW;
+
+    elseif tg_op = 'DELETE' then
+        insert into logs(action_type, old_data)
+        values ('DELETE', to_jsonb(OLD));
+        return OLD;
+    end if;
+
+    return null;
+end;
+$$ language plpgsql;
+
+-- trigger for companies
+create or replace trigger trg_company_logging
+after insert or update or delete on public."Companies"
+for each row
+execute function log_company_changes();
+
+--function for accountigs
+create or replace function log_accounting_changes()
+returns trigger as $$
+declare
+	company_id bigint;
+	user_id bigint;
+begin
+    if tg_op = 'INSERT' then
+		user_id := NEW."EmployeeId";
+		select "CompanyId" into company_id from public."Employees" where "Id" = NEW."EmployeeId";
+        insert into logs(company_id, user_id, action_type, new_data)
+        values (company_id, user_id, 'INSERT', to_jsonb(NEW));
+        return NEW;
+
+    elseif tg_op = 'UPDATE' then
+		user_id := NEW."EmployeeId";
+		select "CompanyId" into company_id from public."Employees" where "Id" = NEW."EmployeeId";
+        insert into logs(company_id, user_id, action_type, old_data, new_data)
+        values (company_id, user_id, 'INSERT', to_jsonb(OLD), to_jsonb(NEW));
+        return NEW;
+
+    elseif tg_op = 'DELETE' then
+		user_id := NEW."EmployeeId";
+		select "CompanyId" into company_id from public."Employee" where Id = NEW."EmployeeId";
+        insert into logs(company_id, user_id, action_type, old_data)
+        values (company_id, user_id, 'INSERT', to_jsonb(OLD));
+        return OLD;
+    end if;
+
+    return null;
+end;
+$$ language plpgsql;
+
+-- trigger for accountings
+create or replace trigger trg_accounting_logging
+after insert or update or delete on public."Accountings"
+for each row
+execute function log_accounting_changes();
+
+-- log function for companies
+create or replace function log_customer_changes()
+returns trigger as $$
+begin
+    if tg_op = 'INSERT' then
+        insert into logs(action_type, new_data)
+        values ('INSERT', to_jsonb(NEW));
+        return NEW;
+
+    elseif tg_op = 'UPDATE' then
+        insert into logs(action_type, old_data, new_data)
+        values ('UPDATE', to_jsonb(OLD), to_jsonb(NEW));
+        return NEW;
+
+    elseif tg_op = 'DELETE' then
+        insert into logs(action_type, old_data)
+        values ('DELETE', to_jsonb(OLD));
+        return OLD;
+    end if;
+
+    return null;
+end;
+$$ language plpgsql;
+
+-- trigger for customers
+create or replace trigger trg_customer_logging
+after insert or update or delete on public."Customers"
+for each row
+execute function log_customer_changes();
+
+--function for employees
+create or replace function log_employee_changes()
+returns trigger as $$
+declare
+	company_id bigint;
+	user_id bigint;
+begin
+    if tg_op = 'INSERT' then
+		user_id := NEW."Id";
+		select "CompanyId" into company_id from public."Employees" where "Id" = NEW."Id";
+        insert into logs(company_id, user_id, action_type, new_data)
+        values (company_id, user_id, 'INSERT', to_jsonb(NEW));
+        return NEW;
+
+    elseif tg_op = 'UPDATE' then
+		user_id := NEW."Id";
+		select "CompanyId" into company_id from public."Employees" where "Id" = NEW."Id";
+        insert into logs(company_id, user_id, action_type, old_data, new_data)
+        values (company_id, user_id, 'INSERT', to_jsonb(OLD), to_jsonb(NEW));
+        return NEW;
+
+    elseif tg_op = 'DELETE' then
+		user_id := NEW."Id";
+		select "CompanyId" into company_id from public."Employee" where Id = NEW."Id";
+        insert into logs(company_id, user_id, action_type, old_data)
+        values (company_id, user_id, 'INSERT', to_jsonb(OLD));
+        return OLD;
+    end if;
+
+    return null;
+end;
+$$ language plpgsql;
+
+-- trigger for employees
+create or replace trigger trg_employee_logging
+after insert or update or delete on public."Employees"
+for each row
+execute function log_employee_changes();
+
+
+--function for finances
+create or replace function log_finance_changes()
+returns trigger as $$
+declare
+	company_id bigint;
+	user_id bigint;
+begin
+    if tg_op = 'INSERT' then
+		user_id := NEW."EmployeeId";
+		select "CompanyId" into company_id from public."Employees" where "Id" = NEW."EmployeeId";
+        insert into logs(company_id, user_id, action_type, new_data)
+        values (company_id, user_id, 'INSERT', to_jsonb(NEW));
+        return NEW;
+
+    elseif tg_op = 'UPDATE' then
+		user_id := NEW."EmployeeId";
+		select "CompanyId" into company_id from public."Employees" where "Id" = NEW."EmployeeId";
+        insert into logs(company_id, user_id, action_type, old_data, new_data)
+        values (company_id, user_id, 'INSERT', to_jsonb(OLD), to_jsonb(NEW));
+        return NEW;
+
+    elseif tg_op = 'DELETE' then
+		user_id := NEW."EmployeeId";
+		select "CompanyId" into company_id from public."Employee" where Id = NEW."EmployeeId";
+        insert into logs(company_id, user_id, action_type, old_data)
+        values (company_id, user_id, 'INSERT', to_jsonb(OLD));
+        return OLD;
+    end if;
+
+    return null;
+end;
+$$ language plpgsql;
+
+-- trigger for finances
+create or replace trigger trg_finance_logging
+after insert or update or delete on public."Finances"
+for each row
+execute function log_finance_changes();
+
+--function for messages
+create or replace function log_message_changes()
+returns trigger as $$
+declare
+	company_id bigint;
+	user_id bigint;
+begin
+    if tg_op = 'INSERT' then
+		user_id := NEW."EmployeeId";
+		select "CompanyId" into company_id from public."Employees" where "Id" = NEW."EmployeeId";
+        insert into logs(company_id, user_id, action_type, new_data)
+        values (company_id, user_id, 'INSERT', to_jsonb(NEW));
+        return NEW;
+
+    elseif tg_op = 'UPDATE' then
+		user_id := NEW."EmployeeId";
+		select "CompanyId" into company_id from public."Employees" where "Id" = NEW."EmployeeId";
+        insert into logs(company_id, user_id, action_type, old_data, new_data)
+        values (company_id, user_id, 'INSERT', to_jsonb(OLD), to_jsonb(NEW));
+        return NEW;
+
+    elseif tg_op = 'DELETE' then
+		user_id := NEW."EmployeeId";
+		select "CompanyId" into company_id from public."Employee" where Id = NEW."EmployeeId";
+        insert into logs(company_id, user_id, action_type, old_data)
+        values (company_id, user_id, 'INSERT', to_jsonb(OLD));
+        return OLD;
+    end if;
+
+    return null;
+end;
+$$ language plpgsql;
+
+-- trigger for messages
+create or replace trigger trg_message_logging
+after insert or update or delete on public."Messages"
+for each row
+execute function log_message_changes();
+
+--function for project
+create or replace function log_project_changes()
+returns trigger as $$
+declare
+	company_id bigint;
+	user_id bigint;
+begin
+    if tg_op = 'INSERT' then
+        insert into logs(company_id, user_id, action_type, new_data)
+        values (company_id, user_id, 'INSERT', to_jsonb(NEW));
+        return NEW;
+
+    elseif tg_op = 'UPDATE' then
+        insert into logs(company_id, user_id, action_type, old_data, new_data)
+        values (company_id, user_id, 'INSERT', to_jsonb(OLD), to_jsonb(NEW));
+        return NEW;
+
+    elseif tg_op = 'DELETE' then
+        insert into logs(company_id, user_id, action_type, old_data)
+        values (company_id, user_id, 'INSERT', to_jsonb(OLD));
+        return OLD;
+    end if;
+
+    return null;
+end;
+$$ language plpgsql;
+
+-- trigger for project
+create or replace trigger trg_project_logging
+after insert or update or delete on public."Projects"
+for each row
+execute function log_project_changes();
+
+--function for task
+create or replace function log_task_changes()
+returns trigger as $$
+declare
+	company_id bigint;
+	user_id bigint;
+begin
+    if tg_op = 'INSERT' then
+        insert into logs(company_id, user_id, action_type, new_data)
+        values (company_id, user_id, 'INSERT', to_jsonb(NEW));
+        return NEW;
+
+    elseif tg_op = 'UPDATE' then
+        insert into logs(company_id, user_id, action_type, old_data, new_data)
+        values (company_id, user_id, 'INSERT', to_jsonb(OLD), to_jsonb(NEW));
+        return NEW;
+
+    elseif tg_op = 'DELETE' then
+        insert into logs(company_id, user_id, action_type, old_data)
+        values (company_id, user_id, 'INSERT', to_jsonb(OLD));
+        return OLD;
+    end if;
+
+    return null;
+end;
+$$ language plpgsql;
+
+-- trigger for task
+create or replace trigger trg_task_logging
+after insert or update or delete on public."Tasks"
+for each row
+execute function log_task_changes();
+
+--function for tag
+create or replace function log_tag_changes()
+returns trigger as $$
+declare
+	company_id bigint;
+	user_id bigint;
+begin
+    if tg_op = 'INSERT' then
+        insert into logs(company_id, user_id, action_type, new_data)
+        values (company_id, user_id, 'INSERT', to_jsonb(NEW));
+        return NEW;
+
+    elseif tg_op = 'UPDATE' then
+        insert into logs(company_id, user_id, action_type, old_data, new_data)
+        values (company_id, user_id, 'INSERT', to_jsonb(OLD), to_jsonb(NEW));
+        return NEW;
+
+    elseif tg_op = 'DELETE' then
+        insert into logs(company_id, user_id, action_type, old_data)
+        values (company_id, user_id, 'INSERT', to_jsonb(OLD));
+        return OLD;
+    end if;
+
+    return null;
+end;
+$$ language plpgsql;
+
+-- trigger for tag
+create or replace trigger trg_tag_logging
+after insert or update or delete on public."Tags"
+for each row
+execute function log_tag_changes();
+
+--function for statement
+create or replace function log_statement_changes()
+returns trigger as $$
+declare
+	company_id bigint;
+	user_id bigint;
+	accounting_id bigint;
+begin
+    if tg_op = 'INSERT' then
+		accounting_id := NEW."AccountingId";
+		select "EmployeeId" into user_id from public."Accountings" where "Id" = NEW."AccountingId";
+		select "CompanyId" into company_id from public."Employees" where "Id" = user_id;
+        insert into logs(company_id, user_id, action_type, new_data)
+        values (company_id, user_id, 'INSERT', to_jsonb(NEW));
+        return NEW;
+
+    elseif tg_op = 'UPDATE' then
+		accounting_id := NEW."AccountingId";
+		select "EmployeeId" into user_id from public."Accountings" where "Id" = NEW."AccountingId";
+		select "CompanyId" into company_id from public."Employees" where "Id" = user_id;
+        insert into logs(company_id, user_id, action_type, old_data, new_data)
+        values (company_id, user_id, 'INSERT', to_jsonb(OLD), to_jsonb(NEW));
+        return NEW;
+
+    elseif tg_op = 'DELETE' then
+		accounting_id := NEW."AccountingId";
+		select "EmployeeId" into user_id from public."Accountings" where "Id" = NEW."AccountingId";
+		select "CompanyId" into company_id from public."Employees" where "Id" = user_id;
+        insert into logs(company_id, user_id, action_type, old_data)
+        values (company_id, user_id, 'INSERT', to_jsonb(OLD));
+        return OLD;
+    end if;
+
+    return null;
+end;
+$$ language plpgsql;
+
+-- trigger for statement
+create or replace trigger trg_statement_logging
+after insert or update or delete on public."Statements"
+for each row
+execute function log_statement_changes();

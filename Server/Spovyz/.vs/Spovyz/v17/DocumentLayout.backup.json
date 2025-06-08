@@ -46,8 +46,7 @@
               "RelativeToolTip": "Spovyz\\ApplicationDbContext.cs",
               "ViewState": "AgIAABgAAAAAAAAAAAAAACYAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-30T09:40:10.598Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-30T09:40:10.598Z"
             },
             {
               "$type": "Document",
@@ -59,8 +58,7 @@
               "RelativeToolTip": "Spovyz\\Controllers\\AccountingController.cs",
               "ViewState": "AgIAABsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-08T14:15:56.519Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-08T14:15:56.519Z"
             },
             {
               "$type": "Document",
@@ -72,8 +70,7 @@
               "RelativeToolTip": "Spovyz\\Services\\AccountingService.cs",
               "ViewState": "AgIAABUAAAAAAAAAAAAAACYAAABaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-08T14:16:17.254Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-08T14:16:17.254Z"
             },
             {
               "$type": "Document",
@@ -83,7 +80,7 @@
               "RelativeDocumentMoniker": "Spovyz\\Repositories\\AccountingRepository.cs",
               "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Repositories\\AccountingRepository.cs",
               "RelativeToolTip": "Spovyz\\Repositories\\AccountingRepository.cs",
-              "ViewState": "AgIAAEgAAAAAAAAAAAAAAFkAAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAADYAAAAAAAAAAAAAAFkAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-08T14:16:11.151Z",
               "EditorCaption": ""
