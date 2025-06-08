@@ -27,12 +27,17 @@ namespace Spovyz.Repositories
 
             for (int i = 0; i < accountings.Count; i++)
             {
+                int numberOfHours = _context.Statements
+                    .Where(s => s.Accounting.Id == accountings[i].Id)
+                    .Sum(s => s.Number_of_hours);
+                uint salary = (uint)(accountings[i].Salary * numberOfHours);
+
                 accountingDataShorts[i] = new AccountingDataShort
                 {
                     Id = accountings[i].Id,
                     Month = (byte)accountings[i].Month,
                     Year = accountings[i].Year,
-                    Salary = accountings[i].Salary
+                    Salary = salary
                 };
             }
             
@@ -72,12 +77,17 @@ namespace Spovyz.Repositories
 
             for (int i = 0; i < accountings.Count; i++)
             {
+                int numberOfHours = _context.Statements
+                    .Where(s => s.Accounting.Id == accountings[i].Id)
+                    .Sum(s => s.Number_of_hours);
+                uint salary = (uint)(accountings[i].Salary * numberOfHours);
+
                 accountingDataLongs[i] = new AccountingDataLong
                 {
                     Id = accountings[i].Id,
                     Month = (byte)accountings[i].Month,
                     Year = accountings[i].Year,
-                    Salary = accountings[i].Salary,
+                    Salary = salary,
                     EmployeeName = accountings[i].Employee.Username
                 };
             }
