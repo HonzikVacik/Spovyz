@@ -44,13 +44,13 @@ namespace Spovyz.Repositories
             }
         }
 
-        public async System.Threading.Tasks.Task<StatementDataShort[]> GetDay(uint CompanyId, DateOnly datum)
+        public async System.Threading.Tasks.Task<StatementDataShort[]> GetDay(uint UserId, DateOnly datum)
         {
             List<Statement>? statements = await _context.Statements
                 .Include(s => s.Accounting)
                 .ThenInclude(a => a.Employee)
                 .ThenInclude(e => e.Company)
-                .Where(s => s.Accounting.Employee.Company.Id == CompanyId && s.Day == datum.Day && s.Accounting.Month == (Enums.Month)datum.Month && s.Accounting.Year == datum.Year)
+                .Where(s => s.Accounting.Employee.Id == UserId && s.Day == datum.Day && s.Accounting.Month == (Enums.Month)datum.Month && s.Accounting.Year == datum.Year)
                 .ToListAsync();
 
             List<StatementDataShort> statementDataShorts = new List<StatementDataShort>();

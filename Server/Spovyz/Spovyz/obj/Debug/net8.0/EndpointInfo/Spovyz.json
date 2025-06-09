@@ -1275,6 +1275,13 @@
         ],
         "parameters": [
           {
+            "name": "EmployeeUserName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "Day",
             "in": "query",
             "schema": {

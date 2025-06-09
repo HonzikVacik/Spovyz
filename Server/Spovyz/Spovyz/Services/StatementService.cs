@@ -58,10 +58,14 @@ namespace Spovyz.Services
             return(ValidityControl.ResultStatus.Ok, null);
         }
 
-        public async System.Threading.Tasks.Task<(ValidityControl.ResultStatus, string? error, StatementDataShort[]?)> GetDay(string UserName, byte Day, uint AccountingId)
+        public async System.Threading.Tasks.Task<(ValidityControl.ResultStatus, string? error, StatementDataShort[]?)> GetDay(string UserName, string EmployeeUserName, byte Day, uint AccountingId)
         {
             Employee? activeUser = await _context.Employees.Include(e => e.Company).FirstOrDefaultAsync(e => e.Username == UserName);
             if (activeUser == null)
+                return (ValidityControl.ResultStatus.NotFound, "Uživatel nenalezen", null);
+
+            Employee? user = await _context.Employees.Include(e => e.Company).FirstOrDefaultAsync(e => e.Username == EmployeeUserName && e.Company.Id == activeUser.Company.Id);
+            if (user == null)
                 return (ValidityControl.ResultStatus.NotFound, "Uživatel nenalezen", null);
 
             Accounting? accounting = await _accountingRepository.GetAccountingById(AccountingId);
@@ -70,7 +74,7 @@ namespace Spovyz.Services
 
             DateOnly Datum = new DateOnly(accounting.Year, (byte)accounting.Month, Day);
 
-            StatementDataShort[]? statementDataShorts = await _statementRepository.GetDay(activeUser.Company.Id, Datum);
+            StatementDataShort[]? statementDataShorts = await _statementRepository.GetDay(user.Id, Datum);
 
             return (ValidityControl.ResultStatus.Ok, null, statementDataShorts);
         }

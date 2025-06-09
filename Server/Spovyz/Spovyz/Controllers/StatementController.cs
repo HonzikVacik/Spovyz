@@ -22,13 +22,13 @@ namespace Spovyz.Controllers
 
         [HttpGet("StatementDataShort")]
         [Authorize]
-        public async Task<IActionResult> Get(byte Day, uint AccountingId)
+        public async Task<IActionResult> Get(string EmployeeUserName, byte Day, uint AccountingId)
         {
             string? UserName = User.Identity?.Name?.ToString();
             if (UserName == null)
                 return NotFound("Uživatel nenalezen");
 
-            (ValidityControl.ResultStatus status, string? error, StatementDataShort[]? statementDataShorts) result = await _statementService.GetDay(UserName, Day, AccountingId);
+            (ValidityControl.ResultStatus status, string? error, StatementDataShort[]? statementDataShorts) result = await _statementService.GetDay(UserName, EmployeeUserName, Day, AccountingId);
 
             if (result.status == ValidityControl.ResultStatus.Error)
                 return BadRequest(result.error);

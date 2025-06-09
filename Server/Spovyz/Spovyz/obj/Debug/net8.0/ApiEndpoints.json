@@ -936,6 +936,11 @@
     "Order": 0,
     "Parameters": [
       {
+        "Name": "EmployeeUserName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
         "Name": "Day",
         "Type": "System.Byte",
         "IsRequired": false

@@ -56,7 +56,7 @@ namespace Spovyz.Repositories
                 {
                     tag = new Tag { Name = tagName };
                     _context.Tags.Add(tag);
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     tags.Add(await _context.Tags.FirstOrDefaultAsync(t => t.Name == tagName));
                 }
                 tags.Add(tag);
