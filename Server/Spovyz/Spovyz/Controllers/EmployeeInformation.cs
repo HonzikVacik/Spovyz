@@ -48,6 +48,15 @@ namespace Spovyz.Controllers
             return Ok(employeeList);
         }
 
+        [HttpGet("GetAllEmployeesToProject")]
+        [Authorize(Roles = "Manager")]
+        public async Task<IActionResult> GetAllEmployeesToProject()
+        {
+            Employee activeUser = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Username == User.Identity.Name.ToString());
+            NameBasic[] employeeArray = await _employeeRepository.GetAllEmployeesToProject(activeUser.Company.Id);
+            return Ok(employeeArray);
+        }
+
         [HttpGet("GetEmployeesToProject")]
         [Authorize(Roles = "Worker,Supervisor,Manager")]
         public async Task<IActionResult> GetEmployeesToProject()

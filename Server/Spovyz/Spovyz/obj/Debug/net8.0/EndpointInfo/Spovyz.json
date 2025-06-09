@@ -81,6 +81,18 @@
         }
       }
     },
+    "/api/EmployeeInformation/GetAllEmployeesToProject": {
+      "get": {
+        "tags": [
+          "EmployeeInformation"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/EmployeeInformation/GetEmployeesToProject": {
       "get": {
         "tags": [
