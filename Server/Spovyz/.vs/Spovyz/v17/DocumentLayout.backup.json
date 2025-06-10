@@ -54,8 +54,7 @@
               "RelativeToolTip": "Spovyz\\ApplicationDbContext.cs",
               "ViewState": "AgIAABgAAAAAAAAAAAAAACYAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-30T09:40:10.598Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-30T09:40:10.598Z"
             },
             {
               "$type": "Document",
@@ -67,8 +66,7 @@
               "RelativeToolTip": "Spovyz\\Services\\StatementService.cs",
               "ViewState": "AgIAADYAAAAAAAAAAAAAAEIAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-09T16:49:47.986Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-09T16:49:47.986Z"
             },
             {
               "$type": "Document",
@@ -80,8 +78,7 @@
               "RelativeToolTip": "Spovyz\\Repositories\\StatementRepository.cs",
               "ViewState": "AgIAACQAAAAAAAAAAAAAADQAAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-09T16:50:05.044Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-09T16:50:05.044Z"
             },
             {
               "$type": "Document",
@@ -91,7 +88,7 @@
               "RelativeDocumentMoniker": "Spovyz\\Controllers\\StatementController.cs",
               "ToolTip": "C:\\Users\\honzi\\Documents\\GitHub\\Spovyz\\Server\\Spovyz\\Spovyz\\Controllers\\StatementController.cs",
               "RelativeToolTip": "Spovyz\\Controllers\\StatementController.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAAB4AAACvAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABgAAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-09T17:21:44.374Z",
               "EditorCaption": ""
@@ -106,8 +103,7 @@
               "RelativeToolTip": "Spovyz\\IServices\\IStatementService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAACCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-09T17:21:48.494Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-09T17:21:48.494Z"
             },
             {
               "$type": "Document",
@@ -119,8 +115,7 @@
               "RelativeToolTip": "Spovyz\\IRepositories\\IStatementRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAABMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-09T17:21:50.049Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-09T17:21:50.049Z"
             }
           ]
         }
